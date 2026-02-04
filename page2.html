@@ -2,23 +2,161 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>전다훈 | Projects</title>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 { margin: 0; font-size: 36px; }
+        nav a {
+            color: #ddd;
+            margin: 0 12px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover { color: #fff; }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+
+        .card h2 { margin-top: 0; }
+
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .project {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .project img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .project a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .pagination {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .pagination a {
+            display: inline-block;
+            margin: 0 6px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            background: #ddd;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .pagination a.active,
+        .pagination a:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            background-color: #eee;
+            font-size: 14px;
+            color: #666;
+        }
+
+    </style>
 </head>
-<body style="font-family:Segoe UI; background:#f4f6f8; padding:40px;">
+<body>
 
-<h2>📂 프로젝트</h2>
-<p>개인 학습 및 AI 프로젝트를 정리하는 공간입니다.</p>
+<header>
+    <h1>전다훈 | Projects</h1>
+    <nav>
+        <a href="index.html">홈</a>
+        <a href="page2.html" class="active">프로젝트</a>
+    </nav>
+</header>
 
-<ul>
-    <li>Python 기초 프로젝트</li>
-    <li>알고리즘 문제 풀이</li>
-    <li>AI 모델 학습 (예정)</li>
-</ul>
+<main>
+    <section class="card">
+        <h2>📂 프로젝트 리스트</h2>
+        <div class="projects">
+            <div class="project">
+                <h3>Python 기초 프로젝트</h3>
+                <p>Python을 활용한 계산기, 게임, 알고리즘 연습 프로젝트</p>
+                <a href="https://github.com/dahunee1111/python-projects" target="_blank">GitHub 보기</a>
+            </div>
 
-<div class="pagination">
-    <a href="index.html">1</a>
-    <a href="page2.html" class="active">2</a>
-</div>
+            <div class="project">
+                <h3>알고리즘 문제 풀이</h3>
+                <p>백준, LeetCode 등에서 알고리즘 문제 풀이 경험 정리</p>
+                <a href="https://github.com/dahunee1111/algorithm-practice" target="_blank">GitHub 보기</a>
+            </div>
+
+            <div class="project">
+                <h3>AI 모델 학습</h3>
+                <p>TensorFlow / PyTorch를 활용한 기초 AI 모델 학습</p>
+                <img src="images/cloud.jpg" alt="AI 프로젝트 예시 이미지">
+                <a href="#" target="_blank">프로젝트 상세보기</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="pagination">
+        <a href="index.html">1</a>
+        <a href="page2.html" class="active">2</a>
+    </div>
+</main>
+
+<footer>
+    © 2026 Jeon Dahoon. All rights reserved.
+</footer>
 
 </body>
 </html>
