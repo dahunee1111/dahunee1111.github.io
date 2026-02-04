@@ -1,71 +1,167 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전다훈</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>전다훈 | Portfolio</title>
 
-    <!-- 간단한 CSS -->
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
         }
+
         header {
-            background-color: #222;
+            background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+            font-size: 36px;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav a {
+            color: #ddd;
+            margin: 0 12px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
             color: #fff;
-            padding: 16px;
         }
+
         main {
-            padding: 20px;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            animation: fadeUp 0.6s ease;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            background-color: #007bff;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
         button {
-            padding: 10px 16px;
+            margin-top: 16px;
+            padding: 12px 20px;
             border: none;
             background-color: #007bff;
             color: white;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 6px;
+            font-size: 16px;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         footer {
             text-align: center;
-            padding: 12px;
+            padding: 20px;
             background-color: #eee;
             font-size: 14px;
+            color: #666;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>환영합니다.</h1>
-        <p>이것은 전다훈의 첫 페이지입니다.</p>
-    </header>
+<header>
+    <h1>전다훈</h1>
+    <p>웹 개발자를 꿈꾸는 포트폴리오 페이지</p>
 
-    <main>
-        <h2>소개</h2>
+    <nav>
+        <a href="#about">소개</a>
+        <a href="#skills">기술</a>
+        <a href="#contact">연락처</a>
+    </nav>
+</header>
+
+<main>
+    <section id="about" class="card">
+        <h2>🙋‍♂️ 소개</h2>
         <p>
-            이 페이지는 제 소개를 하기 위함이기도 하지만 제 포트폴리오 이기도 합니다.
+            안녕하세요. 저는 웹 개발에 관심이 많은 전다훈입니다.<br />
+            이 페이지는 제 소개이자 포트폴리오 공간입니다.
         </p>
+        <button onclick="sayHello()">눌러보세요</button>
+    </section>
 
-        <button onclick="sayHello()">클릭해보세요</button>
-    </main>
+    <section id="skills" class="card">
+        <h2>🛠 기술 스택</h2>
+        <div class="skills">
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">Git</div>
+        </div>
+    </section>
 
-    <footer>
-        © 2026 My Website
-    </footer>
-    
-    <!-- 간단한 JavaScript -->
-    <script>
-        function sayHello() {
-            alert("왜 누르셨나요?");
-        }
-    </script>
-    
+    <section id="contact" class="card">
+        <h2>📬 연락처</h2>
+        <p>Email: example@email.com</p>
+        <p>GitHub: github.com/username</p>
+    </section>
+</main>
+
+<footer>
+    © 2026 Jeon Dahoon. All rights reserved.
+</footer>
+
+<script>
+    function sayHello() {
+        alert("여기까지 와주셔서 감사합니다 😄");
+    }
+</script>
+
 </body>
 </html>
