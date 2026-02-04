@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>전다훈 | Portfolio</title>
+    <title>전다훈 | AI Developer Portfolio</title>
 
     <style>
         * {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -16,18 +20,24 @@
             background-color: #f4f6f8;
             color: #333;
             line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark {
+            background-color: #121212;
+            color: #e0e0e0;
         }
 
         header {
             background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
             color: white;
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
         }
 
         header h1 {
-            margin-bottom: 8px;
-            font-size: 36px;
+            margin-bottom: 10px;
+            font-size: 38px;
         }
 
         nav {
@@ -36,7 +46,7 @@
 
         nav a {
             color: #ddd;
-            margin: 0 12px;
+            margin: 0 14px;
             text-decoration: none;
             font-weight: bold;
         }
@@ -53,11 +63,16 @@
 
         .card {
             background: white;
-            border-radius: 10px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 26px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
             animation: fadeUp 0.6s ease;
+            transition: background 0.3s;
+        }
+
+        body.dark .card {
+            background: #1e1e1e;
         }
 
         .card h2 {
@@ -73,14 +88,14 @@
         .skill {
             background-color: #007bff;
             color: white;
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 14px;
         }
 
         button {
             margin-top: 16px;
-            padding: 12px 20px;
+            padding: 12px 22px;
             border: none;
             background-color: #007bff;
             color: white;
@@ -93,12 +108,27 @@
             background-color: #0056b3;
         }
 
+        .toggle {
+            margin-top: 20px;
+            background: transparent;
+            border: 2px solid white;
+        }
+
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 24px;
             background-color: #eee;
             font-size: 14px;
             color: #666;
+        }
+
+        body.dark footer {
+            background-color: #1a1a1a;
+            color: #aaa;
+        }
+
+        a {
+            color: #007bff;
         }
 
         @keyframes fadeUp {
@@ -117,23 +147,28 @@
 
 <header>
     <h1>전다훈</h1>
-    <p>AI 개발자를 꿈꾸는 포트폴리오 페이지</p>
+    <p>AI 개발자를 목표로 성장 중인 개발자</p>
 
     <nav>
         <a href="#about">소개</a>
         <a href="#skills">기술</a>
+        <a href="#projects">프로젝트</a>
         <a href="#contact">연락처</a>
     </nav>
+
+    <button class="toggle" onclick="toggleDarkMode()">🌙 다크모드</button>
 </header>
 
 <main>
     <section id="about" class="card">
         <h2>🙋‍♂️ 소개</h2>
         <p>
-            안녕하세요. 저는 AI 개발에 관심이 많은 전다훈입니다.<br />
-            이 페이지는 제 소개이자 포트폴리오 공간입니다.
+            안녕하세요. <strong>AI 개발자</strong>를 꿈꾸며 꾸준히 학습하고 있는 전다훈입니다.<br />
+            웹 개발 기초부터 알고리즘, 인공지능까지 차근차근 쌓아가고 있습니다.
         </p>
-        <button onclick="sayHello()">눌러보세요</button>
+        <button onclick="sayHello()" aria-label="환영 인사 버튼">
+            눌러보세요
+        </button>
     </section>
 
     <section id="skills" class="card">
@@ -142,17 +177,30 @@
             <div class="skill">HTML</div>
             <div class="skill">CSS</div>
             <div class="skill">JavaScript</div>
-            <div class="skill">Git</div>
-            <div class="skill">c,c++</div>
             <div class="skill">Python</div>
+            <div class="skill">C</div>
+            <div class="skill">C++</div>
+            <div class="skill">Git</div>
         </div>
+    </section>
+
+    <section id="projects" class="card">
+        <h2>📂 프로젝트</h2>
+        <p>
+            현재 개인 학습 및 실습 프로젝트를 진행 중입니다.<br />
+            추후 AI 모델 구현, 웹 서비스 프로젝트를 추가할 예정입니다.
+        </p>
     </section>
 
     <section id="contact" class="card">
         <h2>📬 연락처</h2>
         <p>Email: dahunee1111@naver.com</p>
-        <p>GitHub: github.com/dahunee1111</p>
-        <p>전화번호 : 010-9433-1332</p>
+        <p>
+            GitHub:
+            <a href="https://github.com/dahunee1111" target="_blank">
+                github.com/dahunee1111
+            </a>
+        </p>
     </section>
 </main>
 
@@ -164,10 +212,11 @@
     function sayHello() {
         alert("여기까지 와주셔서 감사합니다 😄");
     }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark");
+    }
 </script>
-<nav>
-    <a href="index.html">홈</a>
-    <a href="sample.html">소개</a>
-</nav>
+
 </body>
 </html>
