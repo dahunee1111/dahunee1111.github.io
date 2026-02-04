@@ -6,9 +6,8 @@
     <title>전다훈 | Projects</title>
 
     <style>
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            margin: 0;
             font-family: 'Segoe UI', Arial, sans-serif;
             background: #f4f6f8;
             color: #333;
@@ -22,14 +21,34 @@
             padding: 40px 20px;
         }
 
-        header h1 { margin: 0; font-size: 36px; }
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
         nav a {
             color: #ddd;
             margin: 0 12px;
             text-decoration: none;
             font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: background 0.2s;
         }
-        nav a:hover { color: #fff; }
+
+        nav a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav a.active {
+            color: #fff;
+            background: #007bff;
+        }
 
         main {
             max-width: 900px;
@@ -45,7 +64,11 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.08);
         }
 
-        .card h2 { margin-top: 0; }
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
 
         .projects {
             display: flex;
@@ -79,6 +102,11 @@
             color: white;
             text-decoration: none;
             border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .project a:hover {
+            background: #0056b3;
         }
 
         .pagination {
@@ -95,6 +123,7 @@
             color: #333;
             text-decoration: none;
             font-weight: bold;
+            transition: background 0.2s;
         }
 
         .pagination a.active,
@@ -129,19 +158,19 @@
         <div class="projects">
             <div class="project">
                 <h3>Python 기초 프로젝트</h3>
-                <p>Python을 활용한 계산기, 게임, 알고리즘 연습 프로젝트</p>
+                <p>Python을 활용한 연습 프로젝트</p>
                 <a href="https://github.com/dahunee1111/python-projects" target="_blank">GitHub 보기</a>
             </div>
 
             <div class="project">
                 <h3>나의 발자국</h3>
                 <p>나만의 프로젝트 구상 정리 및 프로젝트 경험 후기</p>
-                <a href=https://www.google.com/</a>
+                <a href="https://www.google.com/" target="_blank">프로젝트 상세보기</a>
             </div>
 
             <div class="project">
                 <h3>AI 모델 학습</h3>
-                <p>TensorFlow / PyTorch를 활용한 기초 AI 모델 학습</p>
+                <p>Python을 활용한 기초 AI 모델 학습</p>
                 <img src="images/cloud.jpg" alt="AI 프로젝트 예시 이미지">
                 <a href="#" target="_blank">프로젝트 상세보기</a>
             </div>
