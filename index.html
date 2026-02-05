@@ -46,7 +46,7 @@ nav.desktop-menu a {
 }
 nav.desktop-menu a:hover { color: #fff; }
 
-/* 햄버거 메뉴 (모바일) */
+/* 햄버거 메뉴 */
 .hamburger {
     display: none;
     position: absolute;
@@ -82,7 +82,7 @@ nav.mobile-menu {
     top: 100%;
     right: 0;
     background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
-    width: 200px;
+    width: 220px;
     transform: translateY(-20px);
     opacity: 0;
     pointer-events: none;
@@ -114,7 +114,7 @@ button.toggle {
 }
 button.toggle:hover { background-color: rgba(255,255,255,0.1); }
 
-main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 
 .card {
     background: white;
@@ -125,6 +125,7 @@ main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
     animation: fadeUp 0.6s ease;
 }
 
+/* 기술 스택 */
 .skills { display: flex; flex-wrap: wrap; gap: 10px; }
 .skill {
     background-color: #007bff;
@@ -134,6 +135,45 @@ main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
     font-size: 14px;
 }
 
+/* 프로젝트 카드 */
+.project-card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    margin: 12px 0;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.project-card img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.project-card .project-info h3 {
+    margin: 0 0 8px;
+}
+.project-card .project-info p {
+    margin: 0 0 12px;
+}
+.project-card .project-info a {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.project-card .project-info a:hover { background-color: #0056b3; }
+
+/* 버튼 스타일 */
 button {
     margin-top: 16px;
     padding: 12px 22px;
@@ -146,6 +186,7 @@ button {
     transition: background 0.3s;
 }
 
+/* 페이지네이션 */
 .pagination { text-align: center; margin: 40px 0; }
 .pagination a {
     display: inline-block;
@@ -174,7 +215,9 @@ html.dark .card { background: #1e1e1e; }
 html.dark footer { background-color: #1a1a1a; color: #aaa; }
 html.dark .toggle { border-color: #e0e0e0; color: #e0e0e0; }
 html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
+html.dark .project-card { background: #1a1a1a; }
 
+/* 애니메이션 */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* 반응형 */
@@ -186,7 +229,8 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
     .skills { justify-content: center; }
     .skill { padding: 5px 12px; font-size: 13px; }
     .pagination a { padding: 6px 10px; margin: 0 4px; font-size: 14px; }
-    img { max-width: 100%; height: auto; }
+    .project-card { flex-direction: column; align-items: center; text-align: center; }
+    .project-card img { width: 100%; height: auto; }
 }
 
 @media (max-width: 480px) {
@@ -233,6 +277,7 @@ if (localStorage.getItem("darkMode") === "true") {
 </header>
 
 <main>
+    <!-- 소개 -->
     <section id="about" class="card">
         <h2>🙋‍♂️ 소개</h2>
         <p>안녕하세요. <strong>AI 개발자</strong>를 목표로 학습 중인 전다훈입니다. AI 기반 지능형 시스템 개발에 관심이 있습니다.</p>
@@ -240,29 +285,53 @@ if (localStorage.getItem("darkMode") === "true") {
         <button onclick="sayHello()">눌러보세요!</button>
     </section>
 
+    <!-- 기술 스택 -->
     <section id="skills" class="card">
         <h2>🛠 기술 스택</h2>
         <div class="skills">
             <div class="skill">HTML</div>
             <div class="skill">CSS</div>
-            <div class="skill">Python (AI 기초)</div>
-            <div class="skill">JavaScript (기초)</div>
+            <div class="skill">Python</div>
+            <div class="skill">JavaScript</div>
             <div class="skill">C</div>
             <div class="skill">C++</div>
             <div class="skill">Git</div>
         </div>
     </section>
 
+    <!-- 프로젝트 -->
     <section id="projects" class="card">
         <h2>💻 프로젝트</h2>
-        <div class="skills">
-            <div class="skill">자율주행 자동차 시뮬레이션</div>
-            <div class="skill">자율비행 드론 프로젝트</div>
-            <div class="skill">AI 이미지 분류 모델 개발</div>
+
+        <div class="project-card">
+            <img src="images/self-driving.jpg" alt="자율주행 자동차">
+            <div class="project-info">
+                <h3>자율주행 자동차 시뮬레이션</h3>
+                <p>Python과 OpenCV를 이용한 자율주행 시뮬레이션 프로젝트입니다.</p>
+                <a href="https://github.com/dahunee1111/self-driving" target="_blank">GitHub</a>
+            </div>
         </div>
-        <p>각 프로젝트의 간단한 설명과 GitHub 링크를 추가할 수 있습니다.</p>
+
+        <div class="project-card">
+            <img src="images/drone.jpg" alt="자율비행 드론">
+            <div class="project-info">
+                <h3>자율비행 드론 프로젝트</h3>
+                <p>드론 자율비행 알고리즘과 센서 제어 실습 프로젝트입니다.</p>
+                <a href="https://github.com/dahunee1111/drone-project" target="_blank">GitHub</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="images/ai-classifier.jpg" alt="AI 이미지 분류">
+            <div class="project-info">
+                <h3>AI 이미지 분류 모델 개발</h3>
+                <p>TensorFlow를 활용한 이미지 분류 AI 모델 개발 프로젝트입니다.</p>
+                <a href="https://github.com/dahunee1111/ai-classifier" target="_blank">GitHub</a>
+            </div>
+        </div>
     </section>
 
+    <!-- 연락처 -->
     <section id="contact" class="card">
         <h2>📬 연락처</h2>
         <p>Email: dahunee1111@naver.com</p>
