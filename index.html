@@ -18,11 +18,6 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        body.dark {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-
         header {
             background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
             color: white;
@@ -53,8 +48,6 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.08);
             animation: fadeUp 0.6s ease;
         }
-
-        body.dark .card { background: #1e1e1e; }
 
         .skills {
             display: flex;
@@ -118,7 +111,17 @@
             color: #666;
         }
 
-        body.dark footer {
+        /* 다크모드 CSS */
+        html.dark body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        html.dark .card {
+            background: #1e1e1e;
+        }
+
+        html.dark footer {
             background-color: #1a1a1a;
             color: #aaa;
         }
@@ -128,6 +131,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
+
+    <!-- 페이지 로딩 전에 다크모드 적용 -->
+    <script>
+        if (localStorage.getItem("darkMode") === "true") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
 </head>
 <body>
 
@@ -196,10 +206,11 @@
 </footer>
 
 <script>
-    function sayHello() {
-        alert("저는 이 사이트를 만든 전다훈 이라고 합니다. 이 사이트에 방문해주셔서 정말 감사합니다. ");
-    }
-   const toggleBtn = document.querySelector(".toggle");
+function sayHello() {
+    alert("저는 이 사이트를 만든 전다훈 이라고 합니다. 이 사이트에 방문해주셔서 정말 감사합니다.");
+}
+
+const toggleBtn = document.querySelector(".toggle");
 
 function updateButtonText() {
     toggleBtn.textContent =
@@ -220,12 +231,8 @@ function toggleDarkMode() {
 if (localStorage.getItem("darkMode") === "true") {
     document.body.classList.add("dark");
 }
-updateButtonText();
-}
 
-if (localStorage.getItem("darkMode") === "true") {
-    document.body.classList.add("dark");
-}
+updateButtonText();
 
 </script>
 
