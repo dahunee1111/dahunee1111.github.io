@@ -34,8 +34,9 @@ function calculate() // 함수 paramater variables
 {
 /* 서식 문자열 ( Formated String) */
 //console.log('계산을 시작합니다');
-a = document.getElementById("n1").value;
-b = document.getElementById("n2").value;
+      
+a = parseInt(document.getElementById("n1").value);
+b = parseInt(document.getElementById("n2").value);
 result=`${a} + ${b} = ${a + b}`;
       alert(result);
 }
