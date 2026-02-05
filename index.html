@@ -25,14 +25,21 @@ header p { font-size: 1.1rem; margin: 0; }
   text-align: center;
   position: relative;
 }
+
 .header-content {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+  gap: 12px;
 }
-.header-text { display: flex; flex-direction: column; align-items: center; }
+
+@media (min-width: 769px) {
+  .header-content {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
 .profile-wrapper {
   width: 130px; height: 130px; padding: 4px; border-radius: 50%;
@@ -47,32 +54,36 @@ header p { font-size: 1.1rem; margin: 0; }
 html.dark .profile-wrapper { box-shadow: 0 10px 25px rgba(255,255,255,0.25); }
 html.dark .profile-img { border: 3px solid #e0e0e0; }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 20;
-}
-
 nav.desktop-menu { display: flex; justify-content: center; margin-top: 16px; }
 nav.desktop-menu a { color: #ddd; margin: 0 14px; text-decoration: none; font-weight: bold; transition: color 0.3s; }
 nav.desktop-menu a:hover { color: #fff; }
 
-.hamburger { display: none; width: 28px; height: 22px; flex-direction: column; justify-content: space-between; cursor: pointer; }
+.hamburger {
+  display: none; position: absolute; top: 20px; right: 20px;
+  width: 28px; height: 22px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 20;
+}
 .hamburger span { display: block; height: 3px; background: white; border-radius: 3px; transition: all 0.3s ease; }
 .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
 
-nav.mobile-menu { display: flex; flex-direction: column; position: absolute; top: 100%; right: 0; background: linear-gradient(135deg,#1e1e1e,#3a3a3a); width: 220px; transform: translateY(-20px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 15; }
+nav.mobile-menu {
+  display: flex; flex-direction: column;
+  position: absolute; top: 100%; right: 0;
+  background: linear-gradient(135deg,#1e1e1e,#3a3a3a);
+  width: 220px;
+  transform: translateY(-20px); opacity: 0; pointer-events: none;
+  transition: transform 0.3s ease, opacity 0.3s ease; z-index: 15;
+}
 nav.mobile-menu.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
 nav.mobile-menu a { margin: 10px 0; padding: 10px 20px; color: #ddd; text-decoration: none; font-weight: bold; transition: color 0.3s; }
 nav.mobile-menu a:hover { color: #fff; }
 
-button.toggle { background: transparent; border: 2px solid white; color: white; padding: 8px 20px; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
+button.toggle {
+  background: transparent; border: 2px solid white; color: white; padding: 8px 20px;
+  border-radius: 6px; cursor: pointer; transition: all 0.3s;
+  position: absolute; top: 20px; left: 20px;
+}
 button.toggle:hover { background-color: rgba(255,255,255,0.1); }
 
 main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
@@ -110,7 +121,6 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 @media (max-width: 768px) {
   nav.desktop-menu { display: none; }
   .hamburger { display: flex; }
-  .header-actions { position: absolute; top: 20px; right: 20px; }
   main { margin: 20px auto; padding: 0 15px; }
   .card { padding: 20px; }
   .skills { justify-content: center; }
@@ -118,7 +128,7 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 }
 @media (max-width: 480px) {
   header { padding: 30px 10px; }
-  .header-main { flex-direction: column; gap: 12px; }
+  .header-content { flex-direction: column; gap: 12px; }
   button { width: 100%; padding: 12px 0; font-size: 15px; }
 }
 </style>
@@ -146,18 +156,15 @@ function closeHamburger(){ document.querySelector(".mobile-menu").classList.remo
   <div class="header-main">
     <div class="header-content">
       <div class="profile-wrapper">
-        <img src="https://raw.githubusercontent.com/dahunee1111/dahunee1111.github.io/main/images/KakaoTalk_20260205_152105731.jpg" alt="전다훈 프로필 사진" class="profile-img">
+        <img src="https://dahunee1111.github.io/images/KakaoTalk_20260205_152105731.jpg" alt="전다훈 프로필 사진" class="profile-img">
       </div>
       <div class="header-text">
         <h1>전다훈</h1>
         <p>AI 개발자를 목표로 성장 중인 개발자</p>
       </div>
     </div>
-
-    <div class="header-actions">
-      <button class="toggle">🌙 다크모드</button>
-      <div class="hamburger" onclick="toggleHamburger(this)"><span></span><span></span><span></span></div>
-    </div>
+    <button class="toggle">🌙 다크모드</button>
+    <div class="hamburger" onclick="toggleHamburger(this)"><span></span><span></span><span></span></div>
   </div>
 
   <nav class="desktop-menu">
