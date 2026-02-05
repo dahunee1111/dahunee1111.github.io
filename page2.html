@@ -1,191 +1,215 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전다훈 | Projects</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전다훈 | Projects</title>
 
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f4f6f8;
-            color: #333;
-            line-height: 1.6;
-        }
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+}
+header {
+    background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+header h1 { font-size: 36px; margin-bottom: 10px; }
+nav { margin-top: 10px; }
+nav a {
+    color: #ddd;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+nav a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+nav a.active { color: #fff; background: #007bff; }
 
-        header {
-            background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
+main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.card h2 { margin-top: 0; margin-bottom: 20px; font-size: 28px; }
 
-        header h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
+.categories { text-align: center; margin-bottom: 20px; }
+.categories button {
+    margin: 0 6px 10px 6px;
+    padding: 8px 14px;
+    border: none;
+    background-color: #ddd;
+    color: #333;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.categories button.active, .categories button:hover { background-color: #007bff; color: white; }
 
-        nav {
-            margin-top: 10px;
-        }
+.projects { display: flex; flex-direction: column; gap: 20px; }
 
-        nav a {
-            color: #ddd;
-            margin: 0 12px;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 6px 10px;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
+.project {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.project:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.project img, .project iframe {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 10px;
+}
 
-        nav a:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-        }
+.project a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.project a:hover { background: #0056b3; }
 
-        nav a.active {
-            color: #fff;
-            background: #007bff;
-        }
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+    margin-left: 8px;
+}
+.completed { background-color: #28a745; }
+.in-progress { background-color: #ffc107; }
+.idea { background-color: #6c757d; }
 
-        main {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+.pagination {
+    text-align: center;
+    margin: 40px 0;
+}
+.pagination a {
+    display: inline-block;
+    margin: 0 6px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: #ddd;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.pagination a.active, .pagination a:hover { background: #007bff; color: white; }
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 28px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-        }
-
-        .card h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-
-        .projects {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .project {
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 16px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .project:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        }
-
-        .project img {
-            max-width: 100%;
-            border-radius: 12px;
-            margin-top: 10px;
-        }
-
-        .project a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 14px;
-            background: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.2s;
-        }
-
-        .project a:hover {
-            background: #0056b3;
-        }
-
-        .pagination {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .pagination a {
-            display: inline-block;
-            margin: 0 6px;
-            padding: 8px 14px;
-            border-radius: 6px;
-            background: #ddd;
-            color: #333;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .pagination a.active,
-        .pagination a:hover {
-            background: #007bff;
-            color: white;
-        }
-
-        footer {
-            text-align: center;
-            padding: 24px;
-            background-color: #eee;
-            font-size: 14px;
-            color: #666;
-        }
-
-    </style>
+footer {
+    text-align: center;
+    padding: 24px;
+    background-color: #eee;
+    font-size: 14px;
+    color: #666;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>전다훈 | Projects</h1>
-    <nav>
-        <a href="index.html">홈</a>
-        <a href="page2.html" class="active">프로젝트</a>
-    </nav>
+<h1>전다훈 | Projects</h1>
+<nav>
+    <a href="index.html">홈</a>
+    <a href="page2.html" class="active">프로젝트</a>
+</nav>
 </header>
 
 <main>
-    <section class="card">
-        <h2>📂 프로젝트 리스트</h2>
-        <div class="projects">
-            <div class="project">
-                <h3>Python 기초 프로젝트</h3>
-                <p>Python을 활용한 연습 프로젝트</p>
-                <a href="https://github.com/dahunee1111/python-projects" target="_blank">GitHub 보기</a>
-            </div>
+<section class="card">
+<h2>📂 프로젝트 리스트</h2>
 
-            <div class="project">
-                <h3>나의 발자국</h3>
-                <p>나만의 프로젝트 구상 정리 및 프로젝트 경험 후기</p>
-                <a href="https://www.google.com/" target="_blank">프로젝트 상세보기</a>
-            </div>
+<!-- 카테고리 버튼 -->
+<div class="categories">
+<button class="active" onclick="filterProjects('all')">전체</button>
+<button onclick="filterProjects('python')">Python</button>
+<button onclick="filterProjects('ai')">AI</button>
+<button onclick="filterProjects('web')">Web</button>
+</div>
 
-            <div class="project">
-                <h3>AI 모델 학습</h3>
-                <p>Python을 활용한 기초 AI 모델 학습</p>
-                <img src="images/cloud.jpg" alt="AI 프로젝트 예시 이미지">
-                <a href="#" target="_blank">프로젝트 상세보기</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="pagination">
-        <a href="index.html">1</a>
-        <a href="page2.html" class="active">2</a>
+<div class="projects">
+    <!-- 프로젝트 1 -->
+    <div class="project" data-category="python">
+        <h3>Python 기초 프로젝트 <span class="status completed">완료</span></h3>
+        <p>Python을 활용한 연습 프로젝트</p>
+        <ul>
+            <li>사용 기술: Python, 기본 알고리즘</li>
+            <li>배운 점: 반복문, 조건문, 함수 활용</li>
+        </ul>
+        <a href="https://github.com/dahunee1111/python-projects" target="_blank">GitHub 보기</a>
     </div>
+
+    <!-- 프로젝트 2 -->
+    <div class="project" data-category="web">
+        <h3>나의 발자국 <span class="status in-progress">진행 중</span></h3>
+        <p>나만의 프로젝트 구상 정리 및 경험 후기</p>
+        <ul>
+            <li>사용 기술: HTML, CSS, Markdown</li>
+            <li>배운 점: 프로젝트 문서화, 기록 습관</li>
+        </ul>
+        <a href="https://www.google.com/" target="_blank">프로젝트 상세보기</a>
+    </div>
+
+    <!-- 프로젝트 3 -->
+    <div class="project" data-category="ai">
+        <h3>AI 모델 학습 <span class="status idea">아이디어 단계</span></h3>
+        <p>Python을 활용한 기초 AI 모델 학습</p>
+        <ul>
+            <li>사용 기술: Python, TensorFlow</li>
+            <li>배운 점: 데이터 전처리, 모델 학습, 평가</li>
+        </ul>
+        <img src="images/cloud.jpg" alt="AI 프로젝트 예시 이미지">
+        <a href="#" target="_blank">프로젝트 상세보기</a>
+    </div>
+</div>
+</section>
+
+<div class="pagination">
+    <a href="index.html">1</a>
+    <a href="page2.html" class="active">2</a>
+</div>
 </main>
 
-<footer>
-    © 2026 Jeon Dahoon. All rights reserved.
-</footer>
+<footer>© 2026 Jeon Dahoon. All rights reserved.</footer>
+
+<script>
+// 프로젝트 카테고리 필터링
+function filterProjects(category) {
+    const projects = document.querySelectorAll('.project');
+    const buttons = document.querySelectorAll('.categories button');
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    projects.forEach(proj => {
+        if(category === 'all' || proj.dataset.category === category) {
+            proj.style.display = 'block';
+        } else {
+            proj.style.display = 'none';
+        }
+    });
+}
+</script>
 
 </body>
 </html>
