@@ -8,6 +8,7 @@
 <meta name="robots" content="index, follow">
 
 <style>
+/* --- 기본 스타일 --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; background-color: #f4f6f8; color: #333; transition: background 0.3s, color 0.3s; }
@@ -16,38 +17,11 @@ header { background: linear-gradient(135deg,#1e1e1e,#3a3a3a); color: #fff; paddi
 header h1 { font-size: 2.6rem; margin-bottom: 4px; }
 header p { font-size: 1.1rem; margin: 0; }
 
-.header-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  text-align: center;
-  position: relative;
-}
+.header-main { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; text-align: center; position: relative; }
+.header-content { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.header-text { display: flex; flex-direction: column; align-items: center; }
 
-.header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-@media (min-width: 769px) {
-  .header-content {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.profile-wrapper {
-  width: 130px; height: 130px; padding: 4px; border-radius: 50%;
-  background: linear-gradient(135deg, #00c6ff, #007bff);
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
+.profile-wrapper { width: 130px; height: 130px; padding: 4px; border-radius: 50%; background: linear-gradient(135deg, #00c6ff, #007bff); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.35); transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .profile-wrapper:hover { transform: scale(1.08); box-shadow: 0 16px 35px rgba(0,0,0,0.5); }
 .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white; }
 
@@ -58,32 +32,18 @@ nav.desktop-menu { display: flex; justify-content: center; margin-top: 16px; }
 nav.desktop-menu a { color: #ddd; margin: 0 14px; text-decoration: none; font-weight: bold; transition: color 0.3s; }
 nav.desktop-menu a:hover { color: #fff; }
 
-.hamburger {
-  display: none; position: absolute; top: 20px; right: 20px;
-  width: 28px; height: 22px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 20;
-}
+.hamburger { display: none; position: relative; width: 28px; height: 22px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 20; }
 .hamburger span { display: block; height: 3px; background: white; border-radius: 3px; transition: all 0.3s ease; }
 .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
 
-nav.mobile-menu {
-  display: flex; flex-direction: column;
-  position: absolute; top: 100%; right: 0;
-  background: linear-gradient(135deg,#1e1e1e,#3a3a3a);
-  width: 220px;
-  transform: translateY(-20px); opacity: 0; pointer-events: none;
-  transition: transform 0.3s ease, opacity 0.3s ease; z-index: 15;
-}
+nav.mobile-menu { display: flex; flex-direction: column; position: absolute; top: 100%; right: 0; background: linear-gradient(135deg,#1e1e1e,#3a3a3a); width: 220px; transform: translateY(-20px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 15; }
 nav.mobile-menu.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
 nav.mobile-menu a { margin: 10px 0; padding: 10px 20px; color: #ddd; text-decoration: none; font-weight: bold; transition: color 0.3s; }
 nav.mobile-menu a:hover { color: #fff; }
 
-button.toggle {
-  background: transparent; border: 2px solid white; color: white; padding: 8px 20px;
-  border-radius: 6px; cursor: pointer; transition: all 0.3s;
-  position: absolute; top: 20px; left: 20px;
-}
+button.toggle { background: transparent; border: 2px solid white; margin-top: 20px; color: white; padding: 8px 20px; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
 button.toggle:hover { background-color: rgba(255,255,255,0.1); }
 
 main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
@@ -92,13 +52,6 @@ main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 .skills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .skill { background-color: #007bff; color: white; padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 500; transition: transform 0.2s; }
 .skill:hover { transform: scale(1.05); }
-
-.project-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 30px 20px; border-radius: 16px; background: linear-gradient(135deg,#007bff,#00c6ff); color: white; box-shadow: 0 8px 24px rgba(0,0,0,0.2); transition: transform 0.3s, box-shadow 0.3s; animation: fadeUp 0.6s ease; }
-.project-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
-.project-card .project-header { display: flex; align-items: center; gap: 10px; }
-.project-card .project-desc { font-size: 1rem; max-width: 400px; line-height: 1.5; }
-.project-card a { display:inline-block; padding: 10px 20px; border-radius:8px; background: white; color: #007bff; font-weight: bold; text-decoration: none; transition: all 0.3s; }
-.project-card a:hover { background: #e0e0e0; color: #007bff; }
 
 button { margin-top: 16px; padding: 12px 22px; border: none; background-color: #007bff; color: white; cursor: pointer; border-radius: 6px; font-size: 16px; transition: background 0.3s; }
 button:hover { background-color: #0056b3; }
@@ -111,16 +64,17 @@ footer { text-align: center; padding: 24px; background-color: #eee; font-size: 1
 
 html.dark body { background-color: #121212; color: #e0e0e0; }
 html.dark .card { background: #1e1e1e; }
-html.dark .project-card { background: linear-gradient(135deg,#007bff,#00c6ff); }
 html.dark footer { background-color: #1a1a1a; color: #aaa; }
 html.dark .toggle { border-color: #e0e0e0; color: #e0e0e0; }
 html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+/* --- 반응형 --- */
 @media (max-width: 768px) {
   nav.desktop-menu { display: none; }
-  .hamburger { display: flex; }
+  .hamburger { display: flex; position: absolute; top: 20px; right: 20px; }
+  .toggle { position: absolute; top: 20px; left: 20px; }
   main { margin: 20px auto; padding: 0 15px; }
   .card { padding: 20px; }
   .skills { justify-content: center; }
@@ -128,13 +82,14 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 }
 @media (max-width: 480px) {
   header { padding: 30px 10px; }
-  .header-content { flex-direction: column; gap: 12px; }
+  .header-main { flex-direction: column; gap: 12px; }
   button { width: 100%; padding: 12px 0; font-size: 15px; }
 }
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
+  // 다크모드 유지
   if(localStorage.getItem("darkMode")==="true") document.documentElement.classList.add("dark");
   const toggleBtn=document.querySelector(".toggle");
   function updateButtonText(){ toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드"; }
@@ -144,11 +99,57 @@ document.addEventListener("DOMContentLoaded", function(){
     updateButtonText();
   });
   updateButtonText();
+
+  // 방명록 불러오기
+  loadGuestbook();
 });
-function sayHello(){alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!");}
-function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
-function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
+
+// UX: 방문 알림
+function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!"); }
+
+// 햄버거 메뉴 토글
+function toggleHamburger(el){ 
+  el.classList.toggle("active"); 
+  document.querySelector(".mobile-menu").classList.toggle("show"); 
+}
+function closeHamburger(){ 
+  document.querySelector(".mobile-menu").classList.remove("show"); 
+  document.querySelector(".hamburger").classList.remove("active"); 
+}
+
+// --- 방명록 기능 ---
+function addGuest(name,message){
+  const now=new Date();
+  const entry={name,message,date:now.toLocaleString()};
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  guestbook.push(entry);
+  localStorage.setItem("guestbook",JSON.stringify(guestbook));
+  loadGuestbook();
+}
+function deleteGuest(index){
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  guestbook.splice(index,1);
+  localStorage.setItem("guestbook",JSON.stringify(guestbook));
+  loadGuestbook();
+}
+function loadGuestbook(){
+  const container=document.getElementById("guestbook-list");
+  if(!container) return;
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  container.innerHTML="";
+  guestbook.forEach((entry,i)=>{
+    const div=document.createElement("div");
+    div.style.borderBottom="1px solid #ddd";
+    div.style.padding="8px 0";
+    div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em><p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
+    container.appendChild(div);
+  });
+}
 </script>
+
 </head>
 <body>
 
@@ -156,7 +157,7 @@ function closeHamburger(){ document.querySelector(".mobile-menu").classList.remo
   <div class="header-main">
     <div class="header-content">
       <div class="profile-wrapper">
-        <img src="https://dahunee1111.github.io/images/KakaoTalk_20260205_152105731.jpg" alt="전다훈 프로필 사진" class="profile-img">
+        <img src="https://raw.githubusercontent.com/dahunee1111/dahunee1111.github.io/main/images/KakaoTalk_20260205_152105731.jpg" alt="전다훈 프로필 사진" class="profile-img">
       </div>
       <div class="header-text">
         <h1>전다훈</h1>
@@ -209,9 +210,19 @@ function closeHamburger(){ document.querySelector(".mobile-menu").classList.remo
     <span style="font-size:28px;">📁</span>
     <h3>프로젝트 전체 보기</h3>
   </div>
-  <p class="project-desc">저의 다양한 프로젝트는 2페이지에서 확인하실 수 있습니다.</p>
+  <p class="project-desc">저의 다양한 프로젝트는 <a href="page2.html">2페이지</a>에서 확인하실 수 있습니다.</p>
   <a href="page2.html">프로젝트 페이지로 이동 →</a>
 </div>
+</section>
+
+<section id="guestbook" class="card">
+<h2>✍️ 방명록</h2>
+<form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
+<input type="text" name="name" placeholder="이름" required style="padding:6px 12px; margin-right:6px;">
+<input type="text" name="message" placeholder="메시지" required style="padding:6px 12px; margin-right:6px;">
+<button type="submit">등록</button>
+</form>
+<div id="guestbook-list" style="margin-top:12px;"></div>
 </section>
 
 <section id="contact" class="card">
