@@ -30,12 +30,14 @@ function test()
 //result = `${a} + ${b} = ${a + b}`;
      // alert(result);
 }
-function calculate() // 함수 paramater variables
+function calculate(n1,n2) // 함수 paramater variables
 {
 /* 서식 문자열 ( Formated String) */
 //console.log('계산을 시작합니다');
-console.log(document.getElementById("n1").value);
-console.log(document.getElementById("n2").value);
+document.getElementById("n1").value;
+document.getElementById("n2").value;
+result=`${n1} + ${n2} = ${n1 + n2}`;
+      alert(result);
 }
 </script>
 </head>
@@ -65,7 +67,7 @@ console.log(document.getElementById("n2").value);
 숫자1<input tpye="text" id="n1" name ="n1"><br>
 숫자2<input tpye="text" id="n2" name ="n2"><br>
       
-<butten type="button" onclick="calculate();">계산</button>
+<butten type="button" onclick="calculate(n1,n2);">계산</button>
 
 
 </body>
