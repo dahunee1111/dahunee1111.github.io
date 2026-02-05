@@ -199,12 +199,28 @@
     function sayHello() {
         alert("저는 이 사이트를 만든 전다훈 이라고 합니다. 이 사이트에 방문해주셔서 정말 감사합니다. ");
     }
-   function toggleDarkMode() {
+   const toggleBtn = document.querySelector(".toggle");
+
+function updateButtonText() {
+    toggleBtn.textContent =
+        document.body.classList.contains("dark")
+        ? "☀️ 라이트모드"
+        : "🌙 다크모드";
+}
+
+function toggleDarkMode() {
     document.body.classList.toggle("dark");
     localStorage.setItem(
         "darkMode",
         document.body.classList.contains("dark")
     );
+    updateButtonText();
+}
+
+if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark");
+}
+updateButtonText();
 }
 
 if (localStorage.getItem("darkMode") === "true") {
