@@ -72,14 +72,22 @@
             cursor: pointer;
             border-radius: 6px;
             font-size: 16px;
+            transition: background 0.3s;
         }
 
         .toggle {
             background: transparent;
             border: 2px solid white;
             margin-top: 20px;
+            color: white;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
         }
 
+        .toggle:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* 페이지네이션 */
         .pagination {
             text-align: center;
             margin: 40px 0;
@@ -123,6 +131,15 @@
         html.dark footer {
             background-color: #1a1a1a;
             color: #aaa;
+        }
+
+        html.dark .toggle {
+            border-color: #e0e0e0;
+            color: #e0e0e0;
+        }
+
+        html.dark .toggle:hover {
+            background-color: rgba(224,224,224,0.1);
         }
 
         @keyframes fadeUp {
@@ -229,7 +246,7 @@
         updateButtonText();
     }
 
-    // 페이지 로딩 후 버튼 텍스트 초기화
+    // 페이지 로딩 시 버튼 텍스트 초기화
     updateButtonText();
 </script>
 
