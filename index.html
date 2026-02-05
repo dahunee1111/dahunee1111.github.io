@@ -142,13 +142,13 @@ main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 }
 .skill:hover { transform: scale(1.05); }
 
-/* ===== 프로젝트 카드 ===== */
+/* ===== 프로젝트 안내 카드 ===== */
 .project-card {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
   margin: 12px 0;
-  padding: 16px;
+  padding: 20px;
   border-radius: 12px;
   background: #f9f9f9;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
@@ -247,36 +247,6 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
   button { width: 100%; padding: 12px 0; font-size: 15px; }
 }
 </style>
-
-<script>
-/* ===== 다크모드 초기 적용 ===== */
-if(localStorage.getItem("darkMode")==="true"){document.documentElement.classList.add("dark");}
-
-/* ===== 인사 ===== */
-function sayHello(){alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!");}
-
-/* ===== 다크모드 토글 ===== */
-const toggleBtn=document.querySelector(".toggle");
-function updateButtonText(){
-  toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드";
-}
-function toggleDarkMode(){
-  document.documentElement.classList.toggle("dark");
-  localStorage.setItem("darkMode",document.documentElement.classList.contains("dark"));
-  updateButtonText();
-}
-updateButtonText();
-
-/* ===== 햄버거 메뉴 ===== */
-function toggleHamburger(el){
-  el.classList.toggle("active");
-  document.querySelector(".mobile-menu").classList.toggle("show");
-}
-function closeHamburger(){
-  document.querySelector(".mobile-menu").classList.remove("show");
-  document.querySelector(".hamburger").classList.remove("active");
-}
-</script>
 </head>
 <body>
 
@@ -291,7 +261,7 @@ function closeHamburger(){
 <a href="#contact">연락처</a>
 </nav>
 
-<div class="hamburger" onclick="toggleHamburger(this)">
+<div class="hamburger" role="button" aria-label="메뉴 열기/닫기" aria-expanded="false" onclick="toggleHamburger(this)">
   <span></span><span></span><span></span>
 </div>
 <nav class="mobile-menu">
@@ -301,7 +271,7 @@ function closeHamburger(){
 <a href="#contact" onclick="closeHamburger()">연락처</a>
 </nav>
 
-<button class="toggle" onclick="toggleDarkMode()">🌙 다크모드</button>
+<button class="toggle">🌙 다크모드</button>
 </header>
 
 <main>
@@ -327,34 +297,16 @@ function closeHamburger(){
 </div>
 </section>
 
-<!-- 프로젝트 -->
+<!-- 프로젝트 안내 -->
 <section id="projects" class="card">
 <h2>💻 프로젝트</h2>
-<div class="project-card">
-<img src="images/self-driving.jpg" alt="자율주행 자동차">
-<div class="project-info">
-<h3>자율주행 자동차 시뮬레이션</h3>
-<p>Python과 OpenCV를 이용한 자율주행 시뮬레이션 프로젝트입니다.</p>
-<a href="https://github.com/dahunee1111/self-driving" target="_blank" aria-label="GitHub 링크">GitHub</a>
-</div>
-</div>
-
-<div class="project-card">
-<img src="images/drone.jpg" alt="자율비행 드론">
-<div class="project-info">
-<h3>자율비행 드론 프로젝트</h3>
-<p>드론 자율비행 알고리즘과 센서 제어 실습 프로젝트입니다.</p>
-<a href="https://github.com/dahunee1111/drone-project" target="_blank" aria-label="GitHub 링크">GitHub</a>
-</div>
-</div>
-
-<div class="project-card">
-<img src="images/ai-classifier.jpg" alt="AI 이미지 분류">
-<div class="project-info">
-<h3>AI 이미지 분류 모델 개발</h3>
-<p>TensorFlow를 활용한 이미지 분류 AI 모델 개발 프로젝트입니다.</p>
-<a href="https://github.com/dahunee1111/ai-classifier" target="_blank" aria-label="GitHub 링크">GitHub</a>
-</div>
+<div class="project-card" style="justify-content: center; text-align: center; flex-direction: column;">
+  <img src="images/projects-placeholder.jpg" alt="프로젝트 이미지" style="width:200px; height:120px; object-fit:cover; margin-bottom:12px;">
+  <div class="project-info">
+    <h3>프로젝트 전체 보기</h3>
+    <p>저의 다양한 프로젝트는 2페이지에서 확인하실 수 있습니다.</p>
+    <a href="page2.html" aria-label="프로젝트 페이지로 이동">프로젝트 페이지로 이동</a>
+  </div>
 </div>
 </section>
 
@@ -373,5 +325,42 @@ function closeHamburger(){
 
 <footer>© 2026 Jeon Dahoon. All rights reserved.</footer>
 
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  /* ===== 다크모드 초기 적용 ===== */
+  if(localStorage.getItem("darkMode")==="true"){document.documentElement.classList.add("dark");}
+
+  /* ===== 인사 ===== */
+  window.sayHello = function(){alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!");}
+
+  /* ===== 다크모드 토글 ===== */
+  const toggleBtn=document.querySelector(".toggle");
+  function updateButtonText(){
+    toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드";
+  }
+  toggleBtn.addEventListener("click", function(){
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("darkMode",document.documentElement.classList.contains("dark"));
+    updateButtonText();
+  });
+  updateButtonText();
+
+  /* ===== 햄버거 메뉴 ===== */
+  const hamburger = document.querySelector(".hamburger");
+  function toggleHamburger(el){
+    el.classList.toggle("active");
+    document.querySelector(".mobile-menu").classList.toggle("show");
+    el.setAttribute("aria-expanded", el.classList.contains("active"));
+  }
+  window.toggleHamburger = toggleHamburger;
+
+  window.closeHamburger = function(){
+    document.querySelector(".mobile-menu").classList.remove("show");
+    document.querySelector(".hamburger").classList.remove("active");
+    document.querySelector(".hamburger").setAttribute("aria-expanded","false");
+  }
+});
+</script>
 </body>
 </html>
