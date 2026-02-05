@@ -43,7 +43,6 @@ button.toggle:hover { background-color: rgba(255,255,255,0.1); }
 /* ================= 메인 ================= */
 main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 .card { background: white; border-radius: 12px; padding: 26px; margin-bottom: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); animation: fadeUp 0.6s ease; }
-.card img { border-radius: 12px; max-width: 100%; }
 
 /* ===== 기술 스택 ===== */
 .skills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
@@ -56,18 +55,18 @@ main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
+  gap: 16px;
   padding: 30px 20px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #007bff, #00c6ff);
+  background: linear-gradient(135deg,#007bff,#00c6ff);
   color: white;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   transition: transform 0.3s, box-shadow 0.3s;
   animation: fadeUp 0.6s ease;
 }
 .project-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
-.project-card .project-header { display: flex; align-items: center; gap: 10px; animation: fadeIn 1s ease forwards; }
-.project-card .project-desc { opacity: 0; animation: fadeIn 1s ease 0.2s forwards; }
+.project-card .project-header { display: flex; align-items: center; gap: 10px; }
+.project-card .project-desc { font-size: 1rem; max-width: 400px; line-height: 1.5; }
 .project-card a { display:inline-block; padding: 10px 20px; border-radius:8px; background: white; color: #007bff; font-weight: bold; text-decoration: none; transition: all 0.3s; }
 .project-card a:hover { background: #e0e0e0; color: #007bff; }
 
@@ -93,7 +92,6 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 
 /* ================= 애니메이션 ================= */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ================= 반응형 ================= */
 @media (max-width: 768px) {
@@ -112,22 +110,26 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 
 <script>
 /* ===== 다크모드 초기 적용 ===== */
-if(localStorage.getItem("darkMode")==="true"){document.documentElement.classList.add("dark");}
+document.addEventListener("DOMContentLoaded", function(){
+  if(localStorage.getItem("darkMode")==="true"){
+    document.documentElement.classList.add("dark");
+  }
+
+  /* ===== 버튼 텍스트 업데이트 ===== */
+  const toggleBtn=document.querySelector(".toggle");
+  function updateButtonText(){
+    toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드";
+  }
+  toggleBtn.addEventListener("click", function(){
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("darkMode",document.documentElement.classList.contains("dark"));
+    updateButtonText();
+  });
+  updateButtonText();
+});
 
 /* ===== 인사 ===== */
 function sayHello(){alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!");}
-
-/* ===== 다크모드 토글 ===== */
-const toggleBtn=document.querySelector(".toggle");
-function updateButtonText(){
-  toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드";
-}
-function toggleDarkMode(){
-  document.documentElement.classList.toggle("dark");
-  localStorage.setItem("darkMode",document.documentElement.classList.contains("dark"));
-  updateButtonText();
-}
-updateButtonText();
 
 /* ===== 햄버거 메뉴 ===== */
 function toggleHamburger(el){
@@ -163,7 +165,7 @@ function closeHamburger(){
 <a href="#contact" onclick="closeHamburger()">연락처</a>
 </nav>
 
-<button class="toggle" onclick="toggleDarkMode()">🌙 다크모드</button>
+<button class="toggle">🌙 다크모드</button>
 </header>
 
 <main>
@@ -171,7 +173,6 @@ function closeHamburger(){
 <section id="about" class="card">
 <h2>🙋‍♂️ 소개</h2>
 <p>안녕하세요. <strong>AI 개발자</strong>를 목표로 학습 중인 전다훈입니다. AI 기반 지능형 시스템 개발에 관심이 있습니다.</p>
-<img src="images/image.jpg" alt="우리집 구름이" style="max-width:150px;">
 <button onclick="sayHello()">눌러보세요!</button>
 </section>
 
