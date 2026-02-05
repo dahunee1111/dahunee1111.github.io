@@ -6,6 +6,7 @@
     <title>전다훈 | AI Developer Portfolio</title>
 
     <style>
+        /* 기본 스타일 */
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
@@ -31,7 +32,6 @@
             text-decoration: none;
             font-weight: bold;
         }
-
         nav a:hover { color: #fff; }
 
         main {
@@ -80,7 +80,6 @@
             margin-top: 20px;
         }
 
-        /* 페이지네이션 */
         .pagination {
             text-align: center;
             margin: 40px 0;
@@ -151,6 +150,7 @@
         <a href="#contact">연락처</a>
     </nav>
 
+    <!-- 다크모드 토글 버튼 -->
     <button class="toggle" onclick="toggleDarkMode()">🌙 다크모드</button>
 </header>
 
@@ -182,7 +182,6 @@
         </div>
     </section>
 
-    
     <section id="contact" class="card">
         <h2>📬 연락처</h2>
         <p>Email: dahunee1111@naver.com</p>
@@ -194,7 +193,6 @@
         </p>
     </section>
 
-    <!-- 페이지 번호 -->
     <div class="pagination">
         <a href="index.html" class="active">1</a>
         <a href="page2.html">2</a>
@@ -206,30 +204,33 @@
 </footer>
 
 <script>
-function sayHello() {
-    alert("저는 이 사이트를 만든 전다훈 이라고 합니다. 이 사이트에 방문해주셔서 정말 감사합니다.");
-}
+    // 인사 알림
+    function sayHello() {
+        alert("저는 이 사이트를 만든 전다훈 이라고 합니다. 이 사이트에 방문해주셔서 정말 감사합니다.");
+    }
 
-const toggleBtn = document.querySelector(".toggle");
+    const toggleBtn = document.querySelector(".toggle");
 
-function updateButtonText() {
-    toggleBtn.textContent =
-        document.documentElement.classList.contains("dark")
-        ? "☀️ 라이트모드"
-        : "🌙 다크모드";
-}
+    // 버튼 텍스트 업데이트 함수
+    function updateButtonText() {
+        toggleBtn.textContent =
+            document.documentElement.classList.contains("dark")
+            ? "☀️ 라이트모드"
+            : "🌙 다크모드";
+    }
 
-function toggleDarkMode() {
-    document.documentElement.classList.toggle("dark");
-    localStorage.setItem(
-        "darkMode",
-        document.documentElement.classList.contains("dark")
-    );
+    // 다크모드 토글 함수
+    function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark");
+        localStorage.setItem(
+            "darkMode",
+            document.documentElement.classList.contains("dark")
+        );
+        updateButtonText();
+    }
+
+    // 페이지 로딩 후 버튼 텍스트 초기화
     updateButtonText();
-}
-
-// 페이지 로딩 후 버튼 텍스트 초기화
-updateButtonText();
 </script>
 
 </body>
