@@ -13,55 +13,63 @@
 html { scroll-behavior: smooth; font-size:16px; }
 body { font-family:'Segoe UI', Arial, sans-serif; line-height:1.6; background:#f4f6f8; color:#333; transition:background 0.3s,color 0.3s; }
 
-header { background: linear-gradient(135deg,#1e1e1e,#3a3a3a); color:#fff; padding:50px 20px; text-align:center; position:relative; }
+/* --- 헤더 + 파티클 배경 --- */
+header { 
+  position:relative;
+  color:#fff;
+  padding:50px 20px;
+  text-align:center;
+  overflow:hidden;
+}
+header::before {
+  content:"";
+  position:absolute;
+  top:0; left:0; width:100%; height:100%;
+  background:linear-gradient(135deg,#1e1e1e,#3a3a3a);
+  z-index:-2;
+}
+canvas#particle-canvas {
+  position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;
+}
 header h1 { font-size:2.6rem; margin-bottom:6px; }
 header p { font-size:1.1rem; margin-bottom:10px; }
-.profile-wrapper { width:140px; height:140px; margin:0 auto 20px; padding:4px; border-radius:50%; background:linear-gradient(135deg,#00c6ff,#007bff); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(0,0,0,0.35); transition:transform 0.4s ease,box-shadow 0.4s ease; }
+.profile-wrapper { width:140px; height:140px; margin:0 auto 20px; padding:4px; border-radius:50%; 
+  background:linear-gradient(135deg,#00c6ff,#007bff); 
+  display:flex; align-items:center; justify-content:center; 
+  box-shadow:0 10px 25px rgba(0,0,0,0.35); transition:transform 0.4s ease,box-shadow 0.4s ease; 
+}
 .profile-wrapper:hover { transform:scale(1.08); box-shadow:0 16px 35px rgba(0,0,0,0.5); }
 .profile-img { width:100%; height:100%; border-radius:50%; object-fit:cover; border:3px solid white; }
 
 html.dark .profile-wrapper { box-shadow:0 10px 25px rgba(255,255,255,0.25); }
 html.dark .profile-img { border:3px solid #e0e0e0; }
 
+/* --- 메뉴 --- */
 nav.desktop-menu { display:flex; justify-content:center; margin-top:10px; }
 nav.desktop-menu a { color:#ddd; margin:0 14px; text-decoration:none; font-weight:bold; transition:color 0.3s; }
 nav.desktop-menu a:hover { color:#fff; }
 
-/* --- 햄버거 메뉴 항상 표시 --- */
 .hamburger { display:flex; position:absolute; top:20px; right:20px; width:28px; height:22px; flex-direction:column; justify-content:space-between; cursor:pointer; z-index:20; }
 .hamburger span { display:block; height:3px; background:white; border-radius:3px; transition:all 0.3s ease; }
 .hamburger.active span:nth-child(1){ transform:rotate(45deg) translate(5px,5px);}
 .hamburger.active span:nth-child(2){ opacity:0;}
 .hamburger.active span:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px);}
 
-/* --- 모바일 메뉴: 햄버거 바로 아래 위치 --- */
 nav.mobile-menu {
-  display:flex;
-  flex-direction:column;
-  position:absolute;
-  top:60px;
-  right:20px;
-  background: linear-gradient(135deg,#1e1e1e,#3a3a3a);
-  width:220px;
-  transform:translateY(-20px);
-  opacity:0;
-  pointer-events:none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  z-index:15;
+  display:flex; flex-direction:column; position:absolute; top:60px; right:20px; background: linear-gradient(135deg,#1e1e1e,#3a3a3a); width:220px;
+  transform:translateY(-20px); opacity:0; pointer-events:none; transition: transform 0.3s ease, opacity 0.3s ease; z-index:15;
 }
-nav.mobile-menu.show {
-  transform:translateY(0);
-  opacity:1;
-  pointer-events:auto;
-}
+nav.mobile-menu.show { transform:translateY(0); opacity:1; pointer-events:auto; }
 nav.mobile-menu a { margin:10px 0; padding:10px 20px; color:#ddd; text-decoration:none; font-weight:bold; transition:color 0.3s; }
 nav.mobile-menu a:hover { color:#fff; }
 
 button.toggle { background:transparent; border:2px solid white; margin-top:10px; color:white; padding:8px 20px; border-radius:6px; cursor:pointer; transition: all 0.3s; }
 button.toggle:hover { background-color: rgba(255,255,255,0.1); }
 
+/* --- 메인 영역 --- */
 main { max-width:1000px; margin:40px auto; padding:0 20px; }
-.card { background:white; border-radius:12px; padding:28px; margin-bottom:28px; box-shadow:0 8px 24px rgba(0,0,0,0.08); animation:fadeUp 0.6s ease; }
+.card { background:white; border-radius:12px; padding:28px; margin-bottom:28px; box-shadow:0 8px 24px rgba(0,0,0,0.08); animation:fadeUp 0.6s ease; transition: transform 0.3s, box-shadow 0.3s; }
+.card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.15); }
 
 .skills { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
 .skill { background-color:#007bff; color:white; padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; transition:transform 0.2s; display:flex; align-items:center; gap:6px; }
@@ -90,12 +98,14 @@ button:hover { background-color:#0056b3; }
 
 footer { text-align:center; padding:24px; background:#eee; font-size:14px; color:#666; }
 
+/* --- 다크모드 --- */
 html.dark body { background-color:#121212; color:#e0e0e0; }
 html.dark .card { background:#1e1e1e; }
 html.dark footer { background-color:#1a1a1a; color:#aaa; }
 html.dark .toggle { border-color:#e0e0e0; color:#e0e0e0; }
 html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 
+/* --- 애니메이션 --- */
 @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 
 /* --- 반응형 --- */
@@ -117,8 +127,8 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 </style>
 
 <script>
+// 다크모드 & 방명록
 document.addEventListener("DOMContentLoaded", function(){
-  // 다크모드 유지
   if(localStorage.getItem("darkMode")==="true") document.documentElement.classList.add("dark");
   const toggleBtn=document.querySelector(".toggle");
   function updateButtonText(){ toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드"; }
@@ -128,25 +138,17 @@ document.addEventListener("DOMContentLoaded", function(){
     updateButtonText();
   });
   updateButtonText();
-
-  // 방명록 불러오기
   loadGuestbook();
+
+  // 파티클 캔버스 시작
+  initParticles();
 });
 
-// UX: 방문 알림
 function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!"); }
+function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
+function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
 
-// 햄버거 메뉴 토글
-function toggleHamburger(el){ 
-  el.classList.toggle("active"); 
-  document.querySelector(".mobile-menu").classList.toggle("show"); 
-}
-function closeHamburger(){ 
-  document.querySelector(".mobile-menu").classList.remove("show"); 
-  document.querySelector(".hamburger").classList.remove("active"); 
-}
-
-// --- 방명록 기능 ---
+// 방명록
 function addGuest(name,message){
   const now=new Date();
   const entry={name,message,date:now.toLocaleString()};
@@ -175,6 +177,38 @@ function loadGuestbook(){
     div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em><p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
     container.appendChild(div);
   });
+}
+
+// --- 파티클 배경 ---
+let particles=[];
+function initParticles(){
+  const canvas=document.createElement("canvas");
+  canvas.id="particle-canvas";
+  document.querySelector("header").appendChild(canvas);
+  const ctx=canvas.getContext("2d");
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight*0.5;
+
+  window.addEventListener("resize",()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight*0.5; });
+
+  for(let i=0;i<100;i++){
+    particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, dx:(Math.random()-0.5)*0.5, dy:(Math.random()-0.5)*0.5});
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<0||p.x>canvas.width) p.dx*=-1;
+      if(p.y<0||p.y>canvas.height) p.dy*=-1;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle="rgba(255,255,255,0.6)";
+      ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
 }
 </script>
 </head>
@@ -257,3 +291,4 @@ function loadGuestbook(){
 <footer>© 2026 Jeon Dahoon. All rights reserved.</footer>
 </body>
 </html>
+
