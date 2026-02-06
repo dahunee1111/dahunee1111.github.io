@@ -52,17 +52,22 @@
     }
 
     tbody tr:nth-child(odd) {
-    background-color: #ff000033; /* 연한 빨강 */
-    }
+    background-color: #ff000033;
+  }
+ 
+tbody tr:nth-child(even) {
+  background-color: #0000ff33;
+}
 
-   tbody tr:nth-child(even) {
-   background-color: #0000ff33; /* 연한 파랑 */
-   }
+tbody tr {
+  transition: background-color 0.3s, transform 0.3s;
+  transform-origin: center;
+}
 
-   tbody tr:hover {
-   background-color: #ff9999;  /* 강조 빨강 */
-   transform: scale(1.03);
-   }
+tbody tr:hover {
+  background-color: #ff9999;
+  transform: scale(1.03);
+}
     /*테이블 텍스트 중앙 정렬*/
     th, td {
     text-align: center;     /* 가로 */
