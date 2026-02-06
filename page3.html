@@ -66,6 +66,9 @@
       // 버튼 클릭 시 div 테두리 변경
       document.getElementById("myDiv").style.border = "3px solid red";
     }
+    function submit() {
+    document.forms[0].submit();
+    }
   </script>
 </head>
 
@@ -143,7 +146,7 @@
   <label for="name">이름:</label>
   <input type="text" id="name" name="name">
   <textarea rows="4" clos="30"></textarea>
-  <button type="button">제출</button>
+  <button type="button" onclick="submit()">제출</button>
   </form>
 
 </body>
