@@ -51,12 +51,18 @@
     text-align: center;
     }
 
-    tr:nth-child(even) {
-    background-color: #ff00004d;
+    tbody tr:nth-child(odd) {
+    background-color: #ff000033; /* 연한 빨강 */
     }
-    tr:nth-child(odd) {
-    background-color: #0000ff4d;
-    }
+
+   tbody tr:nth-child(even) {
+   background-color: #0000ff33; /* 연한 파랑 */
+   }
+
+   tbody tr:hover {
+   background-color: #ff9999;  /* 강조 빨강 */
+   transform: scale(1.03);
+   }
     /*테이블 텍스트 중앙 정렬*/
     th, td {
     text-align: center;     /* 가로 */
