@@ -40,11 +40,11 @@
 
   <script>
     function calculate() {
-      // 입력값 가져오기 (문자 → 숫자)
+      // 입력값 가져오기 (문자 > 숫자)
       const a = parseInt(document.getElementById("n1").value);
       const b = parseInt(document.getElementById("n2").value);
 
-      // NaN 방지
+      // NaN ( Not a Number ) 방지 : 이게 진짜 숫자인지 확인 하고 숫자를 입력 하지 않아 발생하는 NaN 현상을 방지하기 위함이다.
       if (isNaN(a) || isNaN(b)) {
         alert("숫자를 입력하세요!");
         return;
@@ -108,6 +108,12 @@
     인라인 요소 그룹 (내용 크기만큼만 차지하며 주로 스타일 적용용)
   </span>
 
+  <div>Hello</div>
+  <span> ABC</span><span> ABC</span>
+  <span> ABC</span>
+  <span> ABC</span>
+  CDE
+  CDE 
   <section>의미 있는 구역 구분</section>
 
   <footer>사이트의 바닥부분을 담당하는 역할</footer>
