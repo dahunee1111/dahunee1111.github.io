@@ -28,7 +28,11 @@
         
     }
     label {display:inline-block; width:50px;text-align:right;}
-    btn_div {justify-content: center;}
+    #btn_div {
+    display: flex;           /* flex 컨테이너로 변환 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    margin-top: 12px;        /* 버튼과 위 입력칸 사이 간격 */
+}
     
     /* 입력창 크기 */
     #n1, #n2, #n3 {
