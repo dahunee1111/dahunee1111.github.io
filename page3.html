@@ -98,9 +98,17 @@
       document.getElementById("myDiv").style.border = "3px solid red";
     }
 
-    function submitForm() {
+  function submitForm() {
       document.forms[0].submit();
-    }
+  }
+  function check_form()
+  {
+    email = "hello@abc.com";
+    if !(email.includes('.'))
+    {
+     alert('이메일 주소를 다시 확인해주세요');
+   }
+  }
   </script>
 </head>
 
@@ -255,7 +263,7 @@
     <label>
     <input type="checkbox" name="agree"> 이용약관 동의 </label><br>
  
-    <button type="submit">전송</button>
+    <button type="button" onclick="check_form()">전송</button>
    </form>
 
 
