@@ -25,15 +25,16 @@
       width:fit-content;
       border:1px solid black;
       padding:15px;
-        
     }
+
     label {display:inline-block; width:50px;text-align:right;}
+
     .btn_div {
-    display: flex;           /* flex 컨테이너로 변환 */
-    justify-content: center; /* 가로 가운데 정렬 */
-    margin-top: 12px;        /* 버튼과 위 입력칸 사이 간격 */
-}
-    
+      display: flex;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
     /* 입력창 크기 */
     #n1, #n2, #n3 {
       width: 60px;
@@ -41,97 +42,71 @@
     }
 
     /* 이미지 크기 */
-    .origin {
-      width: 10%;
-      height: auto;
-    }
+    .origin { width: 10%; height: auto; }
+    .copy { width: 5%; height: auto; }
 
-    .copy {
-      width: 5%;
-      height: auto;
-    }
     /*스팬 테두리*/
     span { border : 1px solid red; }
-    
+
     /*테이블 선 만들기*/
     table {
-    border-collapse: collapse;
-    width: 300px;
+      border-collapse: collapse;
+      width: 300px;
     }
+
     /*테이블 칸 꾸미기*/
     th, td {
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+      vertical-align: middle;
     }
 
-    tbody tr:nth-child(odd) {
-    background-color: #ff000033;
-    }
- 
-    tbody tr:nth-child(even) {
-    background-color: #0000ff33;
-    }
+    tbody tr:nth-child(odd) { background-color: #ff000033; }
+    tbody tr:nth-child(even) { background-color: #0000ff33; }
 
     tbody tr {
-    transition: background-color 0.3s, transform 0.3s;
-    transform-origin: center;
-    }
-    /*마우스를 올렸을때 확대가 되게 하는게 hover 이다.그리고 마우스를 올렸을때 포인트로 바꾸는거는cursor:pointer이다.*/
-    tbody tr:hover {
-    background-color: #ff9999;
-    transform: scale(1.03);
-    cursor:pointer;
-    }
-    /*테이블 텍스트 중앙 정렬*/
-    th, td {
-    text-align: center;     /* 가로 */
-    vertical-align: middle;/* 세로 */
+      transition: background-color 0.3s, transform 0.3s;
     }
 
-    
+    tbody tr:hover {
+      background-color: #ff9999;
+      transform: scale(1.03);
+      cursor:pointer;
+    }
   </style>
 
   <script>
     function calculate() {
-      // 입력값 가져오기 (문자 > 숫자)
       const a = parseInt(document.getElementById("n1").value);
       const b = parseInt(document.getElementById("n2").value);
 
-      // NaN ( Not a Number ) 방지 : 이게 진짜 숫자인지 확인 하고 숫자를 입력 하지 않아 발생하는 NaN 현상을 방지하기 위함이다.
       if (isNaN(a) || isNaN(b)) {
         alert("숫자를 입력하세요!");
         return;
       }
 
       const c = a + b;
-
-      // 결과 문자열
-      const exp = `${a} + ${b} = ${c}`;
-
-      console.log(exp);
-      alert(exp);
-
-      // 결과 출력
       document.getElementById("n3").value = c;
-
-      // 버튼 클릭 시 div 테두리 변경
       document.getElementById("myDiv").style.border = "3px solid red";
     }
-    function submit() {
-    document.forms[0].submit();
+
+    function submitForm() {
+      document.forms[0].submit();
     }
-</script>
+  </script>
 </head>
 
 <body>
   <h1>제목을 작성하는 공간</h1>
   <h2>제목이 점점 작아지는 코드</h2>
   <h3>줄바꿈은 <br> 이렇게 한다</h3>
+
   <!-- 문서 내 특정 위치로 바로 갈수 있게 하는 코드 -->
   <div id="top">여기 맨 위 입니다</div> 
   <a href="#bottom"> 맨 아래로 이동</a>
   <a href="#middle"> 중앙으로 이동 </a>
+
   <p>
     코드를 <strong>복습하고 배우고 연습하는</strong>
     <em>장소</em>입니다.
@@ -160,13 +135,8 @@
 
   <span style="color:red">강조 텍스트</span>
 
-  <div>
-    블럭 요소 그룹 (이건 다른 태그가 옆에 오지 못하게 영역을 차지한다)
-  </div>
-
-  <span>
-    인라인 요소 그룹 (내용 크기만큼만 차지하며 주로 스타일 적용용)
-  </span>
+  <div>블럭 요소 그룹</div>
+  <span>인라인 요소 그룹</span>
 
   <!-- span 과 div , 코드가 없는 문자는 어떻게 표시 되는지 알아보기 위한 실험 -->  
   <div> Hello </div>
@@ -175,7 +145,7 @@
   <span> ABC </span>
   CDE
   CDE 
-  
+
   <!-- div , header , main , footer , section : 모두다 같은 기능이기에 모두 같다고 봐도 되지만 서로를 구별하기 위함이다 즉
     서로를 구별하는게 가능 해지면 개별의 마다의 코드를 넣어 줄수 있어 차별화를 둘수 있게 된다. ( Semantic Tag ) -->
   <!-- <section>의미 있는 구역 구분</section>
@@ -196,95 +166,82 @@
     <input type="text" id="n3" readonly>
   </div>
 
-  <br>
-
   <button type="button" onclick="calculate()">계산</button>
+
   <!--주소창에 이름이랑 text를 새기는 방식-->
   <form>
-  <label for="name">이름:</label>
-  <input type="text" id="name" name="name">
-  <textarea name="text" rows="4" clos="30"></textarea>
-  <button type="button" onclick="submit()">제출</button>
+    <label for="name">이름:</label>
+    <input type="text" id="name" name="name">
+    <textarea name="text" rows="4" cols="30"></textarea>
+    <button type="button" onclick="submitForm()">제출</button>
   </form>
+
   <!-- 테이블 즉 표를 만드는 코드 -->
   <table>
-  <tr><th>이름</th><th>나이</th><th>지역</th></tr>
-  <tr><td>홍길동</td><td>25</td><td>인천</td></tr>
-  <tr><td>홍길은</td><td>29</td><td>서울</td></tr>
-  <tr><td>홍길금</td><td>34</td><td>경기도</td></tr>
-  <tr><td>홍길똥</td><td>31</td><td>부산</td></tr>
-  <tr><td>홍길이</td><td>28</td><td>진도</td></tr>
+    <tr><th>이름</th><th>나이</th><th>지역</th></tr>
+    <tr><td>홍길동</td><td>25</td><td>인천</td></tr>
+    <tr><td>홍길은</td><td>29</td><td>서울</td></tr>
+    <tr><td>홍길금</td><td>34</td><td>경기도</td></tr>
+    <tr><td>홍길똥</td><td>31</td><td>부산</td></tr>
+    <tr><td>홍길이</td><td>28</td><td>진도</td></tr>
   </table>
+
   <!-- 로그인 코드 -->
-<div id="form_container">
-  <form>
-  <div> <label for="uid">아이디:</label>
-  <input type="text" name="uid" id="uid"> 
-  </div>
-  <div> <label for="pwd">암호:</label>
-  <input type="password"name="pwd"id="pwd"> 
-  </div>
-  <fieldset>
-  <legend>좋아하는 과일은?</legend>
-  🍎<input type="checkbox" name="fruits" value="apple">
-  🍇<input type="checkbox" name="fruits" value="grape">
-  🍊<input type="checkbox" name="fruits" value="orange">
-  </fieldset>
-  <fieldset>
-  <legend> 당신의 성별은? </legend>
-  🙆‍♂️남성<input type="radio" name="gender" value="male"> 
-  🙆‍♀️여성<input type="radio" name="gender" value="female">
-  </fieldset>
-  
-  <div>
-  경력<input type="number" name="experience" min="0" max="100" step="10" value="50">
-  </div>
-  <div>
-  점수<input type="range" name="credit" min="0" max="10" step="1">
+  <div id="form_container">
+
+    <form>
+      <div><label for="uid">아이디:</label><input type="text" name="uid" id="uid"></div>
+      <div><label for="pwd">암호:</label><input type="password" name="pwd" id="pwd"></div>
+
+      <fieldset>
+        <legend>좋아하는 과일은?</legend>
+        🍎<input type="checkbox" name="fruits" value="apple">
+        🍇<input type="checkbox" name="fruits" value="grape">
+        🍊<input type="checkbox" name="fruits" value="orange">
+      </fieldset>
+
+      <fieldset>
+        <legend> 당신의 성별은? </legend>
+        🙆‍♂️남성<input type="radio" name="gender" value="male"> 
+        🙆‍♀️여성<input type="radio" name="gender" value="female">
+      </fieldset>
+
+      <div>경력<input type="number" name="experience" min="0" max="100" step="10" value="50"></div>
+      <div>점수<input type="range" name="credit" min="0" max="10" step="1"></div>
+
+      <div class="btn_div"><button type="submit">확인</button></div>
+    </form>
+
+    <!-- 생년월일을 전송하는 form 코드-->
+    <form id="birthdayForm">
+      <label for="birthday">생년월일:</label>
+      <input type="date" id="birthday" name="birthday" required>
+      <button type="submit">전송</button>
+    </form>
+
+    <!-- 입력한 색상을 전송하는 form 코드--> 
+    <form id="colorForm">
+      <label for="colorPicker">색상을 선택하세요:</label>
+      <input type="color" id="colorPicker" name="color" required>
+      <button type="submit">전송</button>
+    </form>
+
+    <!--옵션중 하나를 선택하게 해주는 코드-->
+    <form>
+      <select name="subject[]" multiple size="4">
+        <option value="Python">Python</option>
+        <option value="Html">Html</option>
+        <option value="Css">Css</option>
+        <option value="Javascript">Javascript</option>
+      </select>
+    </form>
+
   </div>
 
-  <div class="btn_div"> <button type="submit">확인</button>
-  </div>
-  <!-- 생년월일을 전송하는 form 코드-->
-  
-  </form>
-  <form id="birthdayForm">
-  <div>
-  <label for="birthday">생년월일:</label>
-  <input type="date" id="birthday" name="birthday" required>
-  <button type="submit">전송</button>
-  </div>
-  </form>
-  
-  
-  <!-- 입력한 색상을 전송하는 form 코드--> 
-  
-  <form id="colorForm">
-  <div>
-  <label for="colorPicker">색상을 선택하세요:</label>
-  <input type="color" id="colorPicker" name="color" required>
-  <button type="submit">전송</button>
-  </div>
-  </form>
- 
-
-  <!--옵션중 하나를 선택하게 해주는 코드-->
-  <div>
-  <form>
-  <select name="subject" multiple>
-  <option value="Python">Python</option>
-  <option value="Html">Html</option>
-  <option value="Css">Css</option>
-  <option value="Javascript">Javascript</option>
-  </select>
-</form>
-  </div>
-    
-</div>
-  
   <!--문서 내 특정 위치로 바로 갈수 있게 하는 코드 -->
   <div id="bottom">여기 맨 아래 입니다</div>
   <a href="#top"> 맨 위로 이동</a>
 </body>
 </html>
+
 
