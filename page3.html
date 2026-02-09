@@ -246,7 +246,17 @@
   <div class="btn_div"> <button type="submit">확인</button>
   </div>
   </form>
-  </div>
+  <form id="birthdayForm" action="/submit-birthday" method="POST">
+  <label for="birthday">생년월일:</label>
+  <input type="date" id="birthday" name="birthday" required>
+  <button type="submit">전송</button>
+  </form>
+  <form id="colorForm" action="/submit-color" method="POST">
+  <label for="colorPicker">색상을 선택하세요:</label>
+  <input type="color" id="colorPicker" name="color" value="#000000" required>
+  <button type="submit">전송</button>
+</form>
+</div>
   
   <!--문서 내 특정 위치로 바로 갈수 있게 하는 코드 -->
   <div id="bottom">여기 맨 아래 입니다</div>
