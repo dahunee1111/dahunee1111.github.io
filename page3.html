@@ -74,6 +74,13 @@
       transform: scale(1.03);
       cursor:pointer;
     }
+  /*글자 자동 글 바꿈 방지*/
+  label {
+  display: inline-block;
+  width: 80px;
+  text-align: right;
+  white-space: nowrap;
+  }
   </style>
 
   <script>
@@ -235,6 +242,7 @@
         <option value="Javascript">Javascript</option>
       </select>
       <button type="submit">전송</button>
+      <button type="reset">초기화</button>
     </form>
 
   </div>
