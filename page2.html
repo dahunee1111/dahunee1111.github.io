@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>전다훈 | Projects</title>
 <link rel="icon" href="images/favicon.ico">
+
 <style>
 /* ==========================
    기본 스타일
@@ -14,7 +15,9 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background:#f4f6f8; color:#33
 a { text-decoration:none; }
 header {
     background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
-    color:white; text-align:center; padding:40px 20px;
+    color:white;
+    text-align:center;
+    padding:40px 20px;
 }
 header h1 { font-size:36px; margin-bottom:10px; }
 nav { margin-top:10px; }
@@ -57,7 +60,6 @@ main { max-width:900px; margin:40px auto; padding:0 20px; }
 }
 .project:hover { transform: translateY(-6px) scale(1.02); box-shadow:0 12px 28px rgba(0,0,0,0.2); }
 .project img, .project iframe { max-width:100%; border-radius:12px; margin-top:10px; }
-
 .project a { display:inline-block; margin-top:10px; padding:8px 14px; background:#007bff; color:white; border-radius:6px; transition:0.3s; }
 .project a:hover { background:#0056b3; }
 
@@ -69,29 +71,13 @@ main { max-width:900px; margin:40px auto; padding:0 20px; }
 
 /* 기술 스택 태그 */
 .tech-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
-.tech-tags span {
-    background: linear-gradient(135deg,#007bff,#00c6ff);
-    color:white;
-    padding:4px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:500;
-}
+.tech-tags span { background: linear-gradient(135deg,#007bff,#00c6ff); color:white; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:500; }
 
 /* ==========================
    페이지네이션
 ========================== */
 .pagination { text-align:center; margin:40px 0; }
-.pagination a {
-    display:inline-block;
-    margin:0 6px;
-    padding:8px 14px;
-    border-radius:6px;
-    background:#ddd;
-    color:#333;
-    font-weight:bold;
-    transition:0.3s;
-}
+.pagination a { display:inline-block; margin:0 6px; padding:8px 14px; border-radius:6px; background:#ddd; color:#333; font-weight:bold; transition:0.3s; }
 .pagination a.active, .pagination a:hover { background:#007bff; color:white; }
 
 /* ==========================
@@ -112,94 +98,91 @@ footer { text-align:center; padding:24px; background:#eee; font-size:14px; color
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
-<h1>전다훈 | Projects</h1>
-<nav>
-    <a href="index.html">홈</a>
-    <a href="page2.html" class="active">프로젝트</a>
-</nav>
+    <h1>전다훈 | Projects</h1>
+    <nav>
+        <a href="index.html">홈</a>
+        <a href="page2.html" class="active">프로젝트</a>
+    </nav>
 </header>
 
 <main>
-<section class="card">
-<h2>📂 대표 프로젝트</h2>
+    <section class="card">
+        <h2>📂 대표 프로젝트</h2>
 
-<!-- 카테고리 버튼 -->
-<div class="categories">
-<button class="active" data-cat="all">전체</button>
-<button data-cat="python">Python</button>
-<button data-cat="ai">AI</button>
-<button data-cat="web">Web</button>
-</div>
-
-<div class="projects">
-    <!-- 프로젝트 1 -->
-    <div class="project" data-category="python">
-        <h3>Python 기초 프로젝트 <span class="status completed">완료</span></h3>
-        <p>Python을 활용한 연습 프로젝트</p>
-        <ul>
-            <li>사용 기술: Python, 기본 알고리즘</li>
-            <li>배운 점: 반복문, 조건문, 함수 활용</li>
-        </ul>
-        <div class="tech-tags">
-            <span>Python</span>
-            <span>Algorithm</span>
+        <!-- 카테고리 버튼 -->
+        <div class="categories">
+            <button class="active" data-cat="all">전체</button>
+            <button data-cat="python">Python</button>
+            <button data-cat="ai">AI</button>
+            <button data-cat="web">Web</button>
         </div>
-        <a href="https://github.com/dahunee1111" target="_blank">GitHub 보기</a>
-    </div>
 
-    <!-- 프로젝트 2 -->
-    <div class="project" data-category="web">
-        <h3>나의 발자국 <span class="status in-progress">진행 중</span></h3>
-        <p>나만의 프로젝트 구상 정리 및 경험 후기</p>
-        <ul>
-            <li>사용 기술: HTML, CSS, Markdown</li>
-            <li>배운 점: 프로젝트 문서화, 기록 습관</li>
-        </ul>
-        <div class="tech-tags">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>Markdown</span>
+        <div class="projects">
+            <!-- 프로젝트 1 -->
+            <div class="project" data-category="python">
+                <h3>Python 기초 프로젝트 <span class="status completed">완료</span></h3>
+                <p>Python을 활용한 연습 프로젝트</p>
+                <ul>
+                    <li>사용 기술: Python, 기본 알고리즘</li>
+                    <li>배운 점: 반복문, 조건문, 함수 활용</li>
+                </ul>
+                <div class="tech-tags">
+                    <span>Python</span>
+                    <span>Algorithm</span>
+                </div>
+                <a href="https://github.com/dahunee1111" target="_blank">GitHub 보기</a>
+            </div>
+
+            <!-- 프로젝트 2 -->
+            <div class="project" data-category="web">
+                <h3>나의 발자국 <span class="status in-progress">진행 중</span></h3>
+                <p>나만의 프로젝트 구상 정리 및 경험 후기</p>
+                <ul>
+                    <li>사용 기술: HTML, CSS, Markdown</li>
+                    <li>배운 점: 프로젝트 문서화, 기록 습관</li>
+                </ul>
+                <div class="tech-tags">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>Markdown</span>
+                </div>
+                <a href="My_Review.html" target="_blank">프로젝트 상세보기</a>
+            </div>
+
+            <!-- 프로젝트 3 -->
+            <div class="project" data-category="ai">
+                <h3>AI 모델 학습 <span class="status idea">아이디어 단계</span></h3>
+                <p>Python을 활용한 기초 AI 모델 학습</p>
+                <ul>
+                    <li>사용 기술: Python, TensorFlow</li>
+                    <li>배운 점: 데이터 전처리, 모델 학습, 평가</li>
+                </ul>
+                <img src="images/cloud.jpg" alt="AI 프로젝트 예시 이미지">
+                <div class="tech-tags">
+                    <span>Python</span>
+                    <span>TensorFlow</span>
+                </div>
+                <a href="#" target="_blank">프로젝트 상세보기</a>
+            </div>
         </div>
-        <a href="My_Review.html" target="_blank">프로젝트 상세보기</a>
+    </section>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        <a href="index.html">1</a>
+        <a href="page2.html" class="active">2</a>
     </div>
-
-    <!-- 프로젝트 3 -->
-    <div class="project" data-category="ai">
-        <h3>AI 모델 학습 <span class="status idea">아이디어 단계</span></h3>
-        <p>Python을 활용한 기초 AI 모델 학습</p>
-        <ul>
-            <li>사용 기술: Python, TensorFlow</li>
-            <li>배운 점: 데이터 전처리, 모델 학습, 평가</li>
-        </ul>
-        <img src="images/cloud.jpg" alt="AI 프로젝트 예시 이미지">
-        <div class="tech-tags">
-            <span>Python</span>
-            <span>TensorFlow</span>
-        </div>
-        <a href="#" target="_blank">프로젝트 상세보기</a>
-    </div>
-</div>
-</section>
-
-<div class="pagination">
-    <a href="index.html">1</a>
-    <a href="page2.html" class="active">2</a>
-</div>
-
 </main>
 
 <footer>© 2026 Jeon Dahoon. All rights reserved.</footer>
 
-<!-- ==========================
-     프로젝트 필터 스크립트
-========================== -->
 <script>
-// ==========================
-// 안전한 프로젝트 필터링
-// ==========================
+/* ==========================
+   프로젝트 필터링
+========================== */
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll('.categories button');
     const projects = document.querySelectorAll('.project');
@@ -218,46 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     proj.style.display = 'none';
                 }
             });
-        });
-    });
-});
-</script>
-
-<!-- ==========================
-     SPA 상세보기 추가 스크립트
-========================== -->
-<!-- 상세보기 영역 (추가, 처음에는 숨김) -->
-<div id="project-detail" style="display:none; background:white; padding:20px; margin:40px auto; max-width:900px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08);"></div>
-
-<script>
-// ==========================
-// 프로젝트 상세보기 SPA 스타일 (추가 코드)
-// ==========================
-document.addEventListener("DOMContentLoaded", () => {
-    const detailDiv = document.getElementById('project-detail');
-
-    // 프로젝트 상세보기 링크를 선택
-    document.querySelectorAll('.projects a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            // My_Review.html 링크만 SPA 처리
-            if(link.getAttribute('href') === 'My_Review.html') {
-                e.preventDefault(); // 페이지 이동 막기
-
-                detailDiv.innerHTML = `
-                    <h3>나의 발자국 프로젝트 상세</h3>
-                    <p>나만의 프로젝트 구상 정리 및 경험 후기를 SPA 방식으로 표시합니다.</p>
-                    <ul>
-                        <li>사용 기술: HTML, CSS, Markdown</li>
-                        <li>배운 점: 프로젝트 문서화, 기록 습관</li>
-                    </ul>
-                    <button id="close-detail" style="margin-top:10px; padding:6px 12px;">닫기</button>
-                `;
-                detailDiv.style.display = 'block';
-
-                document.getElementById('close-detail').addEventListener('click', () => {
-                    detailDiv.style.display = 'none';
-                });
-            }
         });
     });
 });
