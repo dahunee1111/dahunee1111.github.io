@@ -143,6 +143,37 @@ document.addEventListener("DOMContentLoaded", function(){
   });
   updateButtonText();
   loadGuestbook();
+  // 방명록
+function addGuest(name,message){
+  const now=new Date();
+  const entry={name,message,date:now.toLocaleString()};
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  guestbook.push(entry);
+  localStorage.setItem("guestbook",JSON.stringify(guestbook));
+  loadGuestbook();
+}
+function deleteGuest(index){
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  guestbook.splice(index,1);
+  localStorage.setItem("guestbook",JSON.stringify(guestbook));
+  loadGuestbook();
+}
+function loadGuestbook(){
+  const container=document.getElementById("guestbook-list");
+  if(!container) return;
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  container.innerHTML="";
+  guestbook.forEach((entry,i)=>{
+    const div=document.createElement("div");
+    div.className="guestbook-entry";
+    div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em><p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
+    container.appendChild(div);
+  });
+}
+
 
   // 스킬바 애니메이션
   document.querySelectorAll('.skill .bar span').forEach((el) => {
@@ -320,6 +351,16 @@ function initParticles(){
     <a href="page2.html">프로젝트 페이지로 이동 →</a>
   </div>
 </section>
+<section id="guestbook" class="card">
+  <h2>✍️ 방명록</h2>
+  <form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
+    <input type="text" name="name" placeholder="이름" required style="padding:6px 12px; margin-right:6px;">
+    <input type="text" name="message" placeholder="메시지" required style="padding:6px 12px; margin-right:6px;">
+    <button type="submit">등록</button>
+  </form>
+  <div id="guestbook-list" style="margin-top:12px;"></div>
+</section>
+
 
 <section id="contact" class="card">
   <h2>📬 연락처</h2>
