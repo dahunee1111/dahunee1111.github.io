@@ -21,6 +21,6 @@ div#div_world {
   padding: 2px 6px;     
 }
 .container {
-  display:inline-block; width:50px;text-align:right;
+  display:inline-block;
   gap: 20px;
 }
