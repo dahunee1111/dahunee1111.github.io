@@ -19,4 +19,5 @@ div#div_world {
 .container {
   display: flex;
   white-space: nowrap;
+  padding: 15px; 
 }
