@@ -5,6 +5,7 @@ h1 {
   margin: 0;               
   line-height: 1;
   margin-bottom: 100px;
+  padding: 10px;
 }
 div.div_hello {
   font-family: sans-serif;
