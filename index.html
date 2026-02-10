@@ -13,31 +13,14 @@
 * { box-sizing: border-box; margin:0; padding:0; }
 html { scroll-behavior: smooth; font-size:16px; }
 body { font-family:'Segoe UI', Arial, sans-serif; line-height:1.6; background:#f4f6f8; color:#333; transition:background 0.3s,color 0.3s; }
-/* --- 헤더 + 파티클 배경 --- */
-header { 
-  position:relative;
-  color:#fff;
-  padding:50px 20px;
-  text-align:center;
-  overflow:hidden;
-}
-header::before {
-  content:"";
-  position:absolute;
-  top:0; left:0; width:100%; height:100%;
-  background:linear-gradient(135deg,#1e1e1e,#3a3a3a);
-  z-index:-2;
-}
-canvas#particle-canvas {
-  position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;
-}
+
+/* --- 헤더 + 파티클 --- */
+header { position:relative; color:#fff; padding:50px 20px; text-align:center; overflow:hidden; }
+header::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg,#1e1e1e,#3a3a3a); z-index:-2; }
+canvas#particle-canvas { position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1; }
 header h1 { font-size:2.6rem; margin-bottom:6px; }
 header p { font-size:1.1rem; margin-bottom:10px; }
-.profile-wrapper { width:140px; height:140px; margin:0 auto 20px; padding:4px; border-radius:50%; 
-  background:linear-gradient(135deg,#00c6ff,#007bff); 
-  display:flex; align-items:center; justify-content:center; 
-  box-shadow:0 10px 25px rgba(0,0,0,0.35); transition:transform 0.4s ease,box-shadow 0.4s ease; 
-}
+.profile-wrapper { width:140px; height:140px; margin:0 auto 20px; padding:4px; border-radius:50%; background:linear-gradient(135deg,#00c6ff,#007bff); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(0,0,0,0.35); transition:transform 0.4s ease,box-shadow 0.4s ease; }
 .profile-wrapper:hover { transform:scale(1.08); box-shadow:0 16px 35px rgba(0,0,0,0.5); }
 .profile-img { width:100%; height:100%; border-radius:50%; object-fit:cover; border:3px solid white; }
 
@@ -55,10 +38,7 @@ nav.desktop-menu a:hover { color:#fff; }
 .hamburger.active span:nth-child(2){ opacity:0;}
 .hamburger.active span:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px);}
 
-nav.mobile-menu {
-  display:flex; flex-direction:column; position:absolute; top:60px; right:20px; background: linear-gradient(135deg,#1e1e1e,#3a3a3a); width:220px;
-  transform:translateY(-20px); opacity:0; pointer-events:none; transition: transform 0.3s ease, opacity 0.3s ease; z-index:15;
-}
+nav.mobile-menu { display:flex; flex-direction:column; position:absolute; top:60px; right:20px; background: linear-gradient(135deg,#1e1e1e,#3a3a3a); width:220px; transform:translateY(-20px); opacity:0; pointer-events:none; transition: transform 0.3s ease, opacity 0.3s ease; z-index:15; }
 nav.mobile-menu.show { transform:translateY(0); opacity:1; pointer-events:auto; }
 nav.mobile-menu a { margin:10px 0; padding:10px 20px; color:#ddd; text-decoration:none; font-weight:bold; transition:color 0.3s; }
 nav.mobile-menu a:hover { color:#fff; }
@@ -68,79 +48,40 @@ button.toggle:hover { background-color: rgba(255,255,255,0.1); }
 
 /* --- 메인 영역 --- */
 main { max-width:1000px; margin:40px auto; padding:0 20px; }
-.card { background:white; border-radius:12px; padding:28px; margin-bottom:28px; box-shadow:0 8px 24px rgba(0,0,0,0.08); animation:fadeUp 0.6s ease; transition: transform 0.3s, box-shadow 0.3s; }
-.card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.15); }
+.card { background:white; border-radius:12px; padding:28px; margin-bottom:28px; box-shadow:0 8px 24px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; opacity:0; transform:translateY(20px); }
+.card.show { opacity:1; transform:translateY(0); }
 
 .skills { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
 .skill { background-color:#007bff; color:white; padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; display:flex; align-items:center; gap:8px; transition:transform 0.2s; }
 .skill:hover { transform:scale(1.05); }
-
 .skill .bar { height:6px; border-radius:4px; background:rgba(255,255,255,0.5); margin-left:6px; flex:1; position:relative; overflow:hidden; }
 .skill .bar span { display:block; height:100%; background:#fff; width:0; transition:width 0.8s ease; }
 
 button { margin-top:16px; padding:12px 22px; border:none; background-color:#007bff; color:white; cursor:pointer; border-radius:6px; font-size:16px; transition:background 0.3s; }
 button:hover { background-color:#0056b3; }
 
-/* --- 방명록 카드 스타일 --- */
-#guestbook-list .guestbook-entry {
-  background:#f0f4f8;
-  border-left:4px solid #007bff;
-  padding:12px 16px;
-  margin-bottom:10px;
-  border-radius:6px;
-  position:relative;
-  transition:transform 0.2s;
-}
-#guestbook-list .guestbook-entry:hover { transform:translateX(2px); }
-#guestbook-list button {
-  position:absolute;
-  top:8px; right:8px;
-  background:#ff4d4f; color:white; border:none;
-  padding:2px 8px; border-radius:4px;
-  cursor:pointer; font-size:12px;
-  transition:background 0.2s;
-}
-#guestbook-list button:hover { background:#e63946; }
+/* --- 프로젝트 카드 --- */
+.project-card { text-align:center; padding:20px; border:1px solid #ddd; border-radius:12px; margin-bottom:16px; transition: transform 0.3s, box-shadow 0.3s; opacity:0; transform:translateY(20px); background:#f9f9f9; }
+.project-card.show { opacity:1; transform:translateY(0); box-shadow:0 12px 28px rgba(0,0,0,0.2); }
+.project-card h3 { font-size:24px; margin:10px 0; }
+.project-card p { font-size:16px; min-height:50px; margin-bottom:12px; }
+.project-card a { display:inline-block; padding:10px 18px; background:#007bff; color:white; border-radius:6px; text-decoration:none; transition:0.3s; }
+.project-card a:hover { background:#0056b3; }
 
-/* --- 프로젝트 카드 터미널 스타일 --- */
-.project-card {
-  background:#1e1e1e;
-  color:#00ff9c;
-  font-family:'Fira Code', monospace;
-  padding:20px;
-  border-radius:8px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.4);
-  margin-bottom:20px;
-  overflow:hidden;
-  position:relative;
-}
+/* --- 방명록 스타일 --- */
+#guestbook-list .guestbook-entry { background:#e0f7ff; border-left:4px solid #007bff; padding:12px; margin-bottom:8px; border-radius:6px; position:relative; }
+#guestbook-list .guestbook-entry strong { font-weight:bold; }
+#guestbook-list .guestbook-entry em { font-size:0.85rem; color:#555; margin-left:6px; }
+#guestbook-list .guestbook-entry p { margin:6px 0; }
+#guestbook-list .guestbook-entry button { position:absolute; top:8px; right:8px; background:#ff4d4d; border:none; color:white; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:12px; }
+#guestbook-list .guestbook-entry button:hover { background:#e60000; }
 
-.project-card h3 { font-size:1.4rem; margin-bottom:10px; color:#00ff9c; }
-.project-card p { white-space:pre-wrap; line-height:1.4; margin-bottom:12px; }
-.project-card a {
-  display:inline-block;
-  padding:6px 12px;
-  background:#00ff9c;
-  color:#1e1e1e;
-  text-decoration:none;
-  border-radius:4px;
-  font-weight:bold;
-  transition:all 0.2s;
-}
-.project-card a:hover { background:#00d8a0; }
-
-.cursor {
-  display:inline-block;
-  width:8px;
-  background:#00ff9c;
-  margin-left:2px;
-  animation: blink 1s step-start infinite;
-}
-
-@keyframes blink { 50% { background:transparent; } }
-
+/* --- 다크모드 --- */
+html.dark body { background:#121212; color:#ddd; }
+html.dark .card, html.dark .project-card { background:#1f1f1f; color:#eee; border:1px solid #333; }
+html.dark #guestbook-list .guestbook-entry { background:#222; border-left:4px solid #00c6ff; color:#ddd; }
+html.dark #guestbook-list .guestbook-entry button { background:#ff6666; }
 </style>
-
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   // 다크모드
@@ -160,50 +101,55 @@ document.addEventListener("DOMContentLoaded", function(){
     setTimeout(()=> el.style.width = level, 300);
   });
 
-  // 프로젝트 로드
-  loadProjects();
+  // 파티클 시작
+  initParticles();
 
   // 방명록 로드
   loadGuestbook();
 
-  // 파티클 시작
-  initParticles();
-});
-
-function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!"); }
-function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
-function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
-
-/* --- 방명록 --- */
-function addGuest(name,message){
-  const now=new Date();
-  const entry={name,message,date:now.toLocaleString()};
-  let guestbook=[]; try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-  guestbook.push(entry);
-  localStorage.setItem("guestbook",JSON.stringify(guestbook));
-  loadGuestbook();
-}
-function deleteGuest(index){
-  let guestbook=[]; try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-  guestbook.splice(index,1);
-  localStorage.setItem("guestbook",JSON.stringify(guestbook));
-  loadGuestbook();
-}
-function loadGuestbook(){
-  const container=document.getElementById("guestbook-list");
-  if(!container) return;
-  let guestbook=[]; try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-  container.innerHTML="";
-  guestbook.forEach((entry,i)=>{
-    const div=document.createElement("div");
-    div.className="guestbook-entry";
-    div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em>\n<p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
-    container.appendChild(div);
+  // 카드 fade-up
+  document.querySelectorAll(".card, .project-card").forEach(el=>{
+    el.classList.add("fade-up");
   });
-}
+});
+  // 유저 인터랙션
+  function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!"); }
+  function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
+  function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
+
+  // --- 방명록 ---
+  window.addGuest = function(name,message){
+    const now=new Date();
+    const entry={name,message,date:now.toLocaleString()};
+    let guestbook=[];
+    try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+    guestbook.push(entry);
+    localStorage.setItem("guestbook",JSON.stringify(guestbook));
+    loadGuestbook();
+  }
+  window.deleteGuest = function(index){
+    let guestbook=[];
+    try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+    guestbook.splice(index,1);
+    localStorage.setItem("guestbook",JSON.stringify(guestbook));
+    loadGuestbook();
+  }
+  function loadGuestbook(){
+    const container=document.getElementById("guestbook-list");
+    if(!container) return;
+    let guestbook=[];
+    try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+    container.innerHTML="";
+    guestbook.forEach((entry,i)=>{
+      const div=document.createElement("div");
+      div.className="guestbook-entry";
+      div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em><p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
+      container.appendChild(div);
+    });
+  }
+});
 </script>
 
-</head>
 <body>
 <header>
   <div class="profile-wrapper">
@@ -230,28 +176,37 @@ function loadGuestbook(){
 <main>
 <section id="about" class="card">
   <h2>🙋‍♂️ 소개</h2>
-  <p>안녕하세요. <strong>AI 개발자</strong>를 목표로 학습 중인 전다훈입니다. 
-    여기는<strong> AI를 이용한 자율주행 자동차, 자율비행 드론 개발</strong> 과 같은 제 프로젝트를 소개 하기 위함과 저를 소개하기 위한 사이트 입니다.</p>
+  <p>안녕하세요. <strong>AI 개발자</strong>를 목표로 학습 중인 전다훈입니다. 여기는 <strong>AI를 이용한 자율주행 자동차, 자율비행 드론 개발</strong>과 같은 제 프로젝트를 소개하기 위한 사이트입니다.</p>
   <button onclick="sayHello()">눌러보세요!</button>
 </section>
 
 <section id="skills" class="card">
   <h2>🛠 기술 스택</h2>
   <div class="skills">
-    <div class="skill">💻 HTML<div class="bar"><span data-level="90%"></span></div></div>
-    <div class="skill">🎨 CSS<div class="bar"><span data-level="85%"></span></div></div>
-    <div class="skill">🐍 Python<div class="bar"><span data-level="80%"></span></div></div>
-    <div class="skill">🟨 JavaScript<div class="bar"><span data-level="75%"></span></div></div>
-    <div class="skill">C<div class="bar"><span data-level="70%"></span></div></div>
-    <div class="skill">C++<div class="bar"><span data-level="65%"></span></div></div>
-    <div class="skill">🔧 Git<div class="bar"><span data-level="80%"></span></div></div>
+    <div class="skill">💻 HTML <div class="bar"><span data-level="90%"></span></div></div>
+    <div class="skill">🎨 CSS <div class="bar"><span data-level="85%"></span></div></div>
+    <div class="skill">🐍 Python <div class="bar"><span data-level="80%"></span></div></div>
+    <div class="skill">🟨 JavaScript <div class="bar"><span data-level="75%"></span></div></div>
+    <div class="skill">C <div class="bar"><span data-level="70%"></span></div></div>
+    <div class="skill">C++ <div class="bar"><span data-level="65%"></span></div></div>
+    <div class="skill">🔧 Git <div class="bar"><span data-level="80%"></span></div></div>
   </div>
 </section>
 
 <section id="projects" class="card">
   <h2>💻 프로젝트</h2>
-  <div id="projects-container"></div>
+  <div class="project-card show">
+    <h3>자율주행 자동차 프로젝트</h3>
+    <p>Python과 OpenCV, TensorFlow를 활용하여 자율주행 자동차 시뮬레이션을 구현한 프로젝트입니다.</p>
+    <a href="page2.html">자세히 보기 →</a>
+  </div>
+  <div class="project-card show">
+    <h3>자율비행 드론 개발</h3>
+    <p>드론 비행 시뮬레이션 및 AI 제어 알고리즘 개발, ROS 기반 자율비행 구현 경험이 포함되어 있습니다.</p>
+    <a href="page2.html">자세히 보기 →</a>
+  </div>
 </section>
+
 <section id="guestbook" class="card">
   <h2>✍️ 방명록</h2>
   <form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
@@ -279,7 +234,7 @@ function loadGuestbook(){
 </footer>
 
 <script>
-/* --- 개발자 스타일 파티클 --- */
+/* --- 파티클 JS --- */
 let particles = [];
 let mouse = { x:null, y:null };
 window.addEventListener('mousemove', function(e){ mouse.x=e.x; mouse.y=e.y; });
@@ -295,7 +250,6 @@ function initParticles(){
   window.addEventListener("resize", ()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight*0.5; });
 
   const symbols = ['{','}','<','>',';','()','[]'];
-
   for(let i=0;i<80;i++){
     particles.push({
       x:Math.random()*canvas.width,
@@ -341,32 +295,6 @@ function initParticles(){
     requestAnimationFrame(animate);
   }
   animate();
-}
-
-/* --- 프로젝트 카드 + 타이핑 애니메이션 --- */
-const projectsData = [
-  { title:"AI 자율주행 자동차", desc:"Python과 OpenCV를 활용하여 자율주행 자동차 프로토타입을 개발했습니다.\n센서 데이터 기반 경로 추적과 장애물 회피 기능 구현." },
-  { title:"자율비행 드론", desc:"드론 비행 제어 알고리즘과 센서 데이터 처리 프로젝트입니다.\n자체 설계 PID 컨트롤러 적용 및 실시간 위치 추적 기능 포함." },
-  { title:"포트폴리오 웹사이트", desc:"HTML, CSS, JavaScript 기반 반응형 포트폴리오 웹사이트.\n다크모드, 방명록, 스킬바, 프로젝트 카드 등 다양한 UI/UX 적용." }
-];
-
-function loadProjects(){
-  const container = document.getElementById("projects-container");
-  projectsData.forEach((p,index)=>{
-    const div = document.createElement("div");
-    div.className="project-card";
-    div.innerHTML=`<h3>${p.title}</h3><p id="proj-${index}"></p><span class="cursor"></span><a href="#">자세히 보기</a>`;
-    container.appendChild(div);
-    typeText(p.desc, `proj-${index}`);
-  });
-}
-
-function typeText(text, id, i=0){
-  const el = document.getElementById(id);
-  if(i<text.length){
-    el.textContent += text.charAt(i);
-    setTimeout(()=>typeText(text,id,i+1),30);
-  }
 }
 </script>
 </body>
