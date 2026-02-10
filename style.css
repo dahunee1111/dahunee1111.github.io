@@ -37,3 +37,8 @@ div#div_world {
   gap: 20px;
   
 }
+
+div#round {
+display:inline-block; width:200px; border:1px solid black;
+  border-radius: 10px; background-color:green;
+}
