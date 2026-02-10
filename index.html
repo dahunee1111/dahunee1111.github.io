@@ -13,7 +13,6 @@
 * { box-sizing: border-box; margin:0; padding:0; }
 html { scroll-behavior: smooth; font-size:16px; }
 body { font-family:'Segoe UI', Arial, sans-serif; line-height:1.6; background:#f4f6f8; color:#333; transition:background 0.3s,color 0.3s; }
-
 /* --- 헤더 + 파티클 배경 --- */
 header { 
   position:relative;
@@ -88,51 +87,11 @@ button:hover { background-color:#0056b3; }
 .project-card p { font-size:16px; margin-bottom:12px; }
 .project-card a { display:inline-block; padding:10px 18px; background:#007bff; color:white; border-radius:6px; text-decoration:none; transition:0.3s; }
 .project-card a:hover { background:#0056b3; }
-
-.guestbook-entry { border-bottom:1px solid #ddd; padding:10px 0; margin-bottom:6px; border-radius:6px; background:#f9f9f9; }
-.guestbook-entry strong { display:block; margin-bottom:4px; }
-.guestbook-entry em { font-size:12px; color:#666; margin-left:6px; }
-.guestbook-entry p { margin:4px 0; }
-.guestbook-entry button { padding:4px 8px; border:none; background:#dc3545; color:white; border-radius:4px; font-size:12px; cursor:pointer; transition:0.2s; }
-.guestbook-entry button:hover { background:#a71d2a; }
-
-.pagination { display:flex; justify-content:center; gap:10px; margin:20px 0; }
-.pagination a { padding:6px 12px; border:1px solid #007bff; border-radius:6px; text-decoration:none; color:#007bff; transition:0.3s; }
-.pagination a.active, .pagination a:hover { background:#007bff; color:white; }
-
-footer { text-align:center; padding:24px; background:#eee; font-size:14px; color:#666; }
-
-/* --- 다크모드 --- */
-html.dark body { background-color:#121212; color:#e0e0e0; }
-html.dark .card { background:#1e1e1e; }
-html.dark footer { background-color:#1a1a1a; color:#aaa; }
-html.dark .toggle { border-color:#e0e0e0; color:#e0e0e0; }
-html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
-
-/* --- 애니메이션 --- */
-@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-
-/* --- 반응형 --- */
-@media (max-width:768px){
-  nav.desktop-menu{ display:none; }
-  main{ margin:20px auto; padding:0 15px; }
-  .card{ padding:20px; }
-  .skills{ justify-content:center; }
-  .skill{ padding:5px 12px; font-size:13px; }
-  button{ width:100%; }
-}
-@media (max-width:480px){
-  header{ padding:30px 10px; }
-  button.toggle{ margin-top:10px; }
-  .profile-wrapper{ width:120px; height:120px; }
-  header h1{ font-size:1.9rem; }
-  header p{ font-size:1rem; }
-}
 </style>
 
 <script>
-// --- 다크모드 + 방명록 ---
 document.addEventListener("DOMContentLoaded", function(){
+  // 다크모드
   if(localStorage.getItem("darkMode")==="true") document.documentElement.classList.add("dark");
   const toggleBtn=document.querySelector(".toggle");
   function updateButtonText(){ toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드"; }
@@ -142,38 +101,6 @@ document.addEventListener("DOMContentLoaded", function(){
     updateButtonText();
   });
   updateButtonText();
-  loadGuestbook();
-  // 방명록
-function addGuest(name,message){
-  const now=new Date();
-  const entry={name,message,date:now.toLocaleString()};
-  let guestbook=[];
-  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-  guestbook.push(entry);
-  localStorage.setItem("guestbook",JSON.stringify(guestbook));
-  loadGuestbook();
-}
-function deleteGuest(index){
-  let guestbook=[];
-  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-  guestbook.splice(index,1);
-  localStorage.setItem("guestbook",JSON.stringify(guestbook));
-  loadGuestbook();
-}
-function loadGuestbook(){
-  const container=document.getElementById("guestbook-list");
-  if(!container) return;
-  let guestbook=[];
-  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-  container.innerHTML="";
-  guestbook.forEach((entry,i)=>{
-    const div=document.createElement("div");
-    div.className="guestbook-entry";
-    div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em><p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
-    container.appendChild(div);
-  });
-}
-
 
   // 스킬바 애니메이션
   document.querySelectorAll('.skill .bar span').forEach((el) => {
@@ -189,7 +116,7 @@ function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. �
 function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
 function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
 
-// 방명록
+// --- 방명록 수정 버전 ---
 function addGuest(name,message){
   const now=new Date();
   const entry={name,message,date:now.toLocaleString()};
@@ -219,8 +146,103 @@ function loadGuestbook(){
     container.appendChild(div);
   });
 }
+</script>
+</head>
+<body>
+<header>
+  <div class="profile-wrapper">
+    <img src="https://raw.githubusercontent.com/dahunee1111/dahunee1111.github.io/main/images/KakaoTalk_20260205_152105731.jpg" alt="전다훈 프로필 사진" class="profile-img">
+  </div>
+  <h1>전다훈</h1>
+  <p>AI 개발자를 목표로 성장 중인 개발자</p>
+  <button class="toggle">🌙 다크모드</button>
+  <div class="hamburger" onclick="toggleHamburger(this)"><span></span><span></span><span></span></div>
+  <nav class="desktop-menu">
+    <a href="#about">소개</a>
+    <a href="#skills">기술</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#contact">연락처</a>
+  </nav>
+  <nav class="mobile-menu">
+    <a href="#about" onclick="closeHamburger()">소개</a>
+    <a href="#skills" onclick="closeHamburger()">기술</a>
+    <a href="#projects" onclick="closeHamburger()">프로젝트</a>
+    <a href="#contact" onclick="closeHamburger()">연락처</a>
+  </nav>
+</header>
 
-// --- 개발자 스타일 파티클 ---
+<main>
+<section id="about" class="card">
+  <h2>🙋‍♂️ 소개</h2>
+  <p>안녕하세요. <strong>AI 개발자</strong>를 목표로 학습 중인 전다훈입니다. 
+    여기는<strong> AI를 이용한 자율주행 자동차, 자율비행 드론 개발</strong> 과 같은 제 프로젝트를 소개 하기 위함과 저를 소개하기 위한 사이트 입니다.</p>
+  <button onclick="sayHello()">눌러보세요!</button>
+</section>
+
+<section id="skills" class="card">
+  <h2>🛠 기술 스택</h2>
+  <div class="skills">
+    <div class="skill">💻 HTML
+      <div class="bar"><span data-level="90%"></span></div>
+    </div>
+    <div class="skill">🎨 CSS
+      <div class="bar"><span data-level="85%"></span></div>
+    </div>
+    <div class="skill">🐍 Python
+      <div class="bar"><span data-level="80%"></span></div>
+    </div>
+    <div class="skill">🟨 JavaScript
+      <div class="bar"><span data-level="75%"></span></div>
+    </div>
+    <div class="skill">C
+      <div class="bar"><span data-level="70%"></span></div>
+    </div>
+    <div class="skill">C++
+      <div class="bar"><span data-level="65%"></span></div>
+    </div>
+    <div class="skill">🔧 Git
+      <div class="bar"><span data-level="80%"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="card">
+  <h2>💻 프로젝트</h2>
+  <div class="project-card">
+    <h3>대표 프로젝트 살펴보기</h3>
+    <p>저의 다양한 프로젝트와 경험을 확인하고 싶다면 아래 버튼을 클릭하세요. AI, 웹, Python 등 다양한 기술을 활용한 프로젝트를 정리해두었습니다.</p>
+    <a href="page2.html">프로젝트 페이지로 이동 →</a>
+  </div>
+</section>
+
+<section id="guestbook" class="card">
+  <h2>✍️ 방명록</h2>
+  <form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
+    <input type="text" name="name" placeholder="이름" required style="padding:6px 12px; margin-right:6px;">
+    <input type="text" name="message" placeholder="메시지" required style="padding:6px 12px; margin-right:6px;">
+    <button type="submit">등록</button>
+  </form>
+  <div id="guestbook-list" style="margin-top:12px;"></div>
+</section>
+
+<section id="contact" class="card">
+  <h2>📬 연락처</h2>
+  <p>Email: dahunee1111@naver.com</p>
+  <p>GitHub: <a href="https://github.com/dahunee1111" target="_blank">github.com/dahunee1111</a></p>
+</section>
+
+<div class="pagination">
+  <a href="index.html" class="active">1</a>
+  <a href="page2.html">2</a>
+</div>
+</main>
+
+<footer>
+  © 2026 전다훈. All rights reserved.
+</footer>
+
+<script>
+/* --- 개발자 스타일 파티클 --- */
 let particles = [];
 let mouse = { x:null, y:null };
 window.addEventListener('mousemove', function(e){ mouse.x=e.x; mouse.y=e.y; });
@@ -284,100 +306,5 @@ function initParticles(){
   animate();
 }
 </script>
-</head>
-
-<body>
-<header>
-  <div class="profile-wrapper">
-    <img src="https://raw.githubusercontent.com/dahunee1111/dahunee1111.github.io/main/images/KakaoTalk_20260205_152105731.jpg" alt="전다훈 프로필 사진" class="profile-img">
-  </div>
-  <h1>전다훈</h1>
-  <p>AI 개발자를 목표로 성장 중인 개발자</p>
-  <button class="toggle">🌙 다크모드</button>
-  <div class="hamburger" onclick="toggleHamburger(this)"><span></span><span></span><span></span></div>
-  <nav class="desktop-menu">
-    <a href="#about">소개</a>
-    <a href="#skills">기술</a>
-    <a href="#projects">프로젝트</a>
-    <a href="#contact">연락처</a>
-  </nav>
-  <nav class="mobile-menu">
-    <a href="#about" onclick="closeHamburger()">소개</a>
-    <a href="#skills" onclick="closeHamburger()">기술</a>
-    <a href="#projects" onclick="closeHamburger()">프로젝트</a>
-    <a href="#contact" onclick="closeHamburger()">연락처</a>
-  </nav>
-</header>
-
-<main>
-<section id="about" class="card">
-  <h2>🙋‍♂️ 소개</h2>
-  <p>안녕하세요. <strong>AI 개발자</strong>를 목표로 학습 중인 전다훈입니다. 
-    여기는<strong> AI를 이용한 자율주행 자동차, 자율비행 드론 개발</strong> 과 같은 제 프로젝트를 소개 하기 위함과 저를 소개하기 위한 사이트 입니다.</p>
-  <button onclick="sayHello()">눌러보세요!</button>
-</section>
-
-<section id="skills" class="card">
-  <h2>🛠 기술 스택</h2>
-  <div class="skills">
-    <div class="skill">💻 HTML
-      <div class="bar"><span data-level="90%"></span></div>
-    </div>
-    <div class="skill">🎨 CSS
-      <div class="bar"><span data-level="85%"></span></div>
-    </div>
-    <div class="skill">🐍 Python
-      <div class="bar"><span data-level="80%"></span></div>
-    </div>
-    <div class="skill">🟨 JavaScript
-      <div class="bar"><span data-level="75%"></span></div>
-    </div>
-    <div class="skill">C
-      <div class="bar"><span data-level="70%"></span></div>
-    </div>
-    <div class="skill">C++
-      <div class="bar"><span data-level="65%"></span></div>
-    </div>
-    <div class="skill">🔧 Git
-      <div class="bar"><span data-level="80%"></span></div>
-    </div>
-  </div>
-</section>
-<section id="projects" class="card">
-  <h2>💻 프로젝트</h2>
-  <div class="project-card">
-    <h3>대표 프로젝트 살펴보기</h3>
-    <p>저의 다양한 프로젝트와 경험을 확인하고 싶다면 아래 버튼을 클릭하세요. AI, 웹, Python 등 다양한 기술을 활용한 프로젝트를 정리해두었습니다.</p>
-    <a href="page2.html">프로젝트 페이지로 이동 →</a>
-  </div>
-</section>
-<section id="guestbook" class="card">
-  <h2>✍️ 방명록</h2>
-  <form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
-    <input type="text" name="name" placeholder="이름" required style="padding:6px 12px; margin-right:6px;">
-    <input type="text" name="message" placeholder="메시지" required style="padding:6px 12px; margin-right:6px;">
-    <button type="submit">등록</button>
-  </form>
-  <div id="guestbook-list" style="margin-top:12px;"></div>
-</section>
-
-
-<section id="contact" class="card">
-  <h2>📬 연락처</h2>
-  <p>Email: dahunee1111@naver.com</p>
-  <p>GitHub: <a href="https://github.com/dahunee1111" target="_blank">github.com/dahunee1111</a></p>
-</section>
-
-<div class="pagination">
-  <a href="index.html" class="active">1</a>
-  <a href="page2.html">2</a>
-</div>
-</main>
-
-<footer>
-  © 2026 전다훈. All rights reserved.
-</footer>
 </body>
 </html>
-
-
