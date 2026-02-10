@@ -81,12 +81,64 @@ main { max-width:1000px; margin:40px auto; padding:0 20px; }
 button { margin-top:16px; padding:12px 22px; border:none; background-color:#007bff; color:white; cursor:pointer; border-radius:6px; font-size:16px; transition:background 0.3s; }
 button:hover { background-color:#0056b3; }
 
-.project-card { text-align:center; padding:20px; border:1px solid #ddd; border-radius:12px; transition: transform 0.3s, box-shadow 0.3s; }
-.project-card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.2); }
-.project-card h3 { font-size:24px; margin:10px 0; }
-.project-card p { font-size:16px; margin-bottom:12px; }
-.project-card a { display:inline-block; padding:10px 18px; background:#007bff; color:white; border-radius:6px; text-decoration:none; transition:0.3s; }
-.project-card a:hover { background:#0056b3; }
+/* --- 방명록 카드 스타일 --- */
+#guestbook-list .guestbook-entry {
+  background:#f0f4f8;
+  border-left:4px solid #007bff;
+  padding:12px 16px;
+  margin-bottom:10px;
+  border-radius:6px;
+  position:relative;
+  transition:transform 0.2s;
+}
+#guestbook-list .guestbook-entry:hover { transform:translateX(2px); }
+#guestbook-list button {
+  position:absolute;
+  top:8px; right:8px;
+  background:#ff4d4f; color:white; border:none;
+  padding:2px 8px; border-radius:4px;
+  cursor:pointer; font-size:12px;
+  transition:background 0.2s;
+}
+#guestbook-list button:hover { background:#e63946; }
+
+/* --- 프로젝트 카드 터미널 스타일 --- */
+.project-card {
+  background:#1e1e1e;
+  color:#00ff9c;
+  font-family:'Fira Code', monospace;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  margin-bottom:20px;
+  overflow:hidden;
+  position:relative;
+}
+
+.project-card h3 { font-size:1.4rem; margin-bottom:10px; color:#00ff9c; }
+.project-card p { white-space:pre-wrap; line-height:1.4; margin-bottom:12px; }
+.project-card a {
+  display:inline-block;
+  padding:6px 12px;
+  background:#00ff9c;
+  color:#1e1e1e;
+  text-decoration:none;
+  border-radius:4px;
+  font-weight:bold;
+  transition:all 0.2s;
+}
+.project-card a:hover { background:#00d8a0; }
+
+.cursor {
+  display:inline-block;
+  width:8px;
+  background:#00ff9c;
+  margin-left:2px;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink { 50% { background:transparent; } }
+
 </style>
 
 <script>
@@ -108,6 +160,12 @@ document.addEventListener("DOMContentLoaded", function(){
     setTimeout(()=> el.style.width = level, 300);
   });
 
+  // 프로젝트 로드
+  loadProjects();
+
+  // 방명록 로드
+  loadGuestbook();
+
   // 파티클 시작
   initParticles();
 });
@@ -116,19 +174,17 @@ function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. �
 function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
 function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
 
-// --- 방명록 수정 버전 ---
+/* --- 방명록 --- */
 function addGuest(name,message){
   const now=new Date();
   const entry={name,message,date:now.toLocaleString()};
-  let guestbook=[];
-  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  let guestbook=[]; try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
   guestbook.push(entry);
   localStorage.setItem("guestbook",JSON.stringify(guestbook));
   loadGuestbook();
 }
 function deleteGuest(index){
-  let guestbook=[];
-  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  let guestbook=[]; try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
   guestbook.splice(index,1);
   localStorage.setItem("guestbook",JSON.stringify(guestbook));
   loadGuestbook();
@@ -136,17 +192,17 @@ function deleteGuest(index){
 function loadGuestbook(){
   const container=document.getElementById("guestbook-list");
   if(!container) return;
-  let guestbook=[];
-  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  let guestbook=[]; try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
   container.innerHTML="";
   guestbook.forEach((entry,i)=>{
     const div=document.createElement("div");
     div.className="guestbook-entry";
-    div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em><p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
+    div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em>\n<p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
     container.appendChild(div);
   });
 }
 </script>
+
 </head>
 <body>
 <header>
@@ -182,39 +238,20 @@ function loadGuestbook(){
 <section id="skills" class="card">
   <h2>🛠 기술 스택</h2>
   <div class="skills">
-    <div class="skill">💻 HTML
-      <div class="bar"><span data-level="90%"></span></div>
-    </div>
-    <div class="skill">🎨 CSS
-      <div class="bar"><span data-level="85%"></span></div>
-    </div>
-    <div class="skill">🐍 Python
-      <div class="bar"><span data-level="80%"></span></div>
-    </div>
-    <div class="skill">🟨 JavaScript
-      <div class="bar"><span data-level="75%"></span></div>
-    </div>
-    <div class="skill">C
-      <div class="bar"><span data-level="70%"></span></div>
-    </div>
-    <div class="skill">C++
-      <div class="bar"><span data-level="65%"></span></div>
-    </div>
-    <div class="skill">🔧 Git
-      <div class="bar"><span data-level="80%"></span></div>
-    </div>
+    <div class="skill">💻 HTML<div class="bar"><span data-level="90%"></span></div></div>
+    <div class="skill">🎨 CSS<div class="bar"><span data-level="85%"></span></div></div>
+    <div class="skill">🐍 Python<div class="bar"><span data-level="80%"></span></div></div>
+    <div class="skill">🟨 JavaScript<div class="bar"><span data-level="75%"></span></div></div>
+    <div class="skill">C<div class="bar"><span data-level="70%"></span></div></div>
+    <div class="skill">C++<div class="bar"><span data-level="65%"></span></div></div>
+    <div class="skill">🔧 Git<div class="bar"><span data-level="80%"></span></div></div>
   </div>
 </section>
 
 <section id="projects" class="card">
   <h2>💻 프로젝트</h2>
-  <div class="project-card">
-    <h3>대표 프로젝트 살펴보기</h3>
-    <p>저의 다양한 프로젝트와 경험을 확인하고 싶다면 아래 버튼을 클릭하세요. AI, 웹, Python 등 다양한 기술을 활용한 프로젝트를 정리해두었습니다.</p>
-    <a href="page2.html">프로젝트 페이지로 이동 →</a>
-  </div>
+  <div id="projects-container"></div>
 </section>
-
 <section id="guestbook" class="card">
   <h2>✍️ 방명록</h2>
   <form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
@@ -304,6 +341,32 @@ function initParticles(){
     requestAnimationFrame(animate);
   }
   animate();
+}
+
+/* --- 프로젝트 카드 + 타이핑 애니메이션 --- */
+const projectsData = [
+  { title:"AI 자율주행 자동차", desc:"Python과 OpenCV를 활용하여 자율주행 자동차 프로토타입을 개발했습니다.\n센서 데이터 기반 경로 추적과 장애물 회피 기능 구현." },
+  { title:"자율비행 드론", desc:"드론 비행 제어 알고리즘과 센서 데이터 처리 프로젝트입니다.\n자체 설계 PID 컨트롤러 적용 및 실시간 위치 추적 기능 포함." },
+  { title:"포트폴리오 웹사이트", desc:"HTML, CSS, JavaScript 기반 반응형 포트폴리오 웹사이트.\n다크모드, 방명록, 스킬바, 프로젝트 카드 등 다양한 UI/UX 적용." }
+];
+
+function loadProjects(){
+  const container = document.getElementById("projects-container");
+  projectsData.forEach((p,index)=>{
+    const div = document.createElement("div");
+    div.className="project-card";
+    div.innerHTML=`<h3>${p.title}</h3><p id="proj-${index}"></p><span class="cursor"></span><a href="#">자세히 보기</a>`;
+    container.appendChild(div);
+    typeText(p.desc, `proj-${index}`);
+  });
+}
+
+function typeText(text, id, i=0){
+  const el = document.getElementById(id);
+  if(i<text.length){
+    el.textContent += text.charAt(i);
+    setTimeout(()=>typeText(text,id,i+1),30);
+  }
 }
 </script>
 </body>
