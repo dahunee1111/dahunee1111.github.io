@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -194,7 +195,7 @@
     <button type="button" onclick="submitForm()">제출</button>
   </form>
 
-  <!-- 테이블 즉 표를 만드는 코드 -->
+  <!-- 테이블 즉 표를 만드는 코드(colspan 을 활용한 열 병합) -->
   <table border="1">
   <thead>
     <tr><th>이름</th><th>나이</th><th>지역</th></tr>
@@ -213,31 +214,16 @@
   </tfoot>
   </table>
   
-  <!--테이블 기본 코드-->
+  <!--테이블 기본 코드(lowspan 을 활용한 행 병합)-->
   <table border="1">
-  <thead>
-    <tr>
-      <th>이름</th>
-      <th>나이</th>
+   <tr>
+      <td rowspan="2">이름</td>
+      <td>나이</td>
     </tr>
-  </thead>
-  <tbody>
     <tr>
-      <td>홍길동</td>
       <td>25</td>
     </tr>
-    <tr>
-      <td>김영희</td>
-      <td>30</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="2">총 2명</td>
-    </tr>
-  </tfoot>
-</table>
-
+  </table>
 
   <!-- 로그인 코드 -->
   <div id="form_container">
