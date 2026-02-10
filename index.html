@@ -73,8 +73,10 @@ main { max-width:1000px; margin:40px auto; padding:0 20px; }
 .card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.15); }
 
 .skills { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.skill { background-color:#007bff; color:white; padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; transition:transform 0.2s; display:flex; align-items:center; gap:6px; }
+.skill { background-color:#007bff; color:white; padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; transition:transform 0.2s; display:flex; align-items:center; gap:6px; position:relative; overflow:hidden; }
 .skill:hover { transform:scale(1.05); }
+
+.skill-bar { position:absolute; bottom:0; left:0; height:3px; background:rgba(255,255,255,0.8); width:0; transition:width 1.2s ease; }
 
 button { margin-top:16px; padding:12px 22px; border:none; background-color:#007bff; color:white; cursor:pointer; border-radius:6px; font-size:16px; transition:background 0.3s; }
 button:hover { background-color:#0056b3; }
@@ -128,7 +130,7 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 </style>
 
 <script>
-// 다크모드 & 방명록
+// --- 다크모드 & 방명록 ---
 document.addEventListener("DOMContentLoaded", function(){
   if(localStorage.getItem("darkMode")==="true") document.documentElement.classList.add("dark");
   const toggleBtn=document.querySelector(".toggle");
@@ -143,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   // 파티클 캔버스 시작
   initParticles();
+  animateSkillBars();
 });
 
 function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!"); }
@@ -180,20 +183,37 @@ function loadGuestbook(){
   });
 }
 
-// --- 파티클 배경 ---
-let particles=[];
-function initParticles(){
-  const canvas=document.createElement("canvas");
-  canvas.id="particle-canvas";
+// --- 개발자 심볼 파티클 ---
+let particles = [];
+let mouse = { x:-9999, y:-9999 };
+window.addEventListener('mousemove', e=>{ mouse.x=e.x; mouse.y=e.y; });
+window.addEventListener('mouseleave', ()=>{ mouse.x=-9999; mouse.y=-9999; });
+
+function initParticles() {
+  const canvas = document.createElement("canvas");
+  canvas.id = "particle-canvas";
   document.querySelector("header").appendChild(canvas);
-  const ctx=canvas.getContext("2d");
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight*0.5;
+  const ctx = canvas.getContext("2d");
 
-  window.addEventListener("resize",()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight*0.5; });
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight * 0.5;
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
 
-  for(let i=0;i<100;i++){
-    particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, dx:(Math.random()-0.5)*0.5, dy:(Math.random()-0.5)*0.5});
+  const symbols = ['{','}','<','>',';','()','[]'];
+  particles = [];
+  for(let i=0;i<80;i++){
+    particles.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*18+8,
+      dx:(Math.random()-0.5)*0.8,
+      dy:(Math.random()-0.5)*0.8,
+      char:symbols[Math.floor(Math.random()*symbols.length)],
+      color:`hsl(${Math.random()*220+180},70%,70%)`
+    });
   }
 
   function animate(){
@@ -202,14 +222,48 @@ function initParticles(){
       p.x+=p.dx; p.y+=p.dy;
       if(p.x<0||p.x>canvas.width) p.dx*=-1;
       if(p.y<0||p.y>canvas.height) p.dy*=-1;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle="rgba(255,255,255,0.6)";
-      ctx.fill();
+
+      let distX=mouse.x-p.x, distY=mouse.y-p.y, dist=Math.sqrt(distX*distX+distY*distY);
+      let scale = dist<100? Math.min(2,1+(100-dist)/50) : 1;
+
+      ctx.font = `${p.r*scale}px monospace`;
+      ctx.fillStyle=p.color;
+      ctx.fillText(p.char, p.x, p.y);
     });
+
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        let dx=particles[i].x-particles[j].x;
+        let dy=particles[i].y-particles[j].y;
+        let distance=Math.sqrt(dx*dx+dy*dy);
+        if(distance<120){
+          ctx.beginPath();
+          ctx.strokeStyle=`rgba(100,200,255,${1-distance/120})`;
+          ctx.lineWidth=1;
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
     requestAnimationFrame(animate);
   }
   animate();
+}
+
+// --- 스킬 레벨 표시 ---
+function animateSkillBars(){
+  const skills = document.querySelectorAll('.skill');
+  skills.forEach(skill=>{
+    const bar = document.createElement('div');
+    bar.className = 'skill-bar';
+    skill.appendChild(bar);
+
+    // 레벨: data-level 속성 사용 (예: 80%)
+    let level = skill.dataset.level || 70;
+    setTimeout(()=>{ bar.style.width = level+'%'; }, 100);
+  });
 }
 </script>
 </head>
@@ -248,13 +302,13 @@ function initParticles(){
 <section id="skills" class="card">
   <h2>🛠 기술 스택</h2>
   <div class="skills">
-    <div class="skill">💻 HTML</div>
-    <div class="skill">🎨 CSS</div>
-    <div class="skill">🐍 Python</div>
-    <div class="skill">🟨 JavaScript</div>
-    <div class="skill">C</div>
-    <div class="skill">C++</div>
-    <div class="skill">🔧 Git</div>
+    <div class="skill" data-level="90">💻 HTML</div>
+    <div class="skill" data-level="85">🎨 CSS</div>
+    <div class="skill" data-level="80">🐍 Python</div>
+    <div class="skill" data-level="75">🟨 JavaScript</div>
+    <div class="skill" data-level="60">C</div>
+    <div class="skill" data-level="65">C++</div>
+    <div class="skill" data-level="70">🔧 Git</div>
   </div>
 </section>
 
