@@ -1,7 +1,7 @@
  h1 {
   border: 1px solid red;
-  margin: 20px;
-}
+  
+  }
 div.div_hello {
   font-family: sans-serif;
   font-size: 16px;
@@ -12,6 +12,7 @@ div.div_hello {
 
 div#div_world {
   background-color: rgba(0,0,0,0.05);
+  display:inline-block;
 }
 .container {
   display: flex;
