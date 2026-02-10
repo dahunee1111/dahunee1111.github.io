@@ -1,6 +1,7 @@
  h1 {
   border: 1px solid red;
-  
+  display: inline-block; 
+  padding: 2px 6px;
   }
 div.div_hello {
   font-family: sans-serif;
