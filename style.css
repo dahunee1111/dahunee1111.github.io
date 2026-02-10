@@ -21,5 +21,6 @@ div#div_world {
 .container {
   display: flex;
   white-space: nowrap;
-  padding: 15px; 
+  padding: 15px;
+  gap: 20px;
 }
