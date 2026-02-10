@@ -3,7 +3,8 @@ h1 {
   border: 1px solid red;   
   padding: 0 2px;         
   margin: 0;               
-  line-height: 1;         
+  line-height: 1;
+  margin-bottom: 100px;
 }
 div.div_hello {
   font-family: sans-serif;
