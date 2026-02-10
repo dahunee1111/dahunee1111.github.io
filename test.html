@@ -5,7 +5,38 @@
   <title>제 2 코드 연습실</title>
 
  <style>
+ body {
+   font-family: Arial, sans-serif;
+   test-align: center;
+ }
+   h2{
+     margin-button: 10px;
+   }
+  .calendar{
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: 400px;
+  }
+   .caledar th,
+   .caledar td{
+     border: 1px solid #ccc;
+     width: 14.2%;
+     height:60px;
+     text-align:middle;
+   }
 
+   .calendar th{
+     background-color:#f2f2f2;
+     font-weight:bold;
+   }
+   .sun{
+     color:red;
+   }
+   .holiday {
+     color:red;
+     font-weight:bold;
+     background-color:#ffecec;
+   }
  </style>
 
  <script>
@@ -16,7 +47,60 @@
 
 
 <body>
-
+<!--2월 달력 만들기-->
+  <table class="calendar">
+  <caption>2026년 2월</caption>
+  <thead>
+    <tr>
+      <th class="sun">일</th>
+      <th>월</th>
+      <th>화</th>
+      <th>수</th>
+      <th>목</th>
+      <th>금</th>
+      <th>토</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sun">1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td class="sun">8</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td class="holiday">12</td>
+      <td>13</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td class="sun">15</td>
+      <td>16</td>
+      <td>17</td>
+      <td>18</td>
+      <td>19</td>
+      <td>20</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td class="sun">22</td>
+      <td>23</td>
+      <td>24</td>
+      <td>25</td>
+      <td>26</td>
+      <td>27</td>
+      <td class="sun">28</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
