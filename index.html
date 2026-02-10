@@ -14,10 +14,10 @@
 html { scroll-behavior: smooth; font-size:16px; }
 body { font-family:'Segoe UI', Arial, sans-serif; line-height:1.6; background:#f4f6f8; color:#333; transition:background 0.3s,color 0.3s; }
 
-/* --- 헤더 + 파티클 --- */
+/* --- 헤더 --- */
 header { position:relative; color:#fff; padding:50px 20px; text-align:center; overflow:hidden; }
 header::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg,#1e1e1e,#3a3a3a); z-index:-2; }
-canvas#particle-canvas { position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1; }
+
 header h1 { font-size:2.6rem; margin-bottom:6px; }
 header p { font-size:1.1rem; margin-bottom:10px; }
 .profile-wrapper { width:140px; height:140px; margin:0 auto 20px; padding:4px; border-radius:50%; background:linear-gradient(135deg,#00c6ff,#007bff); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(0,0,0,0.35); transition:transform 0.4s ease,box-shadow 0.4s ease; }
@@ -57,9 +57,6 @@ main { max-width:1000px; margin:40px auto; padding:0 20px; }
 .skill .bar { height:6px; border-radius:4px; background:rgba(255,255,255,0.5); margin-left:6px; flex:1; position:relative; overflow:hidden; }
 .skill .bar span { display:block; height:100%; background:#fff; width:0; transition:width 0.8s ease; }
 
-button { margin-top:16px; padding:12px 22px; border:none; background-color:#007bff; color:white; cursor:pointer; border-radius:6px; font-size:16px; transition:background 0.3s; }
-button:hover { background-color:#0056b3; }
-
 /* --- 프로젝트 카드 --- */
 .project-card { text-align:center; padding:20px; border:1px solid #ddd; border-radius:12px; margin-bottom:16px; transition: transform 0.3s, box-shadow 0.3s; opacity:0; transform:translateY(20px); background:#f9f9f9; }
 .project-card.show { opacity:1; transform:translateY(0); box-shadow:0 12px 28px rgba(0,0,0,0.2); }
@@ -68,87 +65,11 @@ button:hover { background-color:#0056b3; }
 .project-card a { display:inline-block; padding:10px 18px; background:#007bff; color:white; border-radius:6px; text-decoration:none; transition:0.3s; }
 .project-card a:hover { background:#0056b3; }
 
-/* --- 방명록 스타일 --- */
-#guestbook-list .guestbook-entry { background:#e0f7ff; border-left:4px solid #007bff; padding:12px; margin-bottom:8px; border-radius:6px; position:relative; }
-#guestbook-list .guestbook-entry strong { font-weight:bold; }
-#guestbook-list .guestbook-entry em { font-size:0.85rem; color:#555; margin-left:6px; }
-#guestbook-list .guestbook-entry p { margin:6px 0; }
-#guestbook-list .guestbook-entry button { position:absolute; top:8px; right:8px; background:#ff4d4d; border:none; color:white; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:12px; }
-#guestbook-list .guestbook-entry button:hover { background:#e60000; }
-
 /* --- 다크모드 --- */
 html.dark body { background:#121212; color:#ddd; }
 html.dark .card, html.dark .project-card { background:#1f1f1f; color:#eee; border:1px solid #333; }
-html.dark #guestbook-list .guestbook-entry { background:#222; border-left:4px solid #00c6ff; color:#ddd; }
-html.dark #guestbook-list .guestbook-entry button { background:#ff6666; }
 </style>
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-  // 다크모드
-  if(localStorage.getItem("darkMode")==="true") document.documentElement.classList.add("dark");
-  const toggleBtn=document.querySelector(".toggle");
-  function updateButtonText(){ toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드"; }
-  toggleBtn.addEventListener("click", function(){
-    document.documentElement.classList.toggle("dark");
-    localStorage.setItem("darkMode",document.documentElement.classList.contains("dark"));
-    updateButtonText();
-  });
-  updateButtonText();
-
-  // 스킬바 애니메이션
-  document.querySelectorAll('.skill .bar span').forEach((el) => {
-    const level = el.getAttribute('data-level');
-    setTimeout(()=> el.style.width = level, 300);
-  });
-
-  // 파티클 시작
-  initParticles();
-
-  // 방명록 로드
-  loadGuestbook();
-
-  // 카드 fade-up
-  document.querySelectorAll(".card, .project-card").forEach(el=>{
-    el.classList.add("fade-up");
-  });
-});
-  // 유저 인터랙션
-  function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!"); }
-  function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
-  function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
-
-  // --- 방명록 ---
-  window.addGuest = function(name,message){
-    const now=new Date();
-    const entry={name,message,date:now.toLocaleString()};
-    let guestbook=[];
-    try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-    guestbook.push(entry);
-    localStorage.setItem("guestbook",JSON.stringify(guestbook));
-    loadGuestbook();
-  }
-  window.deleteGuest = function(index){
-    let guestbook=[];
-    try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-    guestbook.splice(index,1);
-    localStorage.setItem("guestbook",JSON.stringify(guestbook));
-    loadGuestbook();
-  }
-  function loadGuestbook(){
-    const container=document.getElementById("guestbook-list");
-    if(!container) return;
-    let guestbook=[];
-    try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
-    container.innerHTML="";
-    guestbook.forEach((entry,i)=>{
-      const div=document.createElement("div");
-      div.className="guestbook-entry";
-      div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em><p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
-      container.appendChild(div);
-    });
-  }
-});
-</script>
+</head>
 
 <body>
 <header>
@@ -174,13 +95,13 @@ document.addEventListener("DOMContentLoaded", function(){
 </header>
 
 <main>
-<section id="about" class="card">
+<section id="about" class="card show">
   <h2>🙋‍♂️ 소개</h2>
   <p>안녕하세요. <strong>AI 개발자</strong>를 목표로 학습 중인 전다훈입니다. 여기는 <strong>AI를 이용한 자율주행 자동차, 자율비행 드론 개발</strong>과 같은 제 프로젝트를 소개하기 위한 사이트입니다.</p>
   <button onclick="sayHello()">눌러보세요!</button>
 </section>
 
-<section id="skills" class="card">
+<section id="skills" class="card show">
   <h2>🛠 기술 스택</h2>
   <div class="skills">
     <div class="skill">💻 HTML <div class="bar"><span data-level="90%"></span></div></div>
@@ -193,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function(){
   </div>
 </section>
 
-<section id="projects" class="card">
+<section id="projects" class="card show">
   <h2>💻 프로젝트</h2>
   <div class="project-card show">
     <h3>자율주행 자동차 프로젝트</h3>
@@ -206,8 +127,7 @@ document.addEventListener("DOMContentLoaded", function(){
     <a href="page2.html">자세히 보기 →</a>
   </div>
 </section>
-
-<section id="guestbook" class="card">
+<section id="guestbook" class="card show">
   <h2>✍️ 방명록</h2>
   <form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
     <input type="text" name="name" placeholder="이름" required style="padding:6px 12px; margin-right:6px;">
@@ -217,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function(){
   <div id="guestbook-list" style="margin-top:12px;"></div>
 </section>
 
-<section id="contact" class="card">
+<section id="contact" class="card show">
   <h2>📬 연락처</h2>
   <p>Email: dahunee1111@naver.com</p>
   <p>GitHub: <a href="https://github.com/dahunee1111" target="_blank">github.com/dahunee1111</a></p>
@@ -234,7 +154,67 @@ document.addEventListener("DOMContentLoaded", function(){
 </footer>
 
 <script>
-/* --- 파티클 JS --- */
+document.addEventListener("DOMContentLoaded", function(){
+  // 다크모드
+  if(localStorage.getItem("darkMode")==="true") document.documentElement.classList.add("dark");
+  const toggleBtn=document.querySelector(".toggle");
+  function updateButtonText(){ toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드"; }
+  toggleBtn.addEventListener("click", function(){
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("darkMode",document.documentElement.classList.contains("dark"));
+    updateButtonText();
+  });
+  updateButtonText();
+
+  // 스킬바 애니메이션
+  document.querySelectorAll('.skill .bar span').forEach((el) => {
+    const level = el.getAttribute('data-level');
+    setTimeout(()=> el.style.width = level, 300);
+  });
+
+  // 방명록 로드
+  loadGuestbook();
+});
+
+// 유저 인터랙션
+function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!"); }
+function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
+function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
+
+// --- 방명록 ---
+function addGuest(name,message){
+  const now=new Date();
+  const entry={name,message,date:now.toLocaleString()};
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  guestbook.push(entry);
+  localStorage.setItem("guestbook",JSON.stringify(guestbook));
+  loadGuestbook();
+}
+
+function deleteGuest(index){
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  guestbook.splice(index,1);
+  localStorage.setItem("guestbook",JSON.stringify(guestbook));
+  loadGuestbook();
+}
+
+function loadGuestbook(){
+  const container=document.getElementById("guestbook-list");
+  if(!container) return;
+  let guestbook=[];
+  try{ guestbook=JSON.parse(localStorage.getItem("guestbook"))||[]; }catch(e){ guestbook=[]; }
+  container.innerHTML="";
+  guestbook.forEach((entry,i)=>{
+    const div=document.createElement("div");
+    div.className="guestbook-entry";
+    div.innerHTML=`<strong>${entry.name}</strong> <em>${entry.date}</em><p>${entry.message}</p><button onclick="deleteGuest(${i})">삭제</button>`;
+    container.appendChild(div);
+  });
+}
+
+// --- 파티클 ---
 let particles = [];
 let mouse = { x:null, y:null };
 window.addEventListener('mousemove', function(e){ mouse.x=e.x; mouse.y=e.y; });
@@ -296,6 +276,8 @@ function initParticles(){
   }
   animate();
 }
+
+document.addEventListener("DOMContentLoaded", initParticles);
 </script>
 </body>
 </html>
