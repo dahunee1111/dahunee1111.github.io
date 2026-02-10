@@ -72,9 +72,12 @@ main { max-width:1000px; margin:40px auto; padding:0 20px; }
 .card { background:white; border-radius:12px; padding:28px; margin-bottom:28px; box-shadow:0 8px 24px rgba(0,0,0,0.08); animation:fadeUp 0.6s ease; transition: transform 0.3s, box-shadow 0.3s; }
 .card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.15); }
 
-.skills { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.skill { background-color:#007bff; color:white; padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; transition:transform 0.2s; display:flex; align-items:center; gap:6px; }
+.skills { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+.skill { background-color:#007bff; color:white; padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; display:flex; align-items:center; gap:8px; transition:transform 0.2s; }
 .skill:hover { transform:scale(1.05); }
+
+.skill .bar { height:6px; border-radius:4px; background:rgba(255,255,255,0.5); margin-left:6px; flex:1; position:relative; overflow:hidden; }
+.skill .bar span { display:block; height:100%; background:#fff; width:0; transition:width 0.8s ease; }
 
 button { margin-top:16px; padding:12px 22px; border:none; background-color:#007bff; color:white; cursor:pointer; border-radius:6px; font-size:16px; transition:background 0.3s; }
 button:hover { background-color:#0056b3; }
@@ -93,8 +96,8 @@ button:hover { background-color:#0056b3; }
 .guestbook-entry button { padding:4px 8px; border:none; background:#dc3545; color:white; border-radius:4px; font-size:12px; cursor:pointer; transition:0.2s; }
 .guestbook-entry button:hover { background:#a71d2a; }
 
-.pagination { text-align:center; margin:40px 0; }
-.pagination a { display:inline-block; margin:0 6px; padding:8px 14px; border-radius:6px; background:#ddd; color:#333; text-decoration:none; font-weight:bold; }
+.pagination { display:flex; justify-content:center; gap:10px; margin:20px 0; }
+.pagination a { padding:6px 12px; border:1px solid #007bff; border-radius:6px; text-decoration:none; color:#007bff; transition:0.3s; }
 .pagination a.active, .pagination a:hover { background:#007bff; color:white; }
 
 footer { text-align:center; padding:24px; background:#eee; font-size:14px; color:#666; }
@@ -128,7 +131,7 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 </style>
 
 <script>
-// 다크모드 & 방명록
+// --- 다크모드 + 방명록 ---
 document.addEventListener("DOMContentLoaded", function(){
   if(localStorage.getItem("darkMode")==="true") document.documentElement.classList.add("dark");
   const toggleBtn=document.querySelector(".toggle");
@@ -141,7 +144,13 @@ document.addEventListener("DOMContentLoaded", function(){
   updateButtonText();
   loadGuestbook();
 
-  // 파티클 캔버스 시작
+  // 스킬바 애니메이션
+  document.querySelectorAll('.skill .bar span').forEach((el) => {
+    const level = el.getAttribute('data-level');
+    setTimeout(()=> el.style.width = level, 300);
+  });
+
+  // 파티클 시작
   initParticles();
 });
 
@@ -180,20 +189,33 @@ function loadGuestbook(){
   });
 }
 
-// --- 파티클 배경 ---
-let particles=[];
+// --- 개발자 스타일 파티클 ---
+let particles = [];
+let mouse = { x:null, y:null };
+window.addEventListener('mousemove', function(e){ mouse.x=e.x; mouse.y=e.y; });
+
 function initParticles(){
-  const canvas=document.createElement("canvas");
-  canvas.id="particle-canvas";
+  const canvas = document.createElement("canvas");
+  canvas.id = "particle-canvas";
   document.querySelector("header").appendChild(canvas);
-  const ctx=canvas.getContext("2d");
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight*0.5;
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight * 0.5;
 
-  window.addEventListener("resize",()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight*0.5; });
+  window.addEventListener("resize", ()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight*0.5; });
 
-  for(let i=0;i<100;i++){
-    particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, dx:(Math.random()-0.5)*0.5, dy:(Math.random()-0.5)*0.5});
+  const symbols = ['{','}','<','>',';','()','[]'];
+
+  for(let i=0;i<80;i++){
+    particles.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*18+8,
+      dx:(Math.random()-0.5)*0.8,
+      dy:(Math.random()-0.5)*0.8,
+      char:symbols[Math.floor(Math.random()*symbols.length)],
+      color:`hsl(${Math.random()*220+180},70%,70%)`
+    });
   }
 
   function animate(){
@@ -202,11 +224,30 @@ function initParticles(){
       p.x+=p.dx; p.y+=p.dy;
       if(p.x<0||p.x>canvas.width) p.dx*=-1;
       if(p.y<0||p.y>canvas.height) p.dy*=-1;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle="rgba(255,255,255,0.6)";
-      ctx.fill();
+
+      let distX=mouse.x-p.x, distY=mouse.y-p.y, dist=Math.sqrt(distX*distX+distY*distY);
+      let scale = dist<100? 1+(100-dist)/50 : 1;
+
+      ctx.font = `${p.r*scale}px monospace`;
+      ctx.fillStyle=p.color;
+      ctx.fillText(p.char, p.x, p.y);
     });
+
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        let dx=particles[i].x-particles[j].x;
+        let dy=particles[i].y-particles[j].y;
+        let distance=Math.sqrt(dx*dx+dy*dy);
+        if(distance<120){
+          ctx.beginPath();
+          ctx.strokeStyle=`rgba(100,200,255,${1-distance/120})`;
+          ctx.lineWidth=1;
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
     requestAnimationFrame(animate);
   }
   animate();
@@ -248,16 +289,29 @@ function initParticles(){
 <section id="skills" class="card">
   <h2>🛠 기술 스택</h2>
   <div class="skills">
-    <div class="skill">💻 HTML</div>
-    <div class="skill">🎨 CSS</div>
-    <div class="skill">🐍 Python</div>
-    <div class="skill">🟨 JavaScript</div>
-    <div class="skill">C</div>
-    <div class="skill">C++</div>
-    <div class="skill">🔧 Git</div>
+    <div class="skill">💻 HTML
+      <div class="bar"><span data-level="90%"></span></div>
+    </div>
+    <div class="skill">🎨 CSS
+      <div class="bar"><span data-level="85%"></span></div>
+    </div>
+    <div class="skill">🐍 Python
+      <div class="bar"><span data-level="80%"></span></div>
+    </div>
+    <div class="skill">🟨 JavaScript
+      <div class="bar"><span data-level="75%"></span></div>
+    </div>
+    <div class="skill">C
+      <div class="bar"><span data-level="70%"></span></div>
+    </div>
+    <div class="skill">C++
+      <div class="bar"><span data-level="65%"></span></div>
+    </div>
+    <div class="skill">🔧 Git
+      <div class="bar"><span data-level="80%"></span></div>
+    </div>
   </div>
 </section>
-
 <section id="projects" class="card">
   <h2>💻 프로젝트</h2>
   <div class="project-card">
@@ -265,16 +319,6 @@ function initParticles(){
     <p>저의 다양한 프로젝트와 경험을 확인하고 싶다면 아래 버튼을 클릭하세요. AI, 웹, Python 등 다양한 기술을 활용한 프로젝트를 정리해두었습니다.</p>
     <a href="page2.html">프로젝트 페이지로 이동 →</a>
   </div>
-</section>
-
-<section id="guestbook" class="card">
-  <h2>✍️ 방명록</h2>
-  <form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
-    <input type="text" name="name" placeholder="이름" required style="padding:6px 12px; margin-right:6px;">
-    <input type="text" name="message" placeholder="메시지" required style="padding:6px 12px; margin-right:6px;">
-    <button type="submit">등록</button>
-  </form>
-  <div id="guestbook-list" style="margin-top:12px;"></div>
 </section>
 
 <section id="contact" class="card">
@@ -289,7 +333,10 @@ function initParticles(){
 </div>
 </main>
 
-<footer>© 2026 Jeon Dahoon. All rights reserved.</footer>
+<footer>
+  © 2026 전다훈. All rights reserved.
+</footer>
 </body>
 </html>
+
 
