@@ -3,12 +3,18 @@
   margin: 20px;
 }
 div.div_hello {
-  font-family:'sans-serif';
-  font-size: 16px
-  font-weight:400;
-  text-align: senter;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;  
   color: #007bff;
 }
+
 div#div_world {
-  background-color: rgba(0,0,0,0.05)
+  background-color: rgba(0,0,0,0.05);
+}
+.container {
+  display: flex;
+  align-items: center;  
+  gap: 10px;             
 }
