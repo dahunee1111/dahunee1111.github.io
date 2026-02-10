@@ -21,8 +21,6 @@ div#div_world {
   padding: 2px 6px;     
 }
 .container {
-  display: flex;
-  white-space: nowrap;
-  padding: 15px;
+  display:inline-block; width:50px;text-align:right;
   gap: 20px;
 }
