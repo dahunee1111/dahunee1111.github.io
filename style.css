@@ -11,7 +11,9 @@ div.div_hello {
 }
 
 div#div_world {
-  background-color: rgba(0,0,0,0.05)
+  display: inline-block; 
+  background-color: rgba(0,0,0,0.05);
+  padding: 2px 6px;     
 }
 .container {
   display: flex;
