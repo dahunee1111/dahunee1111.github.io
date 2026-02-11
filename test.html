@@ -94,9 +94,20 @@ div>a{
 }
 /* 마우스를 올렸을떄 배경이 빨간색이 되게 하는 코드 */
 div>a:hover{
-text-decoration: underline; background-color:red
+text-decoration: underline; background-color:red;
+  /* div>a 라는 곳에 뒤와 앞에 가상요소를 추가한다 추가할때에는 content를 꼭 포함 시켜야한다. */
+    div>a::before {
+  content: "👉 "; 
+  color: orange;
 }
-    
+
+  div>a::after {
+  content: "👈";
+  color: green;
+}
+  
+}
+
 /* nav 안에 있는 자손 a의 n번째 자손에게 하나씩 속성을 넣을때 쓰는 방법 */
 nav a:nth-child(1){
   background-color:red; 
@@ -122,16 +133,6 @@ p+a{
 /*텍스트 창에 입력을 할려고 할때 테두리가 파란색이 됨 */
 input:focus { outline: 2px solid blue; }
 
-/*p라는 곳에 뒤와 앞에 가상요소를 추가한다 추가할때에는 content를 꼭 포함 시켜야한다. */
-  p::before {
-  content: "👉 ";
-  color: orange;
-  }
-
-  p::after {
-  content: " ✅";
-  color: green;
-  }
 
   
   </style>
