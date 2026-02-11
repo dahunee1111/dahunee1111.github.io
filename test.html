@@ -1,85 +1,97 @@
 <!DOCTYPE html>
+<!-- HTML5 문서임을 선언 -->
 <html lang="ko">
 <head>
-  <meta charset="UTP-8">
+  <!-- 문자 인코딩 설정 -->
+  <meta charset="UTF-8">
+
+  <!-- 브라우저 탭에 표시될 제목 -->
   <title>제 2 코드 연습실</title>
+
   <style>
-    .wrapper {
-  display: flex;
-  flex-direction: column;  
-  align-items: center;      
-  justify-content: flex-start; 
-  min-height: 30vh;        
-  padding-top: 50px;        
-}
+  /* 전체 콘텐츠를 감싸는 래퍼 */
+  .wrapper {
+    display: flex;                /* flex 레이아웃 사용 */
+    flex-direction: column;       /* 세로 방향 정렬 */
+    align-items: center;          /* 가로 중앙 정렬 */
+    justify-content: flex-start;  /* 위에서부터 배치 */
+    min-height: 30vh;             /* 최소 높이를 화면의 30%로 */
+    padding-top: 50px;            /* 위쪽 여백 */
+  }
 
-h1 {
-  display: inline-block; 
-  border-bottom:3px double black;;   
-  padding: 0;
-  padding-bottom: 10px;
-  margin: 0 0 20px 0;    
-  line-height: 1;
-}
+  /* 제목 스타일 */
+  h1 {
+    display: inline-block;        /* 내용 크기만큼만 차지 */
+    border-bottom: 3px double black; /* 이중 밑줄 */
+    padding-bottom: 10px;         /* 밑줄과 글자 간격 */
+    margin: 0 0 20px 0;           /* 아래 여백 */
+    line-height: 1;               /* 줄 높이 */
+  }
 
-div.div_hello {
-  font-family: sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  text-align: center;  
-  color: #007bff;
-  display: inline-block; 
-}
+  /* Hello 텍스트 스타일 */
+  div.div_hello {
+    font-family: sans-serif;      /* 기본 산세리프 글꼴 */
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #007bff;               /* 파란색 글자 */
+    display: inline-block;        /* 옆 요소와 나란히 배치 */
+  }
 
-div#div_world {
-  display: inline-block; 
-  background-color: rgba(0,0,0,0.05);
-  padding: 2px 6px;     
-}
+  /* World 텍스트 스타일 */
+  div#div_world {
+    display: inline-block;        /* Hello 옆에 배치 */
+    background-color: rgba(0,0,0,0.05); /* 연한 회색 배경 */
+    padding: 2px 6px;             /* 안쪽 여백 */
+  }
 
+  /* Hello + World를 감싸는 컨테이너 */
+  .container {
+    display: inline-block;        /* 내용 크기만큼만 차지 */
+    width: fit-content;           /* 내부 요소에 맞게 크기 결정 */
+    margin: 0 auto;               /* 가운데 정렬 */
+    gap: 20px;                    /* (flex일 때 의미 있음) */
+  }
 
-.container {
-  display:inline-block; width: fit-content; margin:0 auto;       
-  gap: 20px;
-  
-}
+  /* 원 모양 공통 스타일 */
+  #round, .round1 {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 100px;         /* 원 모양 */
+  }
 
-#round, .round1 {
-  display: inline-block;
-  width: 200px;
-  height: 200px;
-  border: 1px solid black;
-  border-radius: 100px;
-}
+  /* 검은색 원 */
+  #round {
+    background-color: black;
+  }
 
-#round {
-  background-color: black;
-}
+  /* 회색 원 */
+  .round1 {
+    background-color: gray;
+  }
+  </style>
 
-.round1 {
-  background-color: gray;
-}
-
- </style>
-  
- <script>
-
- </script>
-
+  <script>
+    <!-- 현재는 자바스크립트 없음 -->
+  </script>
 </head>
-  
-<body>
-<div class="wrapper">
-  <h1>코드 실험실</h1>
-  <div class="container">
-    <div class="div_hello">Hello</div>
-    <div id="div_world">World</div>
-  </div>
-</div>
-  
-<div id="round"></div>
-<div class="round1"></div>
 
-  
+<body>
+  <!-- 상단 콘텐츠 영역 -->
+  <div class="wrapper">
+    <h1>코드 실험실</h1>
+
+    <!-- Hello / World 묶음 -->
+    <div class="container">
+      <div class="div_hello">Hello</div>
+      <div id="div_world">World</div>
+    </div>
+  </div>
+
+  <!-- 아래쪽에 있는 원 두 개 -->
+  <div id="round"></div>
+  <div class="round1"></div>
 </body>
-<html>
+</html>
