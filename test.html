@@ -72,6 +72,17 @@
   .round1 {
     background-color: gray;
   }
+ a[href^="http"]{
+   background-color:yellow;
+ }
+ a[href*="github"]{
+   color:lightblue;
+ }
+ a[herf$="abc.com"]{
+   color:pink;
+ }
+    
+  
   </style>
 
   <script>
@@ -97,5 +108,12 @@
   <!-- 아래쪽에 있는 원 두 개 -->
   <div id="round"></div>
   <div class="round1"></div>
+
+<ul>
+<li> <a href="http://google.com">google</a> </li>
+<li> <a href="http://github.com">github</a> </li>
+<li> <a href="http://abc.com">ABC News network</a> </li>
+</ul>
+  
 </body>
 </html>
