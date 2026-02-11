@@ -1,212 +1,48 @@
 <!DOCTYPE html>
-<!-- HTML5 문서임을 선언 -->
 <html lang="ko">
 <head>
-  <!-- 문자 인코딩 설정 -->
-  <meta charset="UTF-8">
+  <meta charset="UTP-8">
+  <title>제 3 코드 연습실</title>
 
-  <!-- 브라우저 탭에 표시될 제목 -->
-  <title>제 2 코드 연습실</title>
+ <style>
+   /*flex 코드 실험 내용이고 크기 조절 밑 화면 정중앙 배치를 하기 위한 코드*/
 
-  <style>
-  /* 전체 콘텐츠를 감싸는 래퍼 */
-  .wrapper {
-    display: flex;                /* flex 레이아웃 사용 */
-    flex-direction: column;       /* 세로 방향 정렬 */
-    align-items: center;          /* 가로 중앙 정렬 */
-    justify-content: flex-start;  /* 위에서부터 배치 */
-    min-height: 20vh;             /* 최소 높이를 화면의 20%로 */
-    padding-top: 50px;            /* 위쪽 여백 */
-  }
-
-  /* 제목 스타일 */
-  h1 {
-    display: inline-block;           /* 내용 크기만큼만 차지 */
-    border-bottom: 3px double black; /* 이중 밑줄 */
-    padding-bottom: 10px;            /* 밑줄과 글자 간격 */
-    margin: 0 0 20px 0;              /* 아래 여백 */
-    line-height: 1;                  /* 줄 높이 */
-  }
-
-  /* Hello 텍스트 스타일 */
-  div.div_hello {
-    font-family: sans-serif;         /* 기본 산세리프 글꼴 */
-    font-size: 16px;
-    font-weight: 400;
-    text-align: center;
-    color: #007bff;                  /* 파란색 글자 */
-    display: inline-block;           /* 옆 요소와 나란히 배치 */
-  }
-
-  /* World 텍스트 스타일 */
-  div#div_world {
-    display: inline-block;              /* Hello 옆에 배치 */
-    background-color: rgba(0,0,0,0.05); /* 연한 회색 배경 */
-    padding: 2px 6px;                   /* 안쪽 여백 */
-  }
-
-  /* Hello + World를 감싸는 컨테이너 */
-  .container {
-    display: inline-block;        /* 내용 크기만큼만 차지 */
-    width: fit-content;           /* 내부 요소에 맞게 크기 결정 */
-    margin: 0 auto;               /* 가운데 정렬 */
-    gap: 20px;                    /* (flex일 때 의미 있음) */
-    
-  }
-
-  /* 원 모양 공통 스타일 */
-  #round, .round1 {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    border: 2px solid black;
-    border-radius: 50px;          /* 원 모양 */
-  }
-
-  /* 검은색 원 */
-  #round {
-    background-color: black;
-  }
-
-  /* 회색 원 */
-  .round1 {
-    background-color: gray;
-  }
-  /* 속성값 적용및 응용하기 */
-    /*href 속성값이 http:로 시작되는 a 태그는 배경색이 노란색이 되는 코드 */
- a[href^="http"]{
-   background-color:yellow;
- }
-    
-   /*href 속성값이 github가 포함되는 a 태그는 배경색이 연한 하늘색이 되는 코드 */
- a[href*="github"]{
-  background-color:lightskyblue;
- }
-    
-   /*href 속성값이 abc.com으로 끝나는 a 태그는 배경색이 핑크색이 되는 코드 */
-a[href$="abc.com"]{
-  background-color:pink;
- }
-    
-/* div 바로 아래 a가 있거나 a 바로위 div가 있는 경우 코드를 주는 방법 */
-div>a:nth-child(1){
-  color:lightblue;
-}
-  
-/* 마우스를 올렸을떄 배경이 빨간색이 되게 하는 코드 */
-div>a:nth-child(1):hover{
-text-decoration: underline;}
-
-/* div>a 라는 곳에 뒤와 앞에 가상요소를 추가한다 추가할때에는 content를 꼭 포함 시켜야한다. 
-    이 예시는 마우스를 올렸을때 나오게 하는 응용 버전이다. */
-  div>a:nth-child(1):hover::before {
-  content: "👉 "; 
-  color: orange;
-}
-
-  div>a:nth-child(1):hover::after {
-  content: "👈";
-  color: green;
-}
-  
-
-
-/* nav 안에 있는 자손 a의 n번째 자손에게 하나씩 속성을 넣을때 쓰는 방법 */
-nav a:nth-child(1){
-  background-color:red; 
-}
-nav a:nth-child(2){
-  background-color:orange;
-}
-nav a:nth-child(3){
-  background-color:yellow;
-}
-nav a:nth-child(4){
-  background-color:green;
-}
-/* id 값에 코드를 주는 방법 */
-#google { 
-  background-color:lightblue;
-}
-/* p 바로 다음 형제인 a에게 코드값을 주는 방법 */
-p+a{
-   background-color:purple;
-}
-
-/*텍스트 창에 입력을 할려고 할때 테두리가 파란색이 됨 */
-input:focus { outline: 2px solid blue; }
-
-/*박스형태에 텍스트나 여러가지로 넣거나 배경처럼 여러 사진으로 벽지를 만들때 사용하는 코드*/
-.box {
-  width: 200px;
-  height: 200px;
-  background-color: #e0f7fa;
-  background-image: url("images/image.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-
-.flex-center{
+div.flex-center{
   display:flex;
   justify-content:center;
   align-items:center;
   width: 200px;
   height: 200px;
   background-color:cyan;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
 }
-  </style>
+ </style>
 
-  <script>
+ <script>
 
-    
-  </script>
+ </script>
+
 </head>
 
+
 <body>
-  <!-- 상단 콘텐츠 영역 -->
-  <div class="wrapper">
-    <h1>코드 실험실</h1>
 
-  <!-- Hello / World 묶음 -->
-  <div class="container">
-      <div class="div_hello">Hello</div>
-      <div id="div_world">World</div>
-    </div>
-  </div>
 
-  <!-- 아래쪽에 있는 원 두 개 -->
-  <div id="round"></div>
-  <div class="round1"></div>
 
-<ul>
-<li> <a href="http://google.com">google</a> </li>
-<li> <a href="http://github.com">github</a> </li>
-<li> <a href="http://abc.com">ABC News network</a> </li>
-</ul>
-  
-  <div>
-  <div>
-   <a>home</a>
-  </div>
-  <div>
-  아이디 <input type="text" name="uid">
-  </div>
-<p>
-    <nav>
-       <a>Python</a>
-       <a>html</a>
-       <a>css</a>
-       <a>Javascript</a>
-    </nav>
-       <a id="google">Google</a>
-</p>
-<a>Contact</a>
-</div>
-  
-<div class="box"> 우리집 강아지 우리집 강아지 우리집 강아지 </div>
 
 <div class="flex-center">flex 코드 실험</div>
+
+
+
+
+
+
+
 </body>
-</html>
+<html>
