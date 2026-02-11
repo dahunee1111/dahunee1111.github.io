@@ -85,7 +85,27 @@
  a[href$="abc.com"]{
   background-color:pink;
  }
-    
+div+p{
+  background-color:blue;
+}
+nav[a="Python"]{
+  background-color:red;
+}
+nav[a="html"]{
+  background-color:orange;
+}
+nav[a="css"]{
+  background-color:yellow;
+}
+nav[a="Javascript"]{
+  background-color:green;
+}
+#google { 
+  background-color:blue;
+}
+p+a{
+   background-color:purple;
+}
   
   </style>
 
@@ -119,5 +139,21 @@
 <li> <a href="http://abc.com">ABC News network</a> </li>
 </ul>
   
+  <div>
+  <div>
+   <a>home</a>
+  </div>
+<p>
+    <nav>
+       <a>Python</a>
+       <a>html</a>
+       <a>css</a>
+       <a>Javascript</a>
+    </nav>
+       <a id="google">Google</a>
+</p>
+<a>Contact</a>
+</div>
+      
 </body>
 </html>
