@@ -77,21 +77,28 @@
  a[href^="http"]{
    background-color:yellow;
  }
+    
    /*href 속성값이 github가 포함되는 a 태그는 배경색이 연한 하늘색이 되는 코드 */
  a[href*="github"]{
   background-color:lightskyblue;
  }
+    
    /*href 속성값이 abc.com으로 끝나는 a 태그는 배경색이 핑크색이 되는 코드 */
- a[href$="abc.com"]{
+[href$ a="abc.com"]{
   background-color:pink;
  }
+    
 /* div 바로 아래 a가 있거나 a 바로위 div가 있는 경우 코드를 주는 방법 */
 div>a{
-  background-color:lightblue;
+  color:lightblue;
 }
+div>a:hover{
+text-decoration: underline; background-color:red
+}
+    
 /* nav 안에 있는 자손 a의 n번째 자손에게 하나씩 속성을 넣을때 쓰는 방법 */
 nav a:nth-child(1){
-  background-color:red;
+  background-color:red; 
 }
 nav a:nth-child(2){
   background-color:orange;
@@ -110,12 +117,12 @@ nav a:nth-child(4){
 p+a{
    background-color:purple;
 }
+    
+input:focus { outline: 2px solid blue; }
   
   </style>
 
   <script>
-
-
 
     
   </script>
@@ -146,6 +153,9 @@ p+a{
   <div>
   <div>
    <a>home</a>
+  </div>
+  <div>
+  아이디 <input type="text" name="uid">
   </div>
 <p>
     <nav>
