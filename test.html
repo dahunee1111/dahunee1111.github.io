@@ -92,21 +92,23 @@
 div>a{
   color:lightblue;
 }
+  
 /* 마우스를 올렸을떄 배경이 빨간색이 되게 하는 코드 */
 div>a:hover{
-text-decoration: underline; background-color:red;
-  /* div>a 라는 곳에 뒤와 앞에 가상요소를 추가한다 추가할때에는 content를 꼭 포함 시켜야한다. */
-    div>a::before {
+text-decoration: underline; background-color:red;}
+
+/* div>a 라는 곳에 뒤와 앞에 가상요소를 추가한다 추가할때에는 content를 꼭 포함 시켜야한다. */
+    div>a:hover::before {
   content: "👉 "; 
   color: orange;
 }
 
-  div>a::after {
+  div>a:hover::after {
   content: "👈";
   color: green;
 }
   
-}
+
 
 /* nav 안에 있는 자손 a의 n번째 자손에게 하나씩 속성을 넣을때 쓰는 방법 */
 nav a:nth-child(1){
