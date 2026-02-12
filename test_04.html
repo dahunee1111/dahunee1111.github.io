@@ -2,37 +2,81 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>제 4 코드 연습실 </title>
+  <title> 제 4 코드 연습실 </title>
 
- <style>
-.box {
-  display:flex;
-  flex: 1 1 200px;
-  width: 200px;
-  height: 200px;
-}
+  <style>
 
- </style>
+    body {
+      margin: 0;   /* 기본 여백 제거 */
+    }
 
- <script>
+    /* 전체 레이아웃 관리 */
+    .layout {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
- </script>
+    /* 위 */
+    .header {
+      background: gray;
+      padding: 20px;
+      text-align: center;
+    }
 
+    /* 아래 */
+    .footer {
+      background:  gray;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* 중간 영역 */
+    .middle {
+      flex: 1;          /* 남은 세로 공간 전부 사용 */
+      display: flex;    /* 가로 정렬 */
+    }
+
+    /* 왼쪽 */
+    .left {
+      width: 200px;
+      background: gray;
+      padding: 20px;
+    }
+
+    /* 가운데 */
+    .center {
+      flex: 1;          /* 남은 가로 공간 전부 사용 */
+      background: white;
+      padding: 20px;
+    }
+
+    /* 오른쪽 */
+    .right {
+      width: 200px;
+      background: gray;
+      padding: 20px;
+    }
+
+  </style>
 </head>
-
 
 <body>
 
-<div class="box"></div>
+  <div class="layout">
 
+    <div class="header">위쪽</div>
 
+    <div class="middle">
+      <div class="left">왼쪽</div>
+      <div class="center">가운데</div>
+      <div class="right">오른쪽</div>
+    </div>
 
+    <div class="footer">아래쪽</div>
 
-
-
-
-
-
+  </div>
 
 </body>
 </html>
+
