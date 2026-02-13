@@ -362,7 +362,85 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 
 #guestbook #guestbook-list .guestbook-entry button:hover {
   background: #a71d2a;
+  
 }
+
+/* --- 연락처 섹션 꾸미기 --- */
+#contact {
+    background-color: #ffffff; /* 하얀 배경 */
+    padding: 30px; /* 내부 여백 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    margin-top: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0; /* 연한 경계선 추가 */
+}
+
+#contact:hover {
+    transform: translateY(-8px); /* 마우스 오버 시 살짝 위로 떠오르는 효과 */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* 그림자 강하게 */
+}
+
+#contact h2 {
+    font-size: 1.5rem; /* 더 큰 제목 */
+    color: #333; /* 진한 색 */
+    margin-bottom: 16px;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+}
+
+/* 제목 아래에 선 추가 */
+#contact h2::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background-color: #00bcd4; /* 하늘색 */
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+  
+}
+
+#contact p {
+    font-size: 1.1rem; /* 텍스트 크기 약간 키움 */
+    color: #555; /* 부드러운 텍스트 색상 */
+    margin-bottom: 16px;
+    line-height: 1.6; /* 텍스트 간격 넓힘 */
+    font-family: 'Arial', sans-serif; /* 깔끔한 폰트 */
+}
+
+/* 링크 스타일 */
+#contact a {
+    color: #007bff; /* 기본 파란색 */
+    text-decoration: none; /* 기본 링크 밑줄 제거 */
+    font-weight: bold;
+    transition: color 0.3s, text-decoration 0.3s ease;
+}
+
+#contact a:hover {
+    color: #0056b3; /* 링크 마우스 오버 색상 */
+    text-decoration: underline; /* 마우스 오버 시 밑줄 */
+}
+
+/* 하이라이트 색상 (하늘색/파란색 그라데이션) */
+#contact .highlight {
+    background: linear-gradient(135deg, #00bcd4, #007bff); /* 하늘색에서 파란색 그라데이션 */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#contact .highlight:hover {
+    transform: translateY(-2px); /* 마우스 오버 시 살짝 떠오르는 효과 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
 </style>
 
 <script>
@@ -568,10 +646,13 @@ function animateSkillBars(){
 </section>
 
 <section id="contact" class="card">
-  <h2>📬 연락처</h2>
+  <h2>/* 연락처 */</h2>
   <p>Email: dahunee1111@naver.com</p>
   <p>GitHub: <a href="https://github.com/dahunee1111" target="_blank">github.com/dahunee1111</a></p>
+  <!-- 강조할 텍스트 예시 -->
+  <p class="highlight">이메일로 문의 주시면 빠르게 답변드리겠습니다!</p>
 </section>
+
 
 <div class="pagination">
   <a href="index.html" class="active">1</a>
