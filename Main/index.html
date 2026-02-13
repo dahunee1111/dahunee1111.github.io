@@ -81,12 +81,97 @@ main { max-width:1000px; margin:40px auto; padding:0 20px; }
 button { margin-top:16px; padding:12px 22px; border:none; background-color:#007bff; color:white; cursor:pointer; border-radius:6px; font-size:16px; transition:background 0.3s; }
 button:hover { background-color:#0056b3; }
 
-.project-card { text-align:center; padding:20px; border:1px solid #ddd; border-radius:12px; transition: transform 0.3s, box-shadow 0.3s; }
-.project-card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.2); }
-.project-card h3 { font-size:24px; margin:10px 0; }
-.project-card p { font-size:16px; margin-bottom:12px; }
-.project-card a { display:inline-block; padding:10px 18px; background:#007bff; color:white; border-radius:6px; text-decoration:none; transition:0.3s; }
-.project-card a:hover { background:#0056b3; }
+/* 카드 */
+.project-card {
+  position: relative;
+  padding: 40px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+  transition: all 0.45s cubic-bezier(.4,.0,.2,1);
+}
+
+/* 내부 미세 그리드 레이어 */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(29,78,216,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,78,216,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+/* hover */
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 25px 60px rgba(29, 78, 216, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.project-card:hover::after {
+  opacity: 1;
+}
+
+/* 상단 기술 라인 */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    #1d4ed8,
+    #60a5fa,
+    #93c5fd
+  );
+}
+
+/* 제목 */
+.project-card h3 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--text-main);
+  margin-bottom: 16px;
+}
+
+/* 설명 */
+.project-card p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-sub);
+  margin-bottom: 24px;
+}
+
+/* 버튼 */
+.project-card a {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    #1d4ed8,
+    #3b82f6
+  );
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.35s ease;
+}
+
+.project-card a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(29, 78, 216, 0.25);
+}
 
 .guestbook-entry { border-bottom:1px solid #ddd; padding:10px 0; margin-bottom:6px; border-radius:6px; background:#f9f9f9; }
 .guestbook-entry strong { display:block; margin-bottom:4px; }
