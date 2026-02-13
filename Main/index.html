@@ -367,13 +367,13 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 
 /* --- 연락처 섹션 꾸미기 --- */
 #contact {
-    background-color: #ffffff; /* 하얀 배경 */
+    background-color: #ffffff; /* 기본 배경: 하얀색 */
     padding: 30px; /* 내부 여백 */
     border-radius: 10px; /* 둥근 모서리 */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
     margin-top: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #e0e0e0; /* 연한 경계선 추가 */
+    border: 1px solid #e0e0e0; /* 연한 경계선 */
 }
 
 #contact:hover {
@@ -401,7 +401,6 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
     left: 50%;
     transform: translateX(-50%);
     border-radius: 2px;
-  
 }
 
 #contact p {
@@ -439,6 +438,52 @@ html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
 #contact .highlight:hover {
     transform: translateY(-2px); /* 마우스 오버 시 살짝 떠오르는 효과 */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* --- 다크모드 스타일 --- */
+html.dark #contact {
+    background-color: #1e1e1e; /* 다크 배경 */
+    color: #e0e0e0; /* 밝은 텍스트 색상 */
+    border: 1px solid #444; /* 어두운 경계선 */
+}
+
+html.dark #contact h2 {
+    color: #e0e0e0; /* 다크 모드에서 제목을 밝은 색으로 */
+}
+
+html.dark #contact h2::after {
+    background-color: #0097a7; /* 다크 모드에서 하늘색을 어두운 파란색으로 */
+}
+
+html.dark #contact p {
+    color: #e0e0e0; /* 다크 모드에서 텍스트 색상 */
+}
+
+html.dark #contact a {
+    color: #00bcd4; /* 링크 색상: 밝은 하늘색 */
+}
+
+html.dark #contact a:hover {
+    color: #80deea; /* 링크 마우스 오버 색상: 밝은 파란색 */
+    text-decoration: underline;
+}
+
+html.dark #contact .highlight {
+    background: linear-gradient(135deg, #0097a7, #007bff); /* 다크 모드에서 그라데이션 색상 */
+    color: white;
+}
+
+html.dark #contact .highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 다크 모드에서 그림자 강하게 */
+}
+
+html.dark #contact {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 더 강한 그림자 */
+}
+
+html.dark #contact:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* 마우스 오버 시 더 강한 그림자 */
 }
 
 </style>
