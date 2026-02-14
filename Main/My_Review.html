@@ -2,222 +2,401 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/images/favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>개발자 노트</title>
-<link rel="icon" href="/images/favicon.ico">
 <style>
-    :root {
-        --bg-light: #f4f4f9;
-        --text-light: #333;
-        --section-light: #fff;
-        --highlight-light: #4a90e2;
-        --code-bg-light: #eaeaea;
+:root {
+    --bg-light: #f4f4f9;
+    --text-light: #333;
+    --section-light: #fff;
+    --highlight-light: #4a90e2;
+    --code-bg-light: #eaeaea;
 
-        --bg-dark: #1e1e2f;
-        --text-dark: #e0e0e0;
-        --section-dark: #2a2a3a;
-        --highlight-dark: #5aa0ff;
-        --code-bg-dark: #2d2d3f;
-    }
+    --bg-dark: #1e1e2f;
+    --text-dark: #e0e0e0;
+    --section-dark: #2a2a3a;
+    --highlight-dark: #5aa0ff;
+    --code-bg-dark: #2d2d3f;
+}
 
-    body {
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        margin: 20px;
-        background-color: var(--bg-light);
-        color: var(--text-light);
-        transition: background-color 0.3s, color 0.3s;
-    }
+/* 기본 body */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    transition: background-color 0.3s, color 0.3s;
+}
+body.dark {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
 
-    body.dark {
-        background-color: var(--bg-dark);
-        color: var(--text-dark);
-    }
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+h1 {
+    color: var(--highlight-light);
+    transition: color 0.3s;
+}
+body.dark h1 {
+    color: var(--highlight-dark);
+}
 
-    header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
+/* 메인 버튼 */
+header a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--highlight-light);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    margin-top: 10px;
+}
+header a:hover {
+    background: #357ab8;
+    transform: translateY(-2px) rotate(-2deg);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+body.dark header a {
+    background: var(--highlight-dark);
+}
+body.dark header a:hover {
+    background: #3388ff;
+}
+header a .icon {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+header a:hover .icon {
+    transform: scale(1.2) rotate(10deg);
+}
 
-    h1 {
-        color: var(--highlight-light);
-        transition: color 0.3s;
-    }
+/* 필터 버튼 */
+.categories {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.categories button {
+    margin: 0 6px 10px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #ddd;
+    color: #333;
+    transition: 0.3s;
+}
+.categories button.active, .categories button:hover {
+    background: var(--highlight-light);
+    color: white;
+}
+body.dark .categories button {
+    background: #555;
+    color: #ddd;
+}
+body.dark .categories button.active, body.dark .categories button:hover {
+    background: var(--highlight-dark);
+    color: white;
+}
 
-    body.dark h1 {
-        color: var(--highlight-dark);
-    }
+/* Section 카드 */
+section {
+    background: var(--section-light);
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    border-left: 5px solid var(--highlight-light);
+    transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+    position: relative;
+}
+section:hover {
+    transform: translateY(-5px);
+    border-left-color: var(--highlight-dark);
+}
+body.dark section {
+    background-color: var(--section-dark);
+    color: var(--text-dark);
+    border-left-color: var(--highlight-dark);
+}
 
-    section {
-        background: var(--section-light);
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transition: background 0.3s, color 0.3s;
-    }
+/* 타임스탬프 */
+.timestamp {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+    position: relative;
+}
+.timestamp::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: var(--highlight-light);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    transition: background 0.3s;
+}
+body.dark .timestamp::before {
+    background: var(--highlight-dark);
+}
+body.dark .timestamp {
+    color: #bbb;
+}
 
-    body.dark section {
-        background-color: var(--section-dark);
-        color: var(--text-dark);
-    }
+/* 제목 */
+h2 {
+    color: var(--text-light);
+    border-bottom: 2px solid var(--highlight-light);
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+    transition: color 0.3s, border-color 0.3s;
+}
+body.dark h2 {
+    color: var(--text-dark);
+    border-color: var(--highlight-dark);
+}
 
-    h2 {
-        color: var(--text-light);
-        border-bottom: 2px solid var(--highlight-light);
-        padding-bottom: 5px;
-        transition: color 0.3s, border-color 0.3s;
-    }
+/* 태그 */
+.tag {
+    display: inline-block;
+    background: var(--highlight-light);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-right: 6px;
+    margin-top: 8px;
+}
+body.dark .tag {
+    background: var(--highlight-dark);
+}
 
-    body.dark h2 {
-        color: var(--text-dark);
-        border-color: var(--highlight-dark);
-    }
+/* 코드 블록 */
+pre {
+    counter-reset: line;
+    background: var(--code-bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    margin-top: 10px;
+    border-left: 4px solid var(--highlight-light);
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.15);
+}
+body.dark pre {
+    background: var(--code-bg-dark);
+    border-left-color: var(--highlight-dark);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 8px 24px rgba(0,0,0,0.25);
+}
+pre code {
+    display: block;
+}
+pre code span {
+    display: block;
+    counter-increment: line;
+    padding-left: 40px;
+    position: relative;
+}
+pre code span::before {
+    content: counter(line);
+    position: absolute;
+    left: 10px;
+    color: #888;
+    font-weight: bold;
+}
+pre code span:nth-child(odd)::before { color: #4a90e2; }
+pre code span:nth-child(even)::before { color: #007acc; }
+body.dark pre code span:nth-child(odd)::before { color: #5aa0ff; }
+body.dark pre code span:nth-child(even)::before { color: #3388ff; }
 
-    a {
-        transition: color 0.2s;
-    }
+/* 라인 하이라이트 */
+pre code span:hover {
+    background: rgba(74, 144, 226, 0.2);
+}
+body.dark pre code span:hover {
+    background: rgba(90, 160, 255, 0.2);
+}
 
-    a:hover {
-        color: var(--highlight-light);
-    }
+/* 코드 복사 버튼 */
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--highlight-light);
+    color: #fff;
+    border: none;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.copy-btn:hover { background: #357ab8; }
+body.dark .copy-btn { background: var(--highlight-dark); }
+body.dark .copy-btn:hover { background: #3388ff; }
 
-    body.dark a:hover {
-        color: var(--highlight-dark);
-    }
+/* 키워드 하이라이트 */
+code .keyword { color: #d73a49; font-weight: bold; }
+code .string { color: #032f62; }
+code .comment { color: #6a737d; font-style: italic; }
 
-    /* 코드 블록 + 줄 번호 */
-    pre {
-        counter-reset: line;
-        background: var(--code-bg-light);
-        padding: 15px;
-        border-radius: 6px;
-        overflow-x: auto;
-        font-family: 'Courier New', monospace;
-        font-size: 14px;
-        margin-bottom: 15px;
-        transition: background 0.3s, color 0.3s;
-        position: relative;
-    }
+/* 다크/라이트 모드 버튼 */
+.mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    background: var(--highlight-light);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background 0.3s, transform 0.2s;
+    z-index: 999;
+}
+.mode-toggle:hover { transform: scale(1.1); }
+body.dark .mode-toggle { background: var(--highlight-dark); }
 
-    body.dark pre {
-        background: var(--code-bg-dark);
-        color: #fff;
-    }
-
-    pre code {
-        display: block;
-    }
-
-    pre code span {
-        display: block;
-        counter-increment: line;
-        padding-left: 40px;
-        position: relative;
-    }
-
-    pre code span::before {
-        content: counter(line);
-        position: absolute;
-        left: 10px;
-        color: #888;
-        transition: color 0.3s;
-    }
-
-    body.dark pre code span::before {
-        color: #bbb;
-    }
-
-    /* 다크/라이트 모드 버튼 */
-    .mode-toggle {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 12px 18px;
-        background: var(--highlight-light);
-        color: #fff;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        font-size: 14px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        transition: background 0.3s, transform 0.2s;
-        z-index: 999;
-    }
-
-    .mode-toggle:hover {
-        transform: scale(1.1);
-    }
-
-    body.dark .mode-toggle {
-        background: var(--highlight-dark);
-    }
-
-    /* 타임스탬프 */
-    .timestamp {
-        font-size: 12px;
-        color: #888;
-        margin-bottom: 10px;
-    }
-
-    body.dark .timestamp {
-        color: #bbb;
-    }
+/* 반응형 */
+@media(max-width:768px){
+    section{padding:18px;}
+    pre{padding:15px;}
+    .categories button{padding:6px 12px;}
+    header a{padding:6px 12px;}
+}
 </style>
 </head>
 <body>
+
 <header>
     <h1>개발자 노트</h1>
-    <p><a href="page2.html">🏠 메인으로 돌아가기</a></p>
+    <p><a href="page2.html"><span class="icon">🏠</span> 메인으로 돌아가기</a></p>
 </header>
 
-<section>
+<!-- 필터 버튼 -->
+<div class="categories">
+    <button class="active" data-filter="all">전체</button>
+    <button data-filter="소개">소개</button>
+    <button data-filter="아이디어">아이디어</button>
+    <button data-filter="후기 & 리뷰">후기 & 리뷰</button>
+</div>
+
+<!-- 기록 섹션 -->
+<section data-category="소개">
     <div class="timestamp">2026-02-09</div>
-    <h2>나의 소개 & 개발자를 선택한 이유 </h2>
+    <h2>나의 소개 & 개발자를 선택한 이유</h2>
     <p>저에 대한 이야기와 개발자를 선택하게 된 계기를 기록한 곳입니다.</p>
-    <pre><code>
+    <div class="tag">Python</div>
+    <pre>
+        <button class="copy-btn">복사</button>
+        <code>
 <span>function hello() {</span>
 <span>    console.log("Hello, developer!");</span>
 <span>}</span>
-    </code></pre>
+        </code>
+    </pre>
 </section>
 
-<section>
+<section data-category="아이디어">
     <div class="timestamp">2026-02-08</div>
     <h2>아이디어 & 구상</h2>
-    <p>새로운 프로젝트나 생각을 정리한것을 기록한 곳입니다.</p>
-    <pre><code>
+    <p>새로운 프로젝트나 생각을 정리한 것을 기록한 곳입니다.</p>
+    <div class="tag">Python</div>
+    <div class="tag">Algorithm</div>
+    <pre>
+        <button class="copy-btn">복사</button>
+        <code>
 <span># Python 예제</span>
 <span>def add(a, b):</span>
 <span>    return a + b</span>
-    </code></pre>
+        </code>
+    </pre>
 </section>
 
-<section>
+<section data-category="후기 & 리뷰">
     <div class="timestamp">2026-02-07</div>
     <h2>후기 & 리뷰</h2>
-    <p>Python,CSS,HTML,C,C++를 사용한 개발의 후기를 기록한 곳입니다.</p>
+    <p>Python, CSS, HTML, C, C++를 사용한 개발의 후기를 기록한 곳입니다.</p>
+    <div class="tag">HTML</div>
+    <div class="tag">CSS</div>
 </section>
 
-<!-- 다크/라이트 모드 토글 버튼 -->
+<!-- 다크/라이트 모드 버튼 -->
 <button class="mode-toggle" id="toggleMode">🌙 다크/라이트 모드</button>
 
 <script>
-    // 로컬 스토리지에서 모드 상태 불러오기
-    const savedMode = localStorage.getItem('mode');
-    if(savedMode === 'dark') {
-        document.body.classList.add('dark');
-    }
+// 다크모드 저장
+const savedMode = localStorage.getItem('mode');
+if(savedMode === 'dark') document.body.classList.add('dark');
 
-    const toggleBtn = document.getElementById('toggleMode');
-    toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-        if(document.body.classList.contains('dark')) {
-            localStorage.setItem('mode', 'dark');
-        } else {
-            localStorage.setItem('mode', 'light');
-        }
+const toggleBtn = document.getElementById('toggleMode');
+toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('mode', document.body.classList.contains('dark') ? 'dark' : 'light');
+});
+
+// 필터 버튼 기능
+const filterButtons = document.querySelectorAll('.categories button');
+const sections = document.querySelectorAll('section[data-category]');
+filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        sections.forEach(sec => {
+            sec.style.display = (filter === 'all' || sec.dataset.category === filter) ? 'block' : 'none';
+        });
     });
+});
+
+// 코드 복사 기능
+document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+            btn.textContent = '복사 완료!';
+            setTimeout(() => btn.textContent = '복사', 1500);
+        });
+    });
+});
+
+// 키워드 하이라이트
+function highlightCode(codeBlock) {
+    const keywords = ['function','console.log','def','return','if','else','for','while','class'];
+    const stringPattern = /(["'`].*?["'`])/g;
+    const commentPattern = /(\/\/.*|#.*)/g;
+    codeBlock.querySelectorAll('span').forEach(line => {
+        let html = line.innerText;
+        html = html.replace(stringPattern, '<span class="string">$1</span>');
+        html = html.replace(commentPattern, '<span class="comment">$1</span>');
+        keywords.forEach(kw => {
+            const kwRegex = new RegExp('\\b'+kw+'\\b','g');
+            html = html.replace(kwRegex, `<span class="keyword">${kw}</span>`);
+        });
+        line.innerHTML = html;
+    });
+}
+document.querySelectorAll('pre code').forEach(highlightCode);
 </script>
+
 </body>
 </html>
