@@ -583,7 +583,7 @@ function initParticles() {
       if(p.y<0||p.y>canvas.height) p.dy*=-1;
 
       let distX=mouse.x-p.x, distY=mouse.y-p.y, dist=Math.sqrt(distX*distX+distY*distY);
-      let scale = dist<100? Math.min(2,1+(100-dist)/50) : 1;
+      let scale = dist<50? Math.min(2,1+(50-dist)/25) : 1;
 
       ctx.font = `${p.r*scale}px monospace`;
       ctx.fillStyle=p.color;
