@@ -1,966 +1,1213 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>전다훈 | AI Developer Portfolio</title>
-<link rel="icon" href="/images/favicon.ico">
-<meta name="description" content="전다훈의 AI 개발자 포트폴리오 사이트. AI, 자율주행, 자율비행 드론 프로젝트와 기술 스택 소개.">
-<meta name="robots" content="index, follow">
-
-<style>
-/* --- 기본 스타일 --- */
-* { box-sizing: border-box; margin:0; padding:0; }
-html { scroll-behavior: smooth; font-size:16px; }
-body { font-family:'Segoe UI', Arial, sans-serif; line-height:1.6; background:#f4f6f8; color:#333; transition:background 0.3s,color 0.3s; }
-
-/* --- 헤더 + 파티클 배경 --- */
-header { 
-  position:relative;
-  color:#fff;
-  padding:50px 20px;
-  text-align:center;
-  overflow:hidden;
-}
-header::before {
-  content:"";
-  position:absolute;
-  top:0; left:0; width:100%; height:100%;
-  background:linear-gradient(135deg,#1e1e1e,#3a3a3a);
-  z-index:-2;
-}
-canvas#particle-canvas {
-  position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;
-}
-header h1 { font-size:2.6rem; margin-bottom:6px; }
-header p { font-size:1.1rem; margin-bottom:10px; }
-.profile-wrapper { width:140px; height:140px; margin:0 auto 20px; padding:4px; border-radius:50%; 
-  background:linear-gradient(135deg,#00c6ff,#007bff); 
-  display:flex; align-items:center; justify-content:center; 
-  box-shadow:0 10px 25px rgba(0,0,0,0.35); transition:transform 0.4s ease,box-shadow 0.4s ease; 
-}
-.profile-wrapper:hover { transform:scale(1.08); box-shadow:0 16px 35px rgba(0,0,0,0.5); }
-.profile-img { width:100%; height:100%; border-radius:50%; object-fit:cover; border:3px solid white; }
-
-html.dark .profile-wrapper { box-shadow:0 10px 25px rgba(255,255,255,0.25); }
-html.dark .profile-img { border:3px solid #e0e0e0; }
-
-/* --- 메뉴 --- */
-nav.desktop-menu { display:flex; justify-content:center; margin-top:10px; }
-nav.desktop-menu a { color:#ddd; margin:0 14px; text-decoration:none; font-weight:bold; transition:color 0.3s; }
-nav.desktop-menu a:hover { color:#fff; }
-
-.hamburger { display:flex; position:absolute; top:20px; right:20px; width:28px; height:22px; flex-direction:column; justify-content:space-between; cursor:pointer; z-index:20; }
-.hamburger span { display:block; height:3px; background:white; border-radius:3px; transition:all 0.3s ease; }
-.hamburger.active span:nth-child(1){ transform:rotate(45deg) translate(5px,5px);}
-.hamburger.active span:nth-child(2){ opacity:0;}
-.hamburger.active span:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px);}
-
-nav.mobile-menu {
-  display:flex; flex-direction:column; position:absolute; top:60px; right:20px; background: linear-gradient(135deg,#1e1e1e,#3a3a3a); width:220px;
-  transform:translateY(-20px); opacity:0; pointer-events:none; transition: transform 0.3s ease, opacity 0.3s ease; z-index:15;
-}
-nav.mobile-menu.show { transform:translateY(0); opacity:1; pointer-events:auto; }
-nav.mobile-menu a { margin:10px 0; padding:10px 20px; color:#ddd; text-decoration:none; font-weight:bold; transition:color 0.3s; }
-nav.mobile-menu a:hover { color:#fff; }
-
-button.toggle { background:transparent; border:2px solid white; margin-top:10px; color:white; padding:8px 20px; border-radius:6px; cursor:pointer; transition: all 0.3s; }
-button.toggle:hover { background-color: rgba(255,255,255,0.1); }
-
-/* --- 메인 영역 --- */
-main { max-width:1000px; margin:40px auto; padding:0 20px; }
-.card { background:white; border-radius:12px; padding:28px; margin-bottom:28px; box-shadow:0 8px 24px rgba(0,0,0,0.08); animation:fadeUp 0.6s ease; transition: transform 0.3s, box-shadow 0.3s; }
-.card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.15); }
-
-button { margin-top:16px; padding:12px 22px; border:none; background-color:#007bff; color:white; cursor:pointer; border-radius:6px; font-size:16px; transition:background 0.3s; }
-button:hover { background-color:#0056b3; }
-
-/* =========================
-   Skills Layout
-========================= */
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-}
-
-/* =========================
-   Skill Pill
-========================= */
-.skill {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  overflow: hidden;
-}
-
-.skill:hover {
-  transform: scale(1.05);
-}
-
-/* =========================
-   Progress Bar
-========================= */
-.skill-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  width: 0;
-  transition: width 1.2s ease;
-  border-radius: 0 0 20px 20px;
-}
-
-/* Hover glow */
-.skill:hover .skill-bar {
-  box-shadow: 0 0 8px rgba(0,123,255,0.6);
-}
-
-/* Percentage Text */
-.skill-percent {
-  font-size: 12px;
-  opacity: 0.85;
-}
-
-/* =========================
-   Dark Mode
-========================= */
-.dark .skill {
-  background-color: #2a2f36;
-  color: #e6e6e6;
-  border: 1px solid #3a4048;
-}
-
-.dark .skill:hover {
-  box-shadow: 0 0 10px rgba(74,144,226,0.3);
-}
-
-.dark .skill:hover .skill-bar {
-  box-shadow: 0 0 10px rgba(74,144,226,0.8);
-}
-
-/* --- 프로젝트 카드 스타일 --- */
-
-:root {
-  --primary: #1d4ed8;
-  --primary-light: #3b82f6;
-  --bg-soft: #f8fbff;
-  --border-soft: rgba(0, 0, 0, 0.06);
-  --text-main: #0f172a;
-  --text-sub: #475569;
-}
-
-
-
-/* 카드 */
-.project-card {
-  position: relative;
-  padding: 40px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-soft);
-  overflow: hidden;
-  transition: all 0.45s cubic-bezier(.4,.0,.2,1);
-}
-
-/* 내부 미세 그리드 레이어 */
-.project-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(29,78,216,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(29,78,216,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-/* hover */
-.project-card:hover {
-  transform: translateY(-10px);
-  box-shadow:
-    0 25px 60px rgba(29, 78, 216, 0.12),
-    0 8px 20px rgba(0, 0, 0, 0.05);
-}
-
-.project-card:hover::after {
-  opacity: 1;
-}
-
-/* 상단 기술 라인 */
-.project-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  background: linear-gradient(
-    90deg,
-    #1d4ed8,
-    #60a5fa,
-    #93c5fd
-  );
-}
-
-/* 제목 */
-.project-card h3 {
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  color: var(--text-main);
-  margin-bottom: 16px;
-}
-
-/* 설명 */
-.project-card p {
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--text-sub);
-  margin-bottom: 24px;
-}
-
-/* 버튼 */
-.project-card a {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 14px;
-  background: linear-gradient(
-    135deg,
-    #1d4ed8,
-    #3b82f6
-  );
-  color: #fff;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.35s ease;
-}
-
-.project-card a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(29, 78, 216, 0.25);
-}
-/* --- 다크모드 --- */
-html.dark body {
-  background-color: #121212; /* 배경을 어두운 색으로 */
-  color: #e0e0e0; /* 글자 색을 밝은 회색으로 */
-}
-
-/* 프로젝트 카드 다크모드 */
-html.dark .project-card {
-  background: rgba(30, 34, 45, 0.85); /* 카드 배경을 어두운 반투명 색으로 */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* 테두리를 더 뚜렷하게 */
-}
-
-/* 카드 상단 기술 라인 */
-html.dark .project-card::before {
-  background: linear-gradient(90deg, #60a5fa, #93c5fd, #bfdbfe); /* 부드러운 파스텔 블루 계열로 변경 */
-}
-
-/* 카드 내부 미세 그리드 */
-html.dark .project-card::after {
-  background-image: 
-    linear-gradient(rgba(96, 165, 250, 0.06) 1px, transparent 1px), 
-    linear-gradient(90deg, rgba(96, 165, 250, 0.06) 1px, transparent 1px); /* 미세 그리드 실선 색상 변경 */
-}
-
-/* 제목 색상 */
-html.dark .project-card h3 {
-  color: #f1f5f9; /* 제목을 밝은 색으로 */
-}
-
-/* 설명 색상 */
-html.dark .project-card p {
-  color: #9aa4b2; /* 설명 텍스트를 밝은 회색으로 */
-}
-
-/* 버튼 스타일 */
-html.dark .project-card a {
-  border: 1px solid #60a5fa; /* 버튼 테두리 밝게 */
-  background: linear-gradient(135deg, #60a5fa, #93c5fd); /* 버튼 배경을 더 부드럽고 밝게 */
-  color: #fff; /* 텍스트 색상은 흰색 */
-}
-
-/* 버튼 hover 효과 */
-html.dark .project-card a:hover {
-  box-shadow: 0 12px 30px rgba(96, 165, 250, 0.25); /* hover 시 그림자 효과 */
-}
-
-  /* --- 방명록 꾸미기 --- */
-  
-.guestbook-entry { border-bottom:1px solid #ddd; padding:10px 0; margin-bottom:6px; border-radius:6px; background:#f9f9f9; }
-.guestbook-entry strong { display:block; margin-bottom:4px; }
-.guestbook-entry em { font-size:12px; color:#666; margin-left:6px; }
-.guestbook-entry p { margin:4px 0; }
-.guestbook-entry button { padding:4px 8px; border:none; background:#dc3545; color:white; border-radius:4px; font-size:12px; cursor:pointer; transition:0.2s; }
-.guestbook-entry button:hover { background:#a71d2a; }
-
-.pagination { text-align:center; margin:40px 0; }
-.pagination a { display:inline-block; margin:0 6px; padding:8px 14px; border-radius:6px; background:#ddd; color:#333; text-decoration:none; font-weight:bold; }
-.pagination a.active, .pagination a:hover { background:#007bff; color:white; }
-
-footer { text-align:center; padding:24px; background:#eee; font-size:14px; color:#666; }
-
-
-.guestbook-entry { border-bottom:1px solid #ddd; padding:10px 0; margin-bottom:6px; border-radius:6px; background:#f9f9f9; }
-.guestbook-entry strong { display:block; margin-bottom:4px; }
-.guestbook-entry em { font-size:12px; color:#666; margin-left:6px; }
-.guestbook-entry p { margin:4px 0; }
-.guestbook-entry button { padding:4px 8px; border:none; background:#dc3545; color:white; border-radius:4px; font-size:12px; cursor:pointer; transition:0.2s; }
-.guestbook-entry button:hover { background:#a71d2a; }
-
-.pagination { text-align:center; margin:40px 0; }
-.pagination a { display:inline-block; margin:0 6px; padding:8px 14px; border-radius:6px; background:#ddd; color:#333; text-decoration:none; font-weight:bold; }
-.pagination a.active, .pagination a:hover { background:#007bff; color:white; }
-
-footer { text-align:center; padding:24px; background:#eee; font-size:14px; color:#666; }
-
-/* --- 다크모드 --- */
-html.dark body { background-color:#121212; color:#e0e0e0; }
-html.dark .card { background:#1e1e1e; }
-html.dark footer { background-color:#1a1a1a; color:#aaa; }
-html.dark .toggle { border-color:#e0e0e0; color:#e0e0e0; }
-html.dark .toggle:hover { background-color: rgba(224,224,224,0.1); }
-
-/* --- 애니메이션 --- */
-@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-
-/* --- 반응형 --- */
-@media (max-width:768px){
-  nav.desktop-menu{ display:none; }
-  main{ margin:20px auto; padding:0 15px; }
-  .card{ padding:20px; }
-  .skills{ justify-content:center; }
-  .skill{ padding:5px 12px; font-size:13px; }
-  button{ width:100%; }
-}
-@media (max-width:480px){
-  header{ padding:30px 10px; }
-  button.toggle{ margin-top:10px; }
-  .profile-wrapper{ width:120px; height:120px; }
-  header h1{ font-size:1.9rem; }
-  header p{ font-size:1rem; }
-}
-  /* 방명록 꾸미기 */
-#guestbook form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 12px;
-}
-
-#guestbook input[type="text"] {
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #007bff;
-  outline: none;
-  transition: all 0.3s ease;
-  font-size: 14px;
-  width: 200px;
-}
-
-#guestbook input[type="text"]:focus {
-  border-color: #00c6ff;
-  box-shadow: 0 0 8px rgba(0,198,255,0.4);
-}
-
-#guestbook button[type="submit"] {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #00c6ff, #007bff);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.3s;
-}
-
-#guestbook button[type="submit"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,123,255,0.4);
-  background: linear-gradient(135deg, #007bff, #00c6ff);
-}
-
-#guestbook #guestbook-list .guestbook-entry {
-  background: rgba(0,123,255,0.05);
-  border: 1px solid rgba(0,123,255,0.2);
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin-bottom: 8px;
-  transition: background 0.3s, transform 0.2s;
-}
-
-#guestbook #guestbook-list .guestbook-entry:hover {
-  background: rgba(0,198,255,0.1);
-  transform: translateY(-2px);
-}
-
-#guestbook #guestbook-list .guestbook-entry strong {
-  color: #007bff;
-}
-
-#guestbook #guestbook-list .guestbook-entry em {
-  color: #555;
-  font-size: 12px;
-}
-
-#guestbook #guestbook-list .guestbook-entry button {
-  background: #dc3545;
-  color: white;
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 12px;
-  cursor: pointer;
-  border: none;
-  transition: 0.2s;
-}
-
-#guestbook #guestbook-list .guestbook-entry button:hover {
-  background: #a71d2a;
-  
-}
-
-/* --- 연락처 섹션 꾸미기 --- */
-#contact {
-    background-color: #ffffff; /* 기본 배경: 하얀색 */
-    padding: 30px; /* 내부 여백 */
-    border-radius: 10px; /* 둥근 모서리 */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
-    margin-top: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #e0e0e0; /* 연한 경계선 */
-}
-
-#contact:hover {
-    transform: translateY(-8px); /* 마우스 오버 시 살짝 위로 떠오르는 효과 */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* 그림자 강하게 */
-}
-
-#contact h2 {
-    font-size: 1.5rem; /* 더 큰 제목 */
-    color: #333; /* 진한 색 */
-    margin-bottom: 16px;
-    font-weight: bold;
-    position: relative;
-    text-align: center;
-}
-
-/* 제목 아래에 선 추가 */
-#contact h2::after {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 4px;
-    background-color: #00bcd4; /* 하늘색 */
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-#contact p {
-    font-size: 1.1rem; /* 텍스트 크기 약간 키움 */
-    color: #555; /* 부드러운 텍스트 색상 */
-    margin-bottom: 16px;
-    line-height: 1.6; /* 텍스트 간격 넓힘 */
-    font-family: 'Arial', sans-serif; /* 깔끔한 폰트 */
-}
-
-/* 링크 스타일 */
-#contact a {
-    color: #007bff; /* 기본 파란색 */
-    text-decoration: none; /* 기본 링크 밑줄 제거 */
-    font-weight: bold;
-    transition: color 0.3s, text-decoration 0.3s ease;
-}
-
-#contact a:hover {
-    color: #0056b3; /* 링크 마우스 오버 색상 */
-    text-decoration: underline; /* 마우스 오버 시 밑줄 */
-}
-
-/* 하이라이트 색상 (하늘색/파란색 그라데이션) */
-#contact .highlight {
-    background: linear-gradient(135deg, #00bcd4, #007bff); /* 하늘색에서 파란색 그라데이션 */
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    display: inline-block;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-#contact .highlight:hover {
-    transform: translateY(-2px); /* 마우스 오버 시 살짝 떠오르는 효과 */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-}
-
-/* --- 다크모드 스타일 --- */
-html.dark #contact {
-    background-color: #1e1e1e; /* 다크 배경 */
-    color: #e0e0e0; /* 밝은 텍스트 색상 */
-    border: 1px solid #444; /* 어두운 경계선 */
-}
-
-html.dark #contact h2 {
-    color: #e0e0e0; /* 다크 모드에서 제목을 밝은 색으로 */
-}
-
-html.dark #contact h2::after {
-    background-color: #0097a7; /* 다크 모드에서 하늘색을 어두운 파란색으로 */
-}
-
-html.dark #contact p {
-    color: #e0e0e0; /* 다크 모드에서 텍스트 색상 */
-}
-
-html.dark #contact a {
-    color: #00bcd4; /* 링크 색상: 밝은 하늘색 */
-}
-
-html.dark #contact a:hover {
-    color: #80deea; /* 링크 마우스 오버 색상: 밝은 파란색 */
-    text-decoration: underline;
-}
-
-html.dark #contact .highlight {
-    background: linear-gradient(135deg, #0097a7, #007bff); /* 다크 모드에서 그라데이션 색상 */
-    color: white;
-}
-
-html.dark #contact .highlight:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 다크 모드에서 그림자 강하게 */
-}
-
-html.dark #contact {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 더 강한 그림자 */
-}
-
-html.dark #contact:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* 마우스 오버 시 더 강한 그림자 */
-}
-/* =========================
-   기본 버튼 (라이트 모드)
-========================= */
-button {
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: #ffffff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
-}
-
-
-/* =========================
-   다크모드 버튼
-========================= */
-.dark button {
-  background: #2a2f36;       /* 어두운 회색 */
-  color: #e6e6e6;            /* 밝은 글씨 */
-  border: 1px solid #3a4048; /* 살짝 경계선 */
-  transition: all 0.25s ease;
-}
-
-.dark button:hover {
-  background: #323844;       /* 살짝만 밝아짐 */
-  border-color: #4a90e2;     /* AI 느낌 블루 포인트 */
-  box-shadow: 0 0 8px rgba(74,144,226,0.3);
-  transform: translateY(-1px);
-}
-</style>
-
-<script>
-// --- 다크모드 & 방명록 ---
-document.addEventListener("DOMContentLoaded", function(){
-  if(localStorage.getItem("darkMode")==="true") document.documentElement.classList.add("dark");
-  const toggleBtn=document.querySelector(".toggle");
-  function updateButtonText(){ toggleBtn.textContent=document.documentElement.classList.contains("dark")?"☀️ 라이트모드":"🌙 다크모드"; }
-  toggleBtn.addEventListener("click", function(){
-    document.documentElement.classList.toggle("dark");
-    localStorage.setItem("darkMode",document.documentElement.classList.contains("dark"));
-    updateButtonText();
-  });
-  updateButtonText();
-  loadGuestbook();
-
-  // 파티클 캔버스 시작
-  initParticles();
-  animateSkillBars();
-});
-
-function sayHello(){ alert("저는 이 사이트를 만든 전다훈입니다. 방문해주셔서 감사합니다!"); }
-function toggleHamburger(el){ el.classList.toggle("active"); document.querySelector(".mobile-menu").classList.toggle("show"); }
-function closeHamburger(){ document.querySelector(".mobile-menu").classList.remove("show"); document.querySelector(".hamburger").classList.remove("active"); }
-
-// ===============================
-// Guestbook - Final Pagination Version
-// ===============================
-
-let currentPage = 1;
-const itemsPerPage = 5;
-
-// ===============================
-// 방명록 추가
-// ===============================
-function addGuest(name, message) {
-  const now = new Date();
-
-  const entry = {
-    name,
-    message,
-    date: now.toLocaleString()
-  };
-
-  let guestbook = JSON.parse(localStorage.getItem("guestbook")) || [];
-
-  guestbook.push(entry);
-  localStorage.setItem("guestbook", JSON.stringify(guestbook));
-
-  const totalPages = Math.ceil(guestbook.length / itemsPerPage);
-
-  currentPage = totalPages;   // 🔥 이 줄 추가
-  loadGuestbook(currentPage);
-}
-
-// ===============================
-// 방명록 삭제
-// ===============================
-function deleteGuest(index) {
-  let guestbook = JSON.parse(localStorage.getItem("guestbook")) || [];
-
-  guestbook.splice(index, 1);
-  localStorage.setItem("guestbook", JSON.stringify(guestbook));
-
-  const totalPages = Math.ceil(guestbook.length / itemsPerPage);
-
-  if (currentPage > totalPages) {
-    currentPage = totalPages || 1;
-  }
-
-  loadGuestbook(currentPage);
-}
-
-// ===============================
-// 방명록 출력 (페이지 분할 핵심)
-// ===============================
-function loadGuestbook(page = 1) {
-  const container = document.getElementById("guestbook-list");
-  if (!container) return;
-
-  let guestbook = JSON.parse(localStorage.getItem("guestbook")) || [];
-
-  container.innerHTML = "";
-  currentPage = page;
-
-  const start = (page - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const currentItems = guestbook.slice(start, end);
-
-  currentItems.forEach((entry, index) => {
-    const realIndex = start + index;
-
-    const div = document.createElement("div");
-    div.className = "guestbook-entry";
-
-    const strong = document.createElement("strong");
-    strong.textContent = entry.name;
-
-    const em = document.createElement("em");
-    em.textContent = ` ${entry.date}`;
-
-    const p = document.createElement("p");
-    p.textContent = entry.message;
-
-    const button = document.createElement("button");
-    button.textContent = "삭제";
-
-    button.addEventListener("click", () => {
-      deleteGuest(realIndex);
-    });
-
-    div.appendChild(strong);
-    div.appendChild(em);
-    div.appendChild(p);
-    div.appendChild(button);
-
-    container.appendChild(div);
-  });
-
-  setupPagination(guestbook.length);
-}
-
-// ===============================
-// 페이지네이션 생성
-// ===============================
-function setupPagination(totalItems) {
-  const pagination = document.getElementById("pagination");
-  if (!pagination) return;
-
-  pagination.style.display = totalItems > itemsPerPage ? "block" : "none";
-
-  const pageCount = Math.ceil(totalItems / itemsPerPage);
-  pagination.innerHTML = "";
-
-  for (let i = 1; i <= pageCount; i++) {
-    const link = document.createElement("a");
-    link.href = "#";
-    link.textContent = i;
-
-    if (i === currentPage) {
-      link.classList.add("active");
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>전다훈 | AI Developer Portfolio</title>
+  <link rel="icon" href="/images/favicon.ico" />
+  <meta
+    name="description"
+    content="전다훈의 AI 개발자 포트폴리오. Python, FastAPI, AI 기반 문제 해결 시스템과 웹 프로젝트를 소개합니다."
+  />
+  <meta name="robots" content="index, follow" />
+
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: #ffffff;
+      --text: #18212f;
+      --muted: #5b6678;
+      --line: rgba(24, 33, 47, 0.08);
+      --primary: #2563eb;
+      --primary-2: #06b6d4;
+      --hero-1: #0f172a;
+      --hero-2: #1e293b;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      --radius: 22px;
     }
 
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      loadGuestbook(i);
-    });
+    html.dark {
+      --bg: #0b1220;
+      --surface: rgba(15, 23, 42, 0.8);
+      --surface-strong: #111827;
+      --text: #edf2ff;
+      --muted: #a7b1c2;
+      --line: rgba(255, 255, 255, 0.08);
+      --primary: #60a5fa;
+      --primary-2: #22d3ee;
+      --hero-1: #050816;
+      --hero-2: #0f172a;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
 
-    pagination.appendChild(link);
-  }
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-// ===============================
-// 최초 로드
-// ===============================
-document.addEventListener("DOMContentLoaded", () => {
-  loadGuestbook(currentPage);
-});
-// --- 개발자 심볼 파티클 ---
-let particles = [];
-let mouse = { x:-9999, y:-9999 };
-window.addEventListener('mousemove', e=>{ mouse.x=e.x; mouse.y=e.y; });
-window.addEventListener('mouseleave', ()=>{ mouse.x=-9999; mouse.y=-9999; });
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
 
-function initParticles() {
-  const canvas = document.createElement("canvas");
-  canvas.id = "particle-canvas";
-  document.querySelector("header").appendChild(canvas);
-  const ctx = canvas.getContext("2d");
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(6, 182, 212, 0.08), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      transition: background 0.3s, color 0.3s;
+    }
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight * 0.5;
-  }
-  resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  const symbols = ['{','}','<','>',';','()','[]'];
-  particles = [];
-  for(let i=0;i<80;i++){
-    particles.push({
-      x:Math.random()*canvas.width,
-      y:Math.random()*canvas.height,
-      r:Math.random()*18+8,
-      dx:(Math.random()-0.3)*0.5,
-      dy:(Math.random()-0.3)*0.5,
-      char:symbols[Math.floor(Math.random()*symbols.length)],
-      color:`hsl(${Math.random()*220+180},70%,70%)`
-    });
-  }
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+    }
 
-  function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-      p.x+=p.dx; p.y+=p.dy;
-      if(p.x<0||p.x>canvas.width) p.dx*=-1;
-      if(p.y<0||p.y>canvas.height) p.dy*=-1;
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-      let distX=mouse.x-p.x, distY=mouse.y-p.y, dist=Math.sqrt(distX*distX+distY*distY);
-      let scale = dist<50? Math.min(2,1+(50-dist)/25) : 1;
+    .section {
+      margin-top: 30px;
+    }
 
-      ctx.font = `${p.r*scale}px monospace`;
-      ctx.fillStyle=p.color;
-      ctx.fillText(p.char, p.x, p.y);
-    });
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
 
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        let dx=particles[i].x-particles[j].x;
-        let dy=particles[i].y-particles[j].y;
-        let distance=Math.sqrt(dx*dx+dy*dy);
-        if(distance<120){
-          ctx.beginPath();
-          ctx.strokeStyle=`rgba(100,200,255,${1-distance/120})`;
-          ctx.lineWidth=1;
-          ctx.moveTo(particles[i].x,particles[i].y);
-          ctx.lineTo(particles[j].x,particles[j].y);
-          ctx.stroke();
-        }
+    /* Header */
+    header {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(135deg, var(--hero-1), var(--hero-2));
+      padding-bottom: 48px;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.18), transparent 20%),
+        radial-gradient(circle at 80% 25%, rgba(34, 211, 238, 0.16), transparent 18%);
+      pointer-events: none;
+    }
+
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding-top: 22px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .desktop-menu {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .desktop-menu a {
+      color: rgba(255, 255, 255, 0.82);
+      font-weight: 600;
+      transition: color 0.25s ease;
+    }
+
+    .desktop-menu a:hover {
+      color: #ffffff;
+    }
+
+    .toggle {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .toggle:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .hamburger {
+      display: none;
+      width: 28px;
+      height: 22px;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 3px;
+      border-radius: 999px;
+      background: white;
+      transition: 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+      padding: 16px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+    }
+
+    .mobile-menu a {
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 600;
+    }
+
+    .mobile-menu.show {
+      display: flex;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      padding: 10px 0 18px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 6vw, 4.4rem);
+      line-height: 1.08;
+      margin-bottom: 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #7dd3fc, #93c5fd, #67e8f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.05rem;
+      max-width: 640px;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 154px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      box-shadow: 0 16px 34px rgba(37, 99, 235, 0.28);
+    }
+
+    .btn-secondary {
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 640px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.92rem;
+    }
+
+    .hero-panel {
+      padding: 24px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-wrap {
+      width: 156px;
+      height: 156px;
+      margin-bottom: 18px;
+      padding: 4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      box-shadow: 0 18px 32px rgba(34, 211, 238, 0.2);
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.96);
+    }
+
+    .panel-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-panel h2 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-panel p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 16px;
+    }
+
+    .mini-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mini-stack span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+    }
+
+    /* Generic section */
+    .section-card {
+      padding: 30px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 6px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .about-box,
+    .focus-box {
+      padding: 24px;
+      border-radius: 20px;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+    }
+
+    .about-box p,
+    .focus-box p {
+      color: var(--muted);
+    }
+
+    .about-points {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .about-points li {
+      list-style: none;
+      padding-left: 18px;
+      position: relative;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .about-points li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    }
+
+    /* Skills */
+    .skill-groups {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .skill-group {
+      padding: 22px;
+      border-radius: 20px;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+    }
+
+    .skill-group h3 {
+      margin-bottom: 14px;
+      font-size: 1.08rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      position: relative;
+      min-width: 140px;
+      padding: 12px 14px 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(6, 182, 212, 0.08));
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
+    }
+
+    .skill-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .skill-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .skill-bar {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 4px;
+      width: 0;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      transition: width 1s ease;
+    }
+
+    /* Project */
+    .featured-project {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(6, 182, 212, 0.08)),
+        var(--surface-strong);
+      border: 1px solid var(--line);
+    }
+
+    .featured-project::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+      background-size: 34px 34px;
+      pointer-events: none;
+    }
+
+    .featured-top {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .featured-project h3 {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .featured-project p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .project-points {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .project-points div {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid var(--line);
+    }
+
+    html.dark .project-points div {
+      background: rgba(15, 23, 42, 0.55);
+    }
+
+    .project-points strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .project-side {
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 18px;
+    }
+
+    .tag-list span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .contact-item {
+      padding: 22px;
+      border-radius: 20px;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+    }
+
+    .contact-item small {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .contact-item a,
+    .contact-item p {
+      font-size: 1rem;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    /* Footer */
+    .page-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 30px 0 40px;
+    }
+
+    .page-nav a {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    .page-nav a.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+    }
+
+    footer {
+      padding: 26px 16px 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    requestAnimationFrame(animate);
-  }
-  animate();
-}
-
-// --- 스킬 레벨 표시 ---
-function animateSkillBars(){
-  const skills = document.querySelectorAll('.skill');
-  skills.forEach(skill=>{
-    const bar = document.createElement('div');
-    bar.className = 'skill-bar';
-    skill.appendChild(bar);
-
-    // 레벨: data-level 속성 사용 (예: 80%)
-    let level = skill.dataset.level || 70;
-    setTimeout(()=>{ bar.style.width = level+'%'; }, 100);
-  });
-}
-function animateSkillsOnScroll() {
-  const skills = document.querySelectorAll(".skill");
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-
-        const skill = entry.target;
-        const bar = skill.querySelector(".skill-bar");
-        const level = parseInt(skill.dataset.level);
-
-        // 1️⃣ 레벨 색상 자동 분기
-        if (level >= 80) {
-          bar.style.background = "linear-gradient(90deg,#00c6ff,#007bff)";
-        } else if (level >= 50) {
-          bar.style.background = "linear-gradient(90deg,#00e676,#00c853)";
-        } else {
-          bar.style.background = "linear-gradient(90deg,#9e9e9e,#616161)";
-        }
-
-        // 2️⃣ 바 채우기
-        bar.style.width = level + "%";
-
-        // 3️⃣ 퍼센트 카운트 애니메이션
-        let current = 0;
-        const percentSpan = document.createElement("span");
-        percentSpan.className = "skill-percent";
-        skill.appendChild(percentSpan);
-
-        const interval = setInterval(() => {
-          if (current >= level) {
-            clearInterval(interval);
-          } else {
-            current++;
-            percentSpan.textContent = current + "%";
-          }
-        }, 15);
-
-        observer.unobserve(skill);
+    /* Responsive */
+    @media (max-width: 920px) {
+      .hero,
+      .about-grid,
+      .featured-top,
+      .contact-grid {
+        grid-template-columns: 1fr;
       }
-    });
-  }, { threshold: 0.5 });
 
-  skills.forEach(skill => observer.observe(skill));
-}
+      .hero-panel {
+        max-width: 620px;
+      }
+    }
 
-document.addEventListener("DOMContentLoaded", animateSkillsOnScroll);
-</script>
+    @media (max-width: 768px) {
+      .desktop-menu,
+      .topbar .toggle {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .topbar {
+        margin-bottom: 30px;
+      }
+
+      .hero-stats,
+      .skill-groups {
+        grid-template-columns: 1fr;
+      }
+
+      .section-card,
+      .featured-project {
+        padding: 22px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .header-inner,
+      .container {
+        width: min(100% - 20px, 1120px);
+      }
+
+      .hero-panel,
+      .about-box,
+      .focus-box,
+      .contact-item,
+      .skill-group {
+        padding: 18px;
+      }
+
+      .profile-wrap {
+        width: 132px;
+        height: 132px;
+      }
+
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<header>
-  <div class="profile-wrapper">
-    <img src="https://raw.githubusercontent.com/dahunee1111/dahunee1111.github.io/main/images/KakaoTalk_20260205_152105731.jpg" alt="전다훈 프로필 사진" class="profile-img">
-  </div>
-  <h1>전다훈</h1>
-  <p>AI 개발자를 목표로 성장 중인 개발자</p>
-  <button class="toggle">🌙 다크모드</button>
-  <div class="hamburger" onclick="toggleHamburger(this)"><span></span><span></span><span></span></div>
-  <nav class="desktop-menu">
-    <a href="#about">소개</a>
-    <a href="#skills">기술</a>
-    <a href="#projects">프로젝트</a>
-    <a href="#contact">연락처</a>
-  </nav>
-  <nav class="mobile-menu">
-    <a href="#about" onclick="closeHamburger()">소개</a>
-    <a href="#skills" onclick="closeHamburger()">기술</a>
-    <a href="#projects" onclick="closeHamburger()">프로젝트</a>
-    <a href="#contact" onclick="closeHamburger()">연락처</a>
-  </nav>
-</header>
+  <header>
+    <canvas id="particle-canvas"></canvas>
 
-<main>
-<section id="about" class="card">
-  <h2>🙋‍♂️ 소개</h2>
-  <p>안녕하세요. <strong>AI 개발자</strong>를 목표로 학습 중인 전다훈입니다. 
-    여기는<strong> AI를 이용한 자율주행 자동차, 자율비행 드론 개발</strong> 과 같은 제 프로젝트를 소개 하기 위함과 저를 소개하기 위한 사이트 입니다.</p>
-  <button onclick="sayHello()">눌러보세요!</button>
-</section>
+    <div class="header-inner">
+      <div class="topbar fade-up">
+        <div class="brand">AI Developer Portfolio</div>
 
-<section id="skills" class="card">
-  <h2>🛠 기술 스택</h2>
-  <div class="skills">
-    <div class="skill" data-level="90">💻 HTML</div>
-    <div class="skill" data-level="70">🎨 CSS</div>
-    <div class="skill" data-level="90">🐍 Python</div>
-    <div class="skill" data-level="70">🟨 JavaScript</div>
-    <div class="skill" data-level="33">C</div>
-    <div class="skill" data-level="33">C++</div>
-    <div class="skill" data-level="70">🔧 Git</div>
-  </div>
-</section>
+        <nav class="desktop-menu" aria-label="메인 메뉴">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Project</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-<section id="projects" class="card">
-  <h2>💻 프로젝트</h2>
-  <div class="project-card">
-    <h3>대표 프로젝트 살펴보기</h3>
-    <p>저의 다양한 <strong> 프로젝트와 경험 </strong> 을 확인하고 싶다면 아래 버튼을 클릭하세요. <strong> AI, 웹, Python </strong> 등 다양한 기술을 활용한 프로젝트를 정리해두었습니다.</p>
-    <a href="page2.html">프로젝트 페이지로 이동 →</a>
-  </div>
-</section>
+        <button class="toggle" type="button" onclick="toggleDarkMode()">🌙 다크모드</button>
 
-<section id="guestbook" class="card">
-  <h2>✍️ 방명록</h2>
-  <form onsubmit="event.preventDefault(); addGuest(this.name.value,this.message.value); this.reset();">
-    <input type="text" name="name" placeholder="이름" required style="padding:6px 12px; margin-right:6px;">
-    <input type="text" name="message" placeholder="메시지" required style="padding:6px 12px; margin-right:6px;">
-    <button type="submit">등록</button>
-  </form>
-  <div id="guestbook-list" style="margin-top:12px;"></div>
-  <div id="pagination" class="pagination" style="margin-top:15px;"></div>
-</section>
+        <div class="hamburger" onclick="toggleHamburger(this)" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
 
-<section id="contact" class="card">
-  <h2>/* 연락처 */</h2>
-   <ul>
-   <li><p>Email: dahunee1111@naver.com</p></li>
-   <li><p>GitHub: <a href="https://github.com/dahunee1111" target="_blank">github.com/dahunee1111</a></p></li>
-  </ul>
-  <!-- 강조할 텍스트 예시 -->
-  <p class="highlight">이메일로 문의 주시면 빠르게 답변드리겠습니다!</p>
-</section>
+      <nav class="mobile-menu" id="mobileMenu" aria-label="모바일 메뉴">
+        <a href="#about" onclick="closeHamburger()">About</a>
+        <a href="#skills" onclick="closeHamburger()">Skills</a>
+        <a href="#projects" onclick="closeHamburger()">Project</a>
+        <a href="#contact" onclick="closeHamburger()">Contact</a>
+        <button class="toggle" type="button" onclick="toggleDarkMode()">🌙 다크모드</button>
+      </nav>
 
+      <section class="hero">
+        <div class="hero-copy fade-up delay-1">
+          <div class="hero-badge">⚡ Python · FastAPI · AI Integration</div>
+          <h1>
+            문제를 분석하고<br />
+            <span>AI로 해결하는 개발자</span>
+          </h1>
+          <p>
+            안녕하세요, 전다훈입니다. Python 기반 백엔드와 AI 연동에 관심이 있으며,
+            에러 분석, 학습 지원, 문제 해결형 서비스를 직접 구현하는 AI 개발자를 목표로 성장하고 있습니다.
+          </p>
 
-<div class="pagination">
-  <a href="index.html" class="active">1</a>
-  <a href="page2.html">2</a>
-</div>
-</main>
+          <div class="hero-actions">
+            <a class="btn-primary" href="page2.html">프로젝트 보러가기 →</a>
+            <a class="btn-secondary" href="#contact">연락하기</a>
+          </div>
 
-<footer>© 2026 Jeon Dahoon. All rights reserved.</footer>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>AI + Web</strong>
+              <span>문제 해결형 프로젝트 설계</span>
+            </div>
+            <div class="stat">
+              <strong>Python</strong>
+              <span>핵심 구현 언어</span>
+            </div>
+            <div class="stat">
+              <strong>FastAPI</strong>
+              <span>백엔드 확장 중</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-panel fade-up delay-2">
+          <div class="profile-wrap">
+            <img
+              src="https://raw.githubusercontent.com/dahunee1111/dahunee1111.github.io/main/images/KakaoTalk_20260205_152105731.jpg"
+              alt="전다훈 프로필 사진"
+              class="profile-img"
+            />
+          </div>
+          <div class="panel-label">👨‍💻 AI Developer in Progress</div>
+          <h2>Jeon Dahoon / 전다훈</h2>
+          <p>
+            웹 개발 경험 위에 AI 기능을 연결해,
+            직접 동작하는 서비스로 발전시키는 과정을 포트폴리오로 담고 있습니다.
+          </p>
+          <div class="mini-stack">
+            <span>Python</span>
+            <span>FastAPI</span>
+            <span>HTML/CSS/JS</span>
+            <span>Git</span>
+          </div>
+        </aside>
+      </section>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about" class="section card section-card fade-up">
+      <div class="section-head">
+        <div>
+          <h2>About Me</h2>
+          <p>
+            단순히 기술을 배우는 것을 넘어서, 실제로 사용할 수 있는 형태의 서비스로 연결하는 과정에 집중하고 있습니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-box">
+          <p>
+            저는 AI 기능을 웹 서비스 안에 자연스럽게 녹여내는 개발자가 되고 싶습니다.
+            특히 사용자가 겪는 문제를 입력받고, 이를 분석해 해결 방향을 제시하는 구조에 관심이 많습니다.
+          </p>
+          <ul class="about-points">
+            <li>Python 기반 문제 해결형 서비스 구현</li>
+            <li>FastAPI를 활용한 AI 백엔드 확장</li>
+            <li>포트폴리오를 직접 설계하고 구현하며 개선</li>
+          </ul>
+        </div>
+
+        <div class="focus-box">
+          <h3 style="margin-bottom: 10px;">Current Focus</h3>
+          <p>
+            에러 분석, 학습 보조, 기록 관리처럼
+            실제 사용자 경험을 개선할 수 있는 AI 서비스 아이디어를 프로젝트로 구체화하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section card section-card fade-up delay-1">
+      <div class="section-head">
+        <div>
+          <h2>Skills</h2>
+          <p>
+            현재 사용할 수 있는 기술과, AI 개발 포트폴리오 방향에 맞춰 확장 중인 스택을 정리했습니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3>Frontend</h3>
+          <div class="skill-list">
+            <div class="skill" data-level="90">
+              <div class="skill-title"><span>HTML</span><span>90%</span></div>
+              <div class="skill-desc">구조 설계와 시맨틱 마크업</div>
+              <div class="skill-bar"></div>
+            </div>
+            <div class="skill" data-level="75">
+              <div class="skill-title"><span>CSS</span><span>75%</span></div>
+              <div class="skill-desc">반응형 UI와 컴포넌트 스타일링</div>
+              <div class="skill-bar"></div>
+            </div>
+            <div class="skill" data-level="72">
+              <div class="skill-title"><span>JavaScript</span><span>72%</span></div>
+              <div class="skill-desc">동적 기능과 인터랙션 구현</div>
+              <div class="skill-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Backend & AI</h3>
+          <div class="skill-list">
+            <div class="skill" data-level="90">
+              <div class="skill-title"><span>Python</span><span>90%</span></div>
+              <div class="skill-desc">핵심 로직과 데이터 처리 구현</div>
+              <div class="skill-bar"></div>
+            </div>
+            <div class="skill" data-level="68">
+              <div class="skill-title"><span>FastAPI</span><span>68%</span></div>
+              <div class="skill-desc">API 설계와 서비스 확장 학습 중</div>
+              <div class="skill-bar"></div>
+            </div>
+            <div class="skill" data-level="70">
+              <div class="skill-title"><span>Git</span><span>70%</span></div>
+              <div class="skill-desc">버전 관리와 프로젝트 기록</div>
+              <div class="skill-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section card section-card fade-up delay-2">
+      <div class="section-head">
+        <div>
+          <h2>Featured Project</h2>
+          <p>
+            메인에서 가장 먼저 보여줄 프로젝트는 단순 나열보다, 어떤 문제를 해결하려는지 명확히 전달하는 것이 중요합니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="featured-project">
+        <div class="featured-top">
+          <div>
+            <div class="eyebrow">대표 프로젝트 미리보기</div>
+            <h3>AI Developer Assistant</h3>
+            <p>
+              코드 에러 분석, 학습 보조, 기록 관리를 하나의 흐름으로 연결한 문제 해결형 AI 서비스 프로젝트입니다.
+            </p>
+
+            <div class="project-points">
+              <div>
+                <strong>문제 정의</strong>
+                개발자가 에러를 해석하고, 공부 흐름을 정리하고, 배운 내용을 기록하는 과정은 자주 분리되어 비효율적입니다.
+              </div>
+              <div>
+                <strong>해결 방향</strong>
+                AI를 활용해 에러 분석과 학습 지원, 기록 관리를 한곳에서 처리할 수 있는 도구를 설계합니다.
+              </div>
+              <div>
+                <strong>목표</strong>
+                단순 기능 구현이 아니라, 실제로 사용할 수 있는 AI 기반 개발 보조 서비스 형태까지 발전시키는 것입니다.
+              </div>
+            </div>
+
+            <a class="btn-primary" href="page2.html">프로젝트 상세 보기 →</a>
+          </div>
+
+          <aside class="project-side">
+            <h4 style="margin-bottom: 10px; font-size: 1.05rem;">Tech Preview</h4>
+            <p style="color: var(--muted); margin-bottom: 8px;">
+              프로젝트 상세 페이지에서는 문제, 구현 방식, 사용 기술, 개선 방향을 더 구조적으로 보여주면 좋습니다.
+            </p>
+            <div class="tag-list">
+              <span>Python</span>
+              <span>FastAPI</span>
+              <span>AI API</span>
+              <span>Web UI</span>
+            </div>
+            <p style="color: var(--muted); font-size: 0.95rem;">
+              지금 메인 페이지에서는 “무엇을 만들고 있는가”를 먼저 보여주고,
+              세부 설명은 2페이지에서 이어지도록 설계했습니다.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section card section-card fade-up delay-3">
+      <div class="section-head">
+        <div>
+          <h2>Contact</h2>
+          <p>
+            협업, 피드백, 문의는 아래 연락처로 편하게 연락 주세요.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <small>Email</small>
+          <a href="mailto:dahunee1111@naver.com">dahunee1111@naver.com</a>
+        </div>
+        <div class="contact-item">
+          <small>GitHub</small>
+          <a href="https://github.com/dahunee1111" target="_blank" rel="noopener noreferrer">github.com/dahunee1111</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="page-nav fade-up">
+      <a href="index.html" class="active">1</a>
+      <a href="page2.html">2</a>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Jeon Dahoon. All rights reserved.
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const mobileMenu = document.getElementById("mobileMenu");
+    const hamburger = document.querySelector(".hamburger");
+
+    function applyThemeLabel() {
+      const isDark = root.classList.contains("dark");
+      document.querySelectorAll(".toggle").forEach((btn) => {
+        btn.textContent = isDark ? "☀️ 라이트모드" : "🌙 다크모드";
+      });
+    }
+
+    function toggleDarkMode() {
+      root.classList.toggle("dark");
+      localStorage.setItem("darkMode", root.classList.contains("dark") ? "true" : "false");
+      applyThemeLabel();
+    }
+
+    function toggleHamburger(el) {
+      el.classList.toggle("active");
+      const expanded = el.classList.contains("active");
+      el.setAttribute("aria-expanded", expanded ? "true" : "false");
+      mobileMenu.classList.toggle("show");
+    }
+
+    function closeHamburger() {
+      mobileMenu.classList.remove("show");
+      if (hamburger) {
+        hamburger.classList.remove("active");
+        hamburger.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    function initTheme() {
+      if (localStorage.getItem("darkMode") === "true") {
+        root.classList.add("dark");
+      }
+      applyThemeLabel();
+    }
+
+    function animateSkillBars() {
+      const skills = document.querySelectorAll(".skill");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const skill = entry.target;
+            const level = skill.dataset.level || 0;
+            const bar = skill.querySelector(".skill-bar");
+            if (bar) {
+              bar.style.width = level + "%";
+            }
+            observer.unobserve(skill);
+          });
+        },
+        { threshold: 0.35 }
+      );
+
+      skills.forEach((skill) => observer.observe(skill));
+    }
+
+    function initParticles() {
+      const canvas = document.getElementById("particle-canvas");
+      const header = document.querySelector("header");
+      if (!canvas || !header) return;
+
+      const ctx = canvas.getContext("2d");
+      const particles = [];
+      const mouse = { x: -9999, y: -9999 };
+      const symbols = ["{", "}", "<", "/", ">", "()", "[]", ";"];
+
+      function resize() {
+        canvas.width = header.offsetWidth;
+        canvas.height = header.offsetHeight;
+      }
+
+      function createParticles() {
+        particles.length = 0;
+        for (let i = 0; i < 70; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 16 + 10,
+            dx: (Math.random() - 0.5) * 0.45,
+            dy: (Math.random() - 0.5) * 0.45,
+            char: symbols[Math.floor(Math.random() * symbols.length)],
+            alpha: Math.random() * 0.45 + 0.2
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (const p of particles) {
+          p.x += p.dx;
+          p.y += p.dy;
+
+          if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+          const distX = mouse.x - p.x;
+          const distY = mouse.y - p.y;
+          const dist = Math.sqrt(distX * distX + distY * distY);
+          const scale = dist < 70 ? Math.min(1.9, 1 + (70 - dist) / 70) : 1;
+
+          ctx.font = `${p.size * scale}px monospace`;
+          ctx.fillStyle = `rgba(147, 197, 253, ${p.alpha})`;
+          ctx.fillText(p.char, p.x, p.y);
+        }
+
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 120) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(34, 211, 238, ${0.18 - distance / 900})`;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      window.addEventListener("mouseleave", () => {
+        mouse.x = -9999;
+        mouse.y = -9999;
+      });
+
+      window.addEventListener("resize", () => {
+        resize();
+        createParticles();
+      });
+
+      resize();
+      createParticles();
+      draw();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initTheme();
+      animateSkillBars();
+      initParticles();
+    });
+  </script>
 </body>
 </html>
