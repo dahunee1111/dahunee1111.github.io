@@ -7,7 +7,7 @@
   <link rel="icon" href="/images/favicon.ico" />
   <meta
     name="description"
-    content="전다훈의 프로젝트 페이지. AI Developer Assistant, 포트폴리오 웹사이트, AI 학습 실험 프로젝트를 소개합니다."
+    content="전다훈의 프로젝트 페이지. AI Developer Assistant, 포트폴리오 웹사이트, AI 실험 프로젝트를 소개합니다."
   />
 
   <style>
@@ -72,11 +72,6 @@
       font: inherit;
       cursor: pointer;
       border: none;
-    }
-
-    .container {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
     }
 
     .card {
@@ -428,6 +423,8 @@
     .project-details {
       display: grid;
       gap: 12px;
+      padding-left: 0;
+      margin: 0;
     }
 
     .project-details li {
@@ -497,12 +494,16 @@
       transform: translateY(-2px);
     }
 
-    .notice {
+    .vision-box {
       padding: 22px;
       border-radius: 20px;
       background: var(--surface-strong);
       border: 1px solid var(--line);
       color: var(--muted);
+    }
+
+    .vision-box p {
+      margin-bottom: 14px;
     }
 
     .pagination {
@@ -594,7 +595,6 @@
     }
 
     @media (max-width: 520px) {
-      .container,
       .header-inner,
       main {
         width: min(100% - 20px, 1120px);
@@ -603,7 +603,7 @@
       .hero-side,
       .project-box,
       .project-side,
-      .notice {
+      .vision-box {
         padding: 16px;
       }
 
@@ -618,10 +618,12 @@
     <div class="header-inner">
       <div class="topbar fade-up">
         <div class="brand">Project Portfolio</div>
+
         <nav aria-label="프로젝트 네비게이션">
           <a href="index.html">홈</a>
           <a href="page2.html" class="active">프로젝트</a>
         </nav>
+
         <button id="modeToggle" class="toggle" type="button">다크모드</button>
       </div>
 
@@ -633,8 +635,10 @@
             <span>동작하는 프로젝트로</span>
           </h1>
           <p>
-            이 페이지는 단순한 학습 기록이 아니라, 어떤 문제를 발견했고 어떻게 해결하려고 했는지를 중심으로 프로젝트를 정리한 포트폴리오 페이지입니다.
+            이 페이지는 단순한 학습 기록이 아니라, 어떤 문제를 발견했고
+            어떻게 해결하려고 했는지를 중심으로 프로젝트를 정리한 포트폴리오 페이지입니다.
           </p>
+
           <div class="hero-actions">
             <a class="btn-primary" href="#projects">프로젝트 보기</a>
             <a class="btn-secondary" href="index.html">메인으로 돌아가기</a>
@@ -644,7 +648,8 @@
         <aside class="hero-side fade-up delay-2">
           <h2>이 페이지의 기준</h2>
           <p>
-            프로젝트를 단순 나열하지 않고, 문제 정의 · 해결 방향 · 기술 스택 · 현재 상태가 보이도록 정리했습니다.
+            프로젝트를 단순 나열하지 않고,
+            문제 정의 · 해결 방향 · 기술 스택 · 현재 상태가 보이도록 정리했습니다.
           </p>
           <div class="quick-tags">
             <span>Problem Definition</span>
@@ -663,7 +668,8 @@
         <div>
           <h2>Projects</h2>
           <p>
-            현재 포트폴리오에서 중심이 되는 프로젝트들과, 이를 통해 보여주고 싶은 역량을 정리했습니다.
+            현재 포트폴리오에서 중심이 되는 프로젝트들과,
+            이를 통해 보여주고 싶은 역량을 정리했습니다.
           </p>
         </div>
       </div>
@@ -681,37 +687,53 @@
             <div>
               <h3>AI Developer Assistant</h3>
               <p class="project-desc">
-                코드 에러 분석, 학습 보조, 기록 관리를 하나의 흐름으로 연결한 문제 해결형 AI 서비스 프로젝트입니다.
+                코드 에러 분석, 학습 계획 추천, 기록 관리, 성장 시각화를 하나의 흐름으로 연결한
+                AI 기반 개발 학습 지원 시스템입니다.
               </p>
             </div>
-            <span class="status in-progress">진행 중</span>
+            <span class="status in-progress">기획 / 구현 중</span>
           </div>
 
           <div class="project-grid">
             <div class="project-box">
               <strong>프로젝트 개요</strong>
               <ul class="project-details">
-                <li>문제: 에러 해결, 공부 흐름 정리, 기록 관리가 분리되어 비효율적임</li>
-                <li>해결: AI를 활용해 분석과 추천, 기록 흐름을 한 서비스 안에서 처리</li>
-                <li>목표: 실제로 사용할 수 있는 AI 기반 개발 보조 도구 구현</li>
+                <li>문제: 개발 학습 과정에서 에러 해결, 공부 계획, 기록 관리, 성장 확인이 각각 분리되어 비효율적임</li>
+                <li>해결: AI를 활용해 에러 분석부터 학습 추천, 기록 저장, 성장 시각화까지 하나의 서비스로 통합</li>
+                <li>목표: 실제로 사용할 수 있는 AI 기반 개발 학습 보조 도구 구현</li>
               </ul>
 
               <div class="project-links">
                 <a class="link-primary" href="#">상세 추가 예정</a>
-                <a class="link-ghost" href="index.html">메인 소개 보기</a>
+                <a class="link-ghost" href="index.html">메인 페이지 보기</a>
               </div>
             </div>
 
             <aside class="project-side">
-              <strong>기술 스택</strong>
+              <strong>주요 기능</strong>
+              <ul class="project-details">
+                <li>코드 에러 입력 및 AI 분석</li>
+                <li>해결 방법 추천</li>
+                <li>개인 맞춤 학습 플래너 생성</li>
+                <li>배운 점 기록 및 출석 체크</li>
+                <li>월간 성장 그래프 및 표 시각화</li>
+                <li>챗봇 기반 질문 응답</li>
+              </ul>
+
               <div class="tech-tags">
                 <span>Python</span>
                 <span>FastAPI</span>
-                <span>AI API</span>
-                <span>Web UI</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>OpenAI API</span>
+                <span>SQLite</span>
+                <span>Chart.js</span>
               </div>
+
               <p>
-                이후 단계에서는 입력된 에러 로그 분석, 해결 방법 추천, 학습 기록 저장 기능까지 연결하는 구조로 확장할 예정입니다.
+                MVP 단계에서는 먼저 <strong>에러 입력 → AI 분석 → 해결 방법 출력</strong> 흐름을 구현한 뒤,
+                이후 학습 계획 추천, 기록 저장, 성장 시각화 기능까지 확장할 예정입니다.
               </p>
             </aside>
           </div>
@@ -720,9 +742,10 @@
         <article class="project" data-category="web">
           <div class="project-top">
             <div>
-              <h3>AI Developer Portfolio Website</h3>
+              <h3>AI Portfolio Website</h3>
               <p class="project-desc">
-                개인 홈페이지를 단순 소개용이 아니라, AI 개발자 포트폴리오답게 보이도록 리디자인한 프로젝트입니다.
+                개인 홈페이지를 단순 소개용이 아니라,
+                AI 개발자 포트폴리오답게 보이도록 리디자인한 프로젝트입니다.
               </p>
             </div>
             <span class="status completed">구성 완료</span>
@@ -752,7 +775,8 @@
                 <span>Responsive UI</span>
               </div>
               <p>
-                단순한 소개 문구보다, 무엇을 만들고 어떤 문제를 해결하려는 개발자인지 한눈에 보이도록 설계했습니다.
+                단순한 소개 문구보다,
+                무엇을 만들고 어떤 문제를 해결하려는 개발자인지 한눈에 보이도록 설계했습니다.
               </p>
             </aside>
           </div>
@@ -761,9 +785,10 @@
         <article class="project" data-category="python">
           <div class="project-top">
             <div>
-              <h3>AI / Python Learning Experiments</h3>
+              <h3>AI / Python Experiments</h3>
               <p class="project-desc">
-                기초 학습 내용을 그대로 나열하는 대신, 향후 독립 프로젝트로 발전시킬 실험과 학습 단계를 정리하는 공간입니다.
+                기초 학습 내용을 그대로 나열하는 대신,
+                향후 독립 프로젝트로 발전시킬 실험과 학습 단계를 정리하는 공간입니다.
               </p>
             </div>
             <span class="status planned">정리 중</span>
@@ -793,7 +818,8 @@
                 <span>Experiment</span>
               </div>
               <p>
-                이 영역은 앞으로 결과 중심의 독립 프로젝트가 생기면 더 구체적인 사례 기반으로 교체하면 좋습니다.
+                이 영역은 앞으로 결과 중심의 독립 프로젝트가 생기면
+                더 구체적인 사례 기반으로 교체하면 좋습니다.
               </p>
             </aside>
           </div>
@@ -804,15 +830,31 @@
     <section class="card section fade-up delay-2">
       <div class="section-head">
         <div>
-          <h2>Next Step</h2>
+          <h2>Future Vision</h2>
           <p>
-            다음으로는 각 프로젝트마다 결과 화면, 문제 해결 과정, 개선 포인트를 더 구체적으로 보완하면 포트폴리오 완성도가 크게 올라갑니다.
+            AI Developer Assistant를 중심으로,
+            개발 학습 전 과정을 하나의 흐름으로 연결하는 통합 시스템으로 확장할 계획입니다.
           </p>
         </div>
       </div>
-      <div class="notice">
-        가장 우선순위가 높은 것은 <strong>AI Developer Assistant</strong>를 실제 동작하는 서비스 형태로 구체화하는 것입니다.
-        예를 들면 에러 입력 → AI 분석 → 해결 가이드 출력 → 기록 저장 흐름까지 연결하면 프로젝트의 설득력이 훨씬 강해집니다.
+
+      <div class="vision-box">
+        <p>
+          이 프로젝트는 단순히 에러를 분석하는 도구에서 끝나는 것이 아니라,
+          개발자가 학습하고 성장하는 전체 과정을 지원하는 플랫폼으로 확장되는 것을 목표로 합니다.
+        </p>
+
+        <ul class="project-details">
+          <li>AI 기반 개인 맞춤 학습 코치 시스템</li>
+          <li>학습 기록 일기 및 출석 관리 기능</li>
+          <li>월간 성장 그래프 및 데이터 시각화</li>
+          <li>챗봇 기반 실시간 질문 해결 시스템</li>
+        </ul>
+
+        <p style="margin-top: 16px;">
+          최종적으로는 <strong>에러 해결 → 학습 추천 → 기록 관리 → 성장 확인</strong>이
+          자연스럽게 이어지는 개발 학습 지원 서비스로 발전시키고자 합니다.
+        </p>
       </div>
     </section>
 
@@ -843,7 +885,10 @@
 
     modeToggle.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-      localStorage.setItem("mode", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      localStorage.setItem(
+        "mode",
+        document.body.classList.contains("dark-mode") ? "dark" : "light"
+      );
       syncModeButton();
     });
 
@@ -858,7 +903,8 @@
           btn.classList.add("active");
 
           projects.forEach((project) => {
-            const match = category === "all" || project.dataset.category === category;
+            const match =
+              category === "all" || project.dataset.category === category;
             project.style.display = match ? "block" : "none";
           });
         });
