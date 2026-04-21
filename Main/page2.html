@@ -494,12 +494,59 @@
       transform: translateY(-2px);
     }
 
-    .project-image {
-      width: 100%;
-      border-radius: 16px;
+    .project-preview-placeholder {
       margin-top: 18px;
-      border: 1px solid var(--line);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px dashed var(--line);
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(6, 182, 212, 0.06)),
+        var(--surface-strong);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    body.dark-mode .project-preview-placeholder {
+      background:
+        linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(34, 211, 238, 0.08)),
+        rgba(15, 23, 42, 0.65);
+    }
+
+    .project-preview-placeholder h4 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .project-preview-placeholder p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .preview-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .preview-mini-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preview-mini-list span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
     .image-caption {
@@ -617,7 +664,8 @@
       .hero-side,
       .project-box,
       .project-side,
-      .vision-box {
+      .vision-box,
+      .project-preview-placeholder {
         padding: 16px;
       }
 
@@ -702,10 +750,11 @@
               <h3>AI Developer Assistant</h3>
               <p class="project-desc">
                 코드 에러 분석, 학습 기록, 출석 체크, 성장 그래프를 하나의 흐름으로 연결한
-                AI 기반 개발 학습 지원 시스템입니다.
+                AI 기반 개발 학습 지원 웹 프로젝트입니다.
+                실제 사용 가능한 형태로 구현하여 배포했고, 기능을 계속 확장 중입니다.
               </p>
             </div>
-            <span class="status completed">MVP 구현 완료</span>
+            <span class="status completed">배포 완료 · 개선 중</span>
           </div>
 
           <div class="project-grid">
@@ -714,22 +763,40 @@
               <ul class="project-details">
                 <li>문제: 에러 해결, 공부 기록, 학습 관리가 각각 분리되어 흐름이 끊기기 쉬움</li>
                 <li>해결: AI 에러 분석과 기록일기, 출석, 성장 그래프를 하나의 서비스로 통합</li>
-                <li>성과: 분석 → 저장 → 시각화까지 이어지는 실제 동작 MVP 구현 완료</li>
+                <li>성과: 분석 → 저장 → 시각화까지 이어지는 실제 동작 MVP 구현 및 배포 완료</li>
               </ul>
 
               <div class="project-links">
-                <a class="link-primary" href="#">실행 화면 정리 예정</a>
+                <a
+                  class="link-primary"
+                  href="https://dahunee1111.github.io/AI-Developer-Assistant/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  실제 프로젝트 실행
+                </a>
                 <a class="link-ghost" href="index.html">메인 페이지 보기</a>
               </div>
 
-              <!-- 실제 스크린샷 파일이 생기면 경로만 바꿔서 사용 -->
-              <img
-                src="images/ai-assistant-main.png"
-                alt="AI Developer Assistant 메인 화면"
-                class="project-image"
-              />
+              <div class="project-preview-placeholder">
+                <div class="preview-badge">Preview</div>
+                <h4>실행 화면 업데이트 예정</h4>
+                <p>
+                  현재 프로젝트는 실제 동작 중이며,
+                  메인 화면 / 에러 분석 / 기록일기 / 출석 / 성장 그래프 화면을
+                  정리해서 순차적으로 추가할 예정입니다.
+                </p>
+
+                <div class="preview-mini-list">
+                  <span>에러 분석</span>
+                  <span>기록일기</span>
+                  <span>출석 체크</span>
+                  <span>성장 그래프</span>
+                </div>
+              </div>
+
               <p class="image-caption">
-                에러 분석, 학습 기록, 출석, 성장 그래프가 연결된 메인 화면
+                현재는 프로젝트 링크를 먼저 공개하고, 스크린샷은 정리 후 추가 예정
               </p>
             </div>
 
