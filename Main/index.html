@@ -291,6 +291,25 @@
       color: #fff;
       box-shadow: 0 16px 34px rgba(37, 99, 235, 0.28);
     }
+    
+    .btn-project-live {
+      color: var(--primary);
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
+    }
+    
+    .btn-project-live:hover {
+      transform: translateY(-2px);
+      background: #ffffff;
+    }
+    
+    html.dark .btn-project-live {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: none;
+    }
 
     .btn-secondary {
       color: #fff;
@@ -1003,12 +1022,13 @@
             <div class="hero-actions">
               <a class="btn-primary" href="page2.html">프로젝트 상세 보기 →</a>
               <a
-                class="btn-secondary"
+                class="btn-secondary btn-project-live"
                 href="https://dahunee1111.github.io/AI-Developer-Assistant/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 실제 프로젝트 보기
+              </a>
               </a>
             </div>
           </div>
