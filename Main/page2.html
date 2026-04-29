@@ -1260,45 +1260,175 @@
           </div>
         </article>
 
-        <article class="project" data-category="python">
+        <article class="project featured-ai" data-category="ai">
           <div class="project-top">
             <div>
-              <h3>AI / Python Experiments</h3>
+              <div class="live-status-badge">● Team Project · In Progress</div>
+              <div class="headline-meta">
+                <span>Computer Vision</span>
+                <span>Behavior Analysis</span>
+                <span>Risk Decision</span>
+              </div>
+              <h3>AI Safety Detection Team Project</h3>
               <p class="project-desc">
-                기초 학습 내용을 그대로 나열하는 대신,
-                향후 독립 프로젝트로 발전시킬 실험과 학습 단계를 정리하는 공간입니다.
+                영상 데이터를 기반으로 정상/이상 행동을 분석하고, 위험 물체 탐지 결과를 함께 활용해
+                상황별 위험도를 판단하는 AI 안전 시스템 팀 프로젝트입니다.
+                최종적으로 위험 점수에 따라 알림, 방송, 신고와 같은 대응 흐름까지 연결하는 것을 목표로 개발하고 있습니다.
               </p>
             </div>
-            <span class="status planned">정리 중</span>
+            <span class="status in-progress">팀 프로젝트 진행 중</span>
+          </div>
+
+          <div class="summary-strip">
+            <div class="summary-item problem">
+              <small>Problem</small>
+              <strong>위험 상황을 놓칠 수 있음</strong>
+              <p>쓰러짐, 이상행동, 위험 물체 등은 사람이 직접 확인하지 않으면 즉시 대응이 어려운 문제가 있습니다.</p>
+            </div>
+            <div class="summary-item solution">
+              <small>Solution</small>
+              <strong>영상 기반 AI 판단</strong>
+              <p>행동 분석 모델과 객체 탐지 모델을 결합해 상황을 분석하고 위험 점수를 계산합니다.</p>
+            </div>
+            <div class="summary-item result">
+              <small>Goal</small>
+              <strong>자동 대응 흐름 구현</strong>
+              <p>위험도에 따라 알림, 방송, 신고로 이어지는 AI 안전 대응 시스템을 구현하는 것이 목표입니다.</p>
+            </div>
           </div>
 
           <div class="project-grid">
             <div class="project-box">
               <strong>프로젝트 개요</strong>
               <ul class="project-details">
-                <li>방향: 데이터 전처리, 모델 학습, 평가 흐름을 실험 단위로 정리</li>
-                <li>목표: 단순 학습 기록이 아니라, 이후 포트폴리오용 프로젝트의 기반으로 전환</li>
-                <li>예정 주제: 텍스트 분류, 이미지 분류, API 연동형 AI 기능 실험</li>
+                <li>문제: CCTV나 영상 속 위험 상황을 사람이 항상 실시간으로 확인하기 어려움</li>
+                <li>해결: 영상 기반 행동 분석과 위험 물체 탐지를 결합해 위험 상황을 자동 판단</li>
+                <li>구성: 정상/이상 행동 분류 모델 + YOLO 기반 위험 물체 탐지 + risk_score 계산 로직</li>
+                <li>목표: 위험 점수에 따라 알림 / 방송 / 신고까지 이어지는 자동 대응 시스템 구현</li>
               </ul>
 
-              <div class="project-links">
-                <a class="link-primary" href="https://colab.research.google.com/drive/162Z05tm_pAkxF9z28O6PGqSRdBbUPOBX?usp=sharing" target="_blank" rel="noopener noreferrer">Colab 보기</a>
-                <a class="link-ghost" href="#">정리 페이지 예정</a>
+              <div class="feature-mini-grid">
+                <div class="feature-mini-card">
+                  <strong>행동 분석</strong>
+                  <span>영상 또는 프레임을 기반으로 정상 행동과 이상 행동을 분류</span>
+                </div>
+                <div class="feature-mini-card">
+                  <strong>위험 물체 탐지</strong>
+                  <span>YOLO 기반 객체 탐지로 칼과 같은 위험 요소를 감지</span>
+                </div>
+                <div class="feature-mini-card">
+                  <strong>위험 점수 계산</strong>
+                  <span>행동 결과와 객체 탐지 결과를 조합해 risk_score 산출</span>
+                </div>
+                <div class="feature-mini-card">
+                  <strong>자동 대응</strong>
+                  <span>위험도에 따라 알림, 방송, 신고 시뮬레이션으로 연결</span>
+                </div>
+              </div>
+
+              <div class="browser-mockup">
+                <div class="browser-top">
+                  <div class="browser-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="browser-address"></div>
+                </div>
+                <div class="browser-body">
+                  <div class="mock-hero">
+                    <div class="mock-line large"></div>
+                    <div class="mock-line mid"></div>
+                    <div class="mock-line small"></div>
+                  </div>
+
+                  <div class="mock-function-grid">
+                    <div class="mock-function-card"></div>
+                    <div class="mock-function-card"></div>
+                    <div class="mock-function-card"></div>
+                    <div class="mock-function-card"></div>
+                  </div>
+
+                  <div class="mock-chart"></div>
+                </div>
+              </div>
+
+              <p class="image-caption">
+                현재는 모델 구조와 백엔드 분석 흐름을 우선 구현하고 있으며, 추후 실제 분석 화면과 결과 시각화를 추가할 예정입니다.
+              </p>
+
+              <div class="cta-box">
+                <h4>AI 판단 파이프라인으로 확장 중입니다</h4>
+                <p>
+                  단순 객체 탐지에서 끝나는 것이 아니라,
+                  영상 입력 → 행동 분석 → 위험 물체 탐지 → 위험 점수 계산 → 대응 결과까지 이어지는
+                  하나의 AI 판단 시스템 구조로 발전시키고 있습니다.
+                </p>
+
+                <div class="project-links">
+                  <a class="link-primary" href="#">팀 프로젝트 정리 예정</a>
+                  <a class="link-ghost" href="index.html">메인 페이지 보기</a>
+                  <a
+                    class="link-ghost"
+                    href="https://github.com/dahunee1111"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub 보기
+                  </a>
+                </div>
+
+                <p class="mini-note">
+                  프로젝트가 완성되면 실제 분석 결과, 위험 점수 예시, 모델 구조 이미지를 추가해 더 구체적으로 보여줄 예정입니다.
+                </p>
               </div>
             </div>
 
             <aside class="project-side">
-              <strong>기술 스택</strong>
-              <div class="tech-tags">
-                <span>Python</span>
-                <span>Machine Learning</span>
-                <span>PyTorch</span>
-                <span>Experiment</span>
+              <div class="side-section">
+                <strong>핵심 기능</strong>
+                <ul class="project-details">
+                  <li>영상 업로드 및 분석 요청</li>
+                  <li>정상 / 이상 행동 분류</li>
+                  <li>위험 물체 탐지</li>
+                  <li>risk_score 기반 위험도 판단</li>
+                  <li>알림 / 방송 / 신고 결과 시뮬레이션</li>
+                </ul>
               </div>
-              <p>
-                이 영역은 앞으로 결과 중심의 독립 프로젝트가 생기면
-                더 구체적인 사례 기반으로 교체할 계획입니다.
-              </p>
+
+              <div class="side-section">
+                <strong>기술 스택</strong>
+                <div class="tech-tags">
+                  <span>Python</span>
+                  <span>FastAPI</span>
+                  <span>YOLO</span>
+                  <span>OpenCV</span>
+                  <span>PyTorch</span>
+                  <span>Computer Vision</span>
+                  <span>SQLite</span>
+                  <span>REST API</span>
+                </div>
+                <p>
+                  백엔드는 FastAPI로 구성하고, 영상 분석 로직은 Python 기반으로 설계하고 있습니다.
+                  행동 분석 모델과 객체 탐지 모델의 결과를 조합해 실제 서비스에서 사용할 수 있는 위험 판단 흐름을 만드는 데 집중하고 있습니다.
+                </p>
+              </div>
+
+              <div class="side-section">
+                <strong>현재 진행 방향</strong>
+                <div class="progress-list">
+                  <div class="progress-item">
+                    <strong>데이터 구성</strong>
+                    <span>정상/이상 행동 영상과 프레임 데이터, 위험 물체 이미지 라벨링 정리</span>
+                  </div>
+                  <div class="progress-item">
+                    <strong>모델 연동</strong>
+                    <span>행동 분석 결과와 객체 탐지 결과를 하나의 분석 결과로 통합</span>
+                  </div>
+                  <div class="progress-item">
+                    <strong>서비스화</strong>
+                    <span>분석 결과 저장, 히스토리 조회, 위험 대응 결과 표시 기능으로 확장</span>
+                  </div>
+                </div>
+              </div>
             </aside>
           </div>
         </article>
