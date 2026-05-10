@@ -7,7 +7,7 @@
   <link rel="icon" href="/images/favicon.ico" />
   <meta
     name="description"
-    content="전다훈의 프로젝트 페이지. AI Developer Assistant, 포트폴리오 웹사이트, AI 실험 프로젝트를 소개합니다."
+    content="전다훈의 프로젝트 페이지. AI Developer Assistant, AI CCTV Behavior & Danger Detection System, 포트폴리오 웹사이트를 소개합니다."
   />
 
   <style>
@@ -1263,37 +1263,39 @@
         <article class="project featured-ai" data-category="ai">
           <div class="project-top">
             <div>
-              <div class="live-status-badge">● Team Project · In Progress</div>
+              <div class="live-status-badge">● Team Project · AI CCTV System</div>
               <div class="headline-meta">
-                <span>Computer Vision</span>
-                <span>Behavior Analysis</span>
-                <span>Risk Decision</span>
+                <span>AI CCTV</span>
+                <span>YOLO + MediaPipe + LSTM</span>
+                <span>RAG Response</span>
+                <span>Admin Dashboard</span>
               </div>
-              <h3>AI Safety Detection Team Project</h3>
+              <h3>AI CCTV Behavior & Danger Detection System</h3>
               <p class="project-desc">
-                영상 데이터를 기반으로 정상/이상 행동을 분석하고, 위험 물체 탐지 결과를 함께 활용해
-                상황별 위험도를 판단하는 AI 안전 시스템 팀 프로젝트입니다.
-                최종적으로 위험 점수에 따라 알림, 방송, 신고와 같은 대응 흐름까지 연결하는 것을 목표로 개발하고 있습니다.
+                CCTV 영상과 업로드 영상을 분석하여 이상행동 감지, 위험물체 탐지,
+                위험도 점수 계산, 자동 대응 액션, RAG 기반 대응 가이드까지 연결하는
+                AI 기반 실시간 통합 관제 시스템 팀 프로젝트입니다.
+                단순 모델 실험이 아니라, 실제 관제 환경에서 사용할 수 있는 서비스형 구조를 목표로 개발하고 있습니다.
               </p>
             </div>
-            <span class="status in-progress">팀 프로젝트 진행 중</span>
+            <span class="status in-progress">통합 개발 진행 중</span>
           </div>
 
           <div class="summary-strip">
             <div class="summary-item problem">
               <small>Problem</small>
-              <strong>위험 상황을 놓칠 수 있음</strong>
-              <p>쓰러짐, 이상행동, 위험 물체 등은 사람이 직접 확인하지 않으면 즉시 대응이 어려운 문제가 있습니다.</p>
+              <strong>실시간 위험 상황 대응 한계</strong>
+              <p>CCTV가 있어도 사람이 모든 영상을 계속 확인하기 어렵고, 쓰러짐이나 위험물체 상황을 놓칠 수 있습니다.</p>
             </div>
             <div class="summary-item solution">
               <small>Solution</small>
-              <strong>영상 기반 AI 판단</strong>
-              <p>행동 분석 모델과 객체 탐지 모델을 결합해 상황을 분석하고 위험 점수를 계산합니다.</p>
+              <strong>행동 + 물체 통합 AI 판단</strong>
+              <p>MediaPipe Pose와 LSTM으로 행동을 분석하고, YOLO로 위험물체를 탐지해 위험도를 계산합니다.</p>
             </div>
             <div class="summary-item result">
-              <small>Goal</small>
-              <strong>자동 대응 흐름 구현</strong>
-              <p>위험도에 따라 알림, 방송, 신고로 이어지는 AI 안전 대응 시스템을 구현하는 것이 목표입니다.</p>
+              <small>System</small>
+              <strong>관제형 대응 시스템 구현</strong>
+              <p>분석 결과를 DB에 저장하고 관리자 대시보드, Discord 알림, RAG 대응 가이드까지 연결합니다.</p>
             </div>
           </div>
 
@@ -1301,28 +1303,29 @@
             <div class="project-box">
               <strong>프로젝트 개요</strong>
               <ul class="project-details">
-                <li>문제: CCTV나 영상 속 위험 상황을 사람이 항상 실시간으로 확인하기 어려움</li>
-                <li>해결: 영상 기반 행동 분석과 위험 물체 탐지를 결합해 위험 상황을 자동 판단</li>
-                <li>구성: 정상/이상 행동 분류 모델 + YOLO 기반 위험 물체 탐지 + risk_score 계산 로직</li>
-                <li>목표: 위험 점수에 따라 알림 / 방송 / 신고까지 이어지는 자동 대응 시스템 구현</li>
+                <li>문제: CCTV 영상 속 이상행동과 위험물체를 사람이 항상 실시간으로 확인하기 어려움</li>
+                <li>해결: 행동 분석 모델과 객체 탐지 모델을 결합해 위험 상황을 자동으로 판단</li>
+                <li>구성: MediaPipe Pose + LSTM 행동 분석, YOLO 위험물체 탐지, risk_score 계산 로직</li>
+                <li>대응: 위험도에 따라 안전 / 주의·위험 / 긴급 단계로 분류하고 알림 및 대응 가이드 제공</li>
+                <li>성과: FastAPI 백엔드, 관리자 대시보드, 분석 기록 저장, Discord 알림, RAG 대응 시스템까지 통합</li>
               </ul>
 
               <div class="feature-mini-grid">
                 <div class="feature-mini-card">
                   <strong>행동 분석</strong>
-                  <span>영상 또는 프레임을 기반으로 정상 행동과 이상 행동을 분류</span>
+                  <span>MediaPipe Pose로 사람 관절 좌표를 추출하고 LSTM 기반으로 정상/이상 행동을 분석</span>
                 </div>
                 <div class="feature-mini-card">
-                  <strong>위험 물체 탐지</strong>
-                  <span>YOLO 기반 객체 탐지로 칼과 같은 위험 요소를 감지</span>
+                  <strong>위험물체 탐지</strong>
+                  <span>YOLO 기반 객체 탐지로 칼, 둔기 등 위험 요소를 감지하는 구조</span>
                 </div>
                 <div class="feature-mini-card">
-                  <strong>위험 점수 계산</strong>
-                  <span>행동 결과와 객체 탐지 결과를 조합해 risk_score 산출</span>
+                  <strong>위험도 계산</strong>
+                  <span>행동 결과와 물체 탐지 결과를 종합해 risk_score를 계산하고 위험 단계를 결정</span>
                 </div>
                 <div class="feature-mini-card">
                   <strong>자동 대응</strong>
-                  <span>위험도에 따라 알림, 방송, 신고 시뮬레이션으로 연결</span>
+                  <span>Discord 위험 알림, 관리자 기록 저장, RAG 대응 가이드 제공으로 관제 흐름 구현</span>
                 </div>
               </div>
 
@@ -1352,19 +1355,26 @@
               </div>
 
               <p class="image-caption">
-                현재는 모델 구조와 백엔드 분석 흐름을 우선 구현하고 있으며, 추후 실제 분석 화면과 결과 시각화를 추가할 예정입니다.
+                현재는 AI 분석 파이프라인과 관리자 기능을 중심으로 구현하고 있으며,
+                추후 실제 분석 결과 화면, CCTV 화면, 위험도 그래프 이미지를 추가해 더 구체적으로 보여줄 예정입니다.
               </p>
 
               <div class="cta-box">
-                <h4>AI 판단 파이프라인으로 확장 중입니다</h4>
+                <h4>AI 모델과 웹 시스템을 하나로 연결한 팀 프로젝트입니다</h4>
                 <p>
-                  단순 객체 탐지에서 끝나는 것이 아니라,
-                  영상 입력 → 행동 분석 → 위험 물체 탐지 → 위험 점수 계산 → 대응 결과까지 이어지는
-                  하나의 AI 판단 시스템 구조로 발전시키고 있습니다.
+                  영상 입력 → 행동 분석 → 위험물체 탐지 → 위험도 계산 → 대응 액션 결정 → Discord 알림 →
+                  RAG 대응 가이드 → DB 저장 → 관리자 대시보드 표시까지 이어지는 통합 관제 흐름을 구현하고 있습니다.
                 </p>
 
                 <div class="project-links">
-                  <a class="link-primary" href="#">팀 프로젝트 정리 예정</a>
+                  <a
+                    class="link-primary"
+                    href="https://github.com/dahunee1111/TeamProject"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    팀 프로젝트 GitHub
+                  </a>
                   <a class="link-ghost" href="index.html">메인 페이지 보기</a>
                   <a
                     class="link-ghost"
@@ -1372,12 +1382,12 @@
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    GitHub 보기
+                    GitHub 전체 보기
                   </a>
                 </div>
 
                 <p class="mini-note">
-                  프로젝트가 완성되면 실제 분석 결과, 위험 점수 예시, 모델 구조 이미지를 추가해 더 구체적으로 보여줄 예정입니다.
+                  포트폴리오에서는 단순 모델 학습보다 “AI 판단 결과를 실제 서비스 기능으로 연결하는 능력”을 강조했습니다.
                 </p>
               </div>
             </div>
@@ -1387,10 +1397,15 @@
                 <strong>핵심 기능</strong>
                 <ul class="project-details">
                   <li>영상 업로드 및 분석 요청</li>
-                  <li>정상 / 이상 행동 분류</li>
-                  <li>위험 물체 탐지</li>
+                  <li>실시간 CCTV 웹캠 감지</li>
+                  <li>MediaPipe Pose 기반 행동 분석</li>
+                  <li>LSTM 기반 이상행동 감지</li>
+                  <li>YOLO 기반 위험물체 탐지</li>
                   <li>risk_score 기반 위험도 판단</li>
-                  <li>알림 / 방송 / 신고 결과 시뮬레이션</li>
+                  <li>Discord Webhook 위험 알림</li>
+                  <li>RAG 기반 대응 가이드 제공</li>
+                  <li>분석 기록 저장 및 조회</li>
+                  <li>관리자 대시보드 및 통계 그래프</li>
                 </ul>
               </div>
 
@@ -1399,33 +1414,43 @@
                 <div class="tech-tags">
                   <span>Python</span>
                   <span>FastAPI</span>
+                  <span>SQLAlchemy</span>
+                  <span>SQLite</span>
+                  <span>PyTorch</span>
+                  <span>MediaPipe</span>
+                  <span>LSTM</span>
                   <span>YOLO</span>
                   <span>OpenCV</span>
-                  <span>PyTorch</span>
-                  <span>Computer Vision</span>
-                  <span>SQLite</span>
-                  <span>REST API</span>
+                  <span>JavaScript</span>
+                  <span>Chart.js</span>
+                  <span>Discord Webhook</span>
+                  <span>RAG</span>
                 </div>
                 <p>
-                  백엔드는 FastAPI로 구성하고, 영상 분석 로직은 Python 기반으로 설계하고 있습니다.
-                  행동 분석 모델과 객체 탐지 모델의 결과를 조합해 실제 서비스에서 사용할 수 있는 위험 판단 흐름을 만드는 데 집중하고 있습니다.
+                  백엔드는 FastAPI와 SQLAlchemy 기반으로 구성하고,
+                  AI 분석은 MediaPipe, LSTM, YOLO, OpenCV를 활용했습니다.
+                  프론트엔드는 HTML/CSS/JavaScript와 Chart.js로 관리자 관제 화면과 통계 시각화를 구성했습니다.
                 </p>
               </div>
 
               <div class="side-section">
-                <strong>현재 진행 방향</strong>
+                <strong>AI Pipeline</strong>
                 <div class="progress-list">
                   <div class="progress-item">
-                    <strong>데이터 구성</strong>
-                    <span>정상/이상 행동 영상과 프레임 데이터, 위험 물체 이미지 라벨링 정리</span>
+                    <strong>1. 영상 입력</strong>
+                    <span>업로드 영상 또는 실시간 CCTV 웹캠 프레임을 분석 대상으로 사용</span>
                   </div>
                   <div class="progress-item">
-                    <strong>모델 연동</strong>
-                    <span>행동 분석 결과와 객체 탐지 결과를 하나의 분석 결과로 통합</span>
+                    <strong>2. 행동 + 물체 분석</strong>
+                    <span>LSTM 행동 분석 결과와 YOLO 위험물체 탐지 결과를 결합</span>
                   </div>
                   <div class="progress-item">
-                    <strong>서비스화</strong>
-                    <span>분석 결과 저장, 히스토리 조회, 위험 대응 결과 표시 기능으로 확장</span>
+                    <strong>3. 위험도 판단</strong>
+                    <span>risk_score 기준으로 안전, 주의·위험, 긴급 단계를 결정</span>
+                  </div>
+                  <div class="progress-item">
+                    <strong>4. 대응 및 저장</strong>
+                    <span>Discord 알림, RAG 대응 가이드, DB 저장, 관리자 대시보드 표시로 연결</span>
                   </div>
                 </div>
               </div>
@@ -1440,28 +1465,30 @@
         <div>
           <h2>Future Vision</h2>
           <p>
-            현재 MVP를 기반으로, 개발 학습 전 과정을 하나의 흐름으로 연결하는 통합 시스템으로 확장할 계획입니다.
+            개인 프로젝트와 팀 프로젝트를 기반으로, AI를 실제 서비스와 운영 시스템에 적용할 수 있는 개발자로 성장하는 것을 목표로 합니다.
           </p>
         </div>
       </div>
 
       <div class="vision-box">
         <p>
-          현재는 에러 분석, 기록일기, 출석, 성장 그래프까지 구현된 상태이며,
-          다음 단계에서는 학습 추천과 더 정교한 시각화 기능까지 확장해
-          개발자의 학습 루프를 완성하는 서비스로 발전시키고자 합니다.
+          현재는 AI Developer Assistant를 통해 개발 학습 지원 서비스를 구현했고,
+          팀 프로젝트에서는 AI CCTV 기반 이상행동 및 위험물체 감지 시스템을 개발하고 있습니다.
+          앞으로는 단순한 모델 구현을 넘어, AI 분석 결과가 실제 사용자 화면, 관리자 기능,
+          알림 시스템, 대응 흐름까지 연결되는 서비스형 AI 시스템을 만드는 방향으로 확장하고자 합니다.
         </p>
 
         <ul class="project-details">
-          <li>AI 기반 개인 맞춤 학습 코치 시스템</li>
-          <li>분석 결과 기반 학습 추천 기능</li>
-          <li>주간 / 월간 성장 리포트 시각화</li>
-          <li>챗봇 기반 실시간 질문 해결 시스템</li>
+          <li>AI 기반 개발 학습 지원 서비스 고도화</li>
+          <li>실시간 CCTV 스트리밍 분석 기능 확장</li>
+          <li>행동 분석 + 위험물체 탐지 기반 위험도 판단 고도화</li>
+          <li>관리자 대시보드, 알림, 대응 가이드를 포함한 관제 시스템 강화</li>
+          <li>Docker 기반 배포 및 클라우드 운영 환경 구축</li>
         </ul>
 
         <p style="margin-top: 16px;">
-          최종적으로는 <strong>에러 해결 → 학습 추천 → 기록 관리 → 성장 확인</strong>이
-          자연스럽게 이어지는 개발 학습 지원 서비스로 확장할 계획입니다.
+          최종적으로는 <strong>AI 모델 개발 → 백엔드 API 구성 → 프론트엔드 연동 → 배포 및 운영</strong>까지
+          이어지는 전체 흐름을 직접 구현할 수 있는 AI 개발자로 성장하는 것이 목표입니다.
         </p>
       </div>
     </section>
