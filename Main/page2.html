@@ -1049,9 +1049,9 @@
               <h3>AI Developer Assistant</h3>
               <p class="project-desc">
                 코드 에러 분석, 학습 기록, 출석 체크, 성장 그래프를 하나의 흐름으로 연결한
-                AI 기반 개발 학습 지원 웹 프로젝트입니다.
-                설명용 아이디어가 아니라, 실제 사용 가능한 형태로 구현하여 배포했고
-                기능을 계속 확장하고 있습니다.
+                AI 기반 개발 학습 지원 및 분석 시스템입니다.
+                FastAPI 백엔드와 Ollama 로컬 AI 환경을 연동하여 실제 사용 가능한 서비스 형태로 구현했으며,
+                Docker 기반 환경과 AWS EC2 서버 배포 경험을 통해 백엔드 운영 흐름까지 확장했습니다.
               </p>
             </div>
             <span class="status completed">배포 완료 · 개선 중</span>
@@ -1081,7 +1081,7 @@
               <ul class="project-details">
                 <li>문제: 에러 해결, 공부 기록, 학습 관리가 각각 분리되어 흐름이 끊기기 쉬움</li>
                 <li>해결: AI 에러 분석과 기록일기, 출석, 성장 그래프를 하나의 서비스로 통합</li>
-                <li>성과: 분석 → 저장 → 시각화까지 이어지는 실제 동작 MVP 구현 및 배포 완료</li>
+                <li>성과: 분석 → 저장 → 시각화까지 이어지는 실제 동작 MVP 구현 및 배포, Docker·AWS EC2 기반 서버 운영 경험 확보</li>
               </ul>
 
               <div class="feature-mini-grid">
@@ -1188,11 +1188,15 @@
                   <span>SQLite</span>
                   <span>Chart.js</span>
                   <span>Ollama</span>
+                  <span>Docker</span>
+                  <span>AWS EC2</span>
                 </div>
                 <p>
                   유료 API 대신 로컬 AI 환경(Ollama)을 연결해
                   비용 없이 실제 AI 분석 흐름을 구현했고,
                   결과 저장과 학습 시각화까지 이어지는 서비스 구조를 완성했습니다.
+                  또한 Docker 기반 실행 환경과 AWS EC2 서버 배포 경험을 통해
+                  백엔드 서비스를 직접 운영하는 흐름까지 학습했습니다.
                 </p>
               </div>
 
@@ -1275,10 +1279,11 @@
                 CCTV 영상과 업로드 영상을 분석하여 이상행동 감지, 위험물체 탐지,
                 위험도 점수 계산, 자동 대응 액션, RAG 기반 대응 가이드까지 연결하는
                 AI 기반 실시간 통합 관제 시스템 팀 프로젝트입니다.
-                단순 모델 실험이 아니라, 실제 관제 환경에서 사용할 수 있는 서비스형 구조를 목표로 개발하고 있습니다.
+                FastAPI 백엔드, 관리자 대시보드, 분석 기록 저장, Discord 위험 알림을 통합했으며,
+                Docker와 Render를 활용해 실제 서비스 형태로 배포까지 완료했습니다.
               </p>
             </div>
-            <span class="status in-progress">통합 개발 진행 중</span>
+            <span class="status completed">배포 완료 · 개선 중</span>
           </div>
 
           <div class="summary-strip">
@@ -1307,7 +1312,7 @@
                 <li>해결: 행동 분석 모델과 객체 탐지 모델을 결합해 위험 상황을 자동으로 판단</li>
                 <li>구성: MediaPipe Pose + LSTM 행동 분석, YOLO 위험물체 탐지, risk_score 계산 로직</li>
                 <li>대응: 위험도에 따라 안전 / 주의·위험 / 긴급 단계로 분류하고 알림 및 대응 가이드 제공</li>
-                <li>성과: FastAPI 백엔드, 관리자 대시보드, 분석 기록 저장, Discord 알림, RAG 대응 시스템까지 통합</li>
+                <li>성과: FastAPI 백엔드, 관리자 대시보드, 분석 기록 저장, Discord 알림, RAG 대응 시스템 통합 및 Docker·Render 기반 배포 완료</li>
               </ul>
 
               <div class="feature-mini-grid">
@@ -1355,15 +1360,16 @@
               </div>
 
               <p class="image-caption">
-                현재는 AI 분석 파이프라인과 관리자 기능을 중심으로 구현하고 있으며,
-                추후 실제 분석 결과 화면, CCTV 화면, 위험도 그래프 이미지를 추가해 더 구체적으로 보여줄 예정입니다.
+                AI 분석 파이프라인, 관리자 기능, 위험도 판단, 알림 시스템을 통합했으며,
+                현재 배포된 서비스 화면을 통해 실제 동작 흐름을 확인할 수 있습니다.
               </p>
 
               <div class="cta-box">
                 <h4>AI 모델과 웹 시스템을 하나로 연결한 팀 프로젝트입니다</h4>
                 <p>
                   영상 입력 → 행동 분석 → 위험물체 탐지 → 위험도 계산 → 대응 액션 결정 → Discord 알림 →
-                  RAG 대응 가이드 → DB 저장 → 관리자 대시보드 표시까지 이어지는 통합 관제 흐름을 구현하고 있습니다.
+                  RAG 대응 가이드 → DB 저장 → 관리자 대시보드 표시까지 이어지는 통합 관제 흐름을 구현했습니다.
+                  또한 Docker 기반 환경에서 GitHub 저장소와 Render를 연동하여 실제 배포까지 완료했습니다.
                 </p>
 
                 <div class="project-links">
@@ -1375,7 +1381,6 @@
                   >
                     🚀 Live Demo
                   </a>
-                
                   <a
                     class="link-ghost"
                     href="https://github.com/dahunee1111/TeamProject"
@@ -1384,11 +1389,7 @@
                   >
                     팀 프로젝트 GitHub
                   </a>
-                
-                  <a class="link-ghost" href="index.html">
-                    메인 페이지 보기
-                  </a>
-                
+                  <a class="link-ghost" href="index.html">메인 페이지 보기</a>
                   <a
                     class="link-ghost"
                     href="https://github.com/dahunee1111"
@@ -1438,11 +1439,14 @@
                   <span>Chart.js</span>
                   <span>Discord Webhook</span>
                   <span>RAG</span>
+                  <span>Docker</span>
+                  <span>Render</span>
                 </div>
                 <p>
                   백엔드는 FastAPI와 SQLAlchemy 기반으로 구성하고,
                   AI 분석은 MediaPipe, LSTM, YOLO, OpenCV를 활용했습니다.
                   프론트엔드는 HTML/CSS/JavaScript와 Chart.js로 관리자 관제 화면과 통계 시각화를 구성했습니다.
+                  배포는 Docker 기반 환경에서 GitHub와 Render를 연동해 실제 서비스 형태로 운영했습니다.
                 </p>
               </div>
 
@@ -1486,9 +1490,9 @@
       <div class="vision-box">
         <p>
           현재는 AI Developer Assistant를 통해 개발 학습 지원 서비스를 구현했고,
-          팀 프로젝트에서는 AI CCTV 기반 이상행동 및 위험물체 감지 시스템을 개발하고 있습니다.
+          팀 프로젝트에서는 AI CCTV 기반 이상행동 및 위험물체 감지 시스템을 실제 배포까지 완료했습니다.
           앞으로는 단순한 모델 구현을 넘어, AI 분석 결과가 실제 사용자 화면, 관리자 기능,
-          알림 시스템, 대응 흐름까지 연결되는 서비스형 AI 시스템을 만드는 방향으로 확장하고자 합니다.
+          알림 시스템, 대응 흐름, 클라우드 배포 및 운영까지 연결되는 서비스형 AI 시스템을 만드는 방향으로 확장하고자 합니다.
         </p>
 
         <ul class="project-details">
@@ -1496,7 +1500,7 @@
           <li>실시간 CCTV 스트리밍 분석 기능 확장</li>
           <li>행동 분석 + 위험물체 탐지 기반 위험도 판단 고도화</li>
           <li>관리자 대시보드, 알림, 대응 가이드를 포함한 관제 시스템 강화</li>
-          <li>Docker 기반 배포 및 클라우드 운영 환경 구축</li>
+          <li>Docker 기반 컨테이너 환경과 AWS EC2 / Render 클라우드 배포 경험 확장</li>
         </ul>
 
         <p style="margin-top: 16px;">
