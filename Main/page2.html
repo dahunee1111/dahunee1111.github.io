@@ -1048,9 +1048,9 @@
               </div>
               <h3>AI Developer Assistant</h3>
               <p class="project-desc">
-                코드 에러 분석, 학습 기록, 출석 체크, 성장 그래프를 하나의 흐름으로 연결한
+                코드 에러 분석, 코드 리뷰, 학습 기록, 출석 체크, 성장 그래프, 플로팅 AI 챗봇을 하나의 흐름으로 연결한
                 AI 기반 개발 학습 지원 및 분석 시스템입니다.
-                FastAPI 백엔드와 Ollama 로컬 AI 환경을 연동하여 실제 사용 가능한 서비스 형태로 구현했으며,
+                FastAPI 백엔드와 Hugging Face 기반 AI 응답 구조를 연동하여 실제 사용 가능한 서비스 형태로 구현했으며,
                 Docker 기반 환경과 AWS EC2 서버 배포 경험을 통해 백엔드 운영 흐름까지 확장했습니다.
               </p>
             </div>
@@ -1071,7 +1071,7 @@
             <div class="summary-item result">
               <small>Result</small>
               <strong>MVP 구현 및 배포</strong>
-              <p>분석 → 저장 → 시각화까지 연결되는 실제 동작 가능한 프로젝트를 완성했습니다.</p>
+              <p>분석 → 저장 → 시각화 → 실시간 질문까지 연결되는 실제 동작 가능한 프로젝트를 완성했습니다.</p>
             </div>
           </div>
 
@@ -1080,8 +1080,8 @@
               <strong>프로젝트 개요</strong>
               <ul class="project-details">
                 <li>문제: 에러 해결, 공부 기록, 학습 관리가 각각 분리되어 흐름이 끊기기 쉬움</li>
-                <li>해결: AI 에러 분석과 기록일기, 출석, 성장 그래프를 하나의 서비스로 통합</li>
-                <li>성과: 분석 → 저장 → 시각화까지 이어지는 실제 동작 MVP 구현 및 배포, Docker·AWS EC2 기반 서버 운영 경험 확보</li>
+                <li>해결: AI 에러 분석, 코드 리뷰, 기록일기, 출석, 성장 그래프, 플로팅 챗봇을 하나의 서비스로 통합</li>
+                <li>성과: 분석 → 저장 → 시각화 → 챗봇 질문 응답까지 이어지는 실제 동작 MVP 구현 및 배포, Docker·AWS EC2 기반 서버 운영 경험 확보</li>
               </ul>
 
               <div class="feature-mini-grid">
@@ -1100,6 +1100,10 @@
                 <div class="feature-mini-card">
                   <strong>성장 그래프</strong>
                   <span>누적 기록을 기반으로 학습 흐름을 시각적으로 확인</span>
+                </div>
+                <div class="feature-mini-card">
+                  <strong>플로팅 AI 챗봇</strong>
+                  <span>사이트 우측 하단에서 프로젝트 설명, 기술 스택, 오류 해결 흐름을 바로 질문</span>
                 </div>
               </div>
 
@@ -1129,14 +1133,15 @@
               </div>
 
               <p class="image-caption">
-                현재는 실제 서비스 링크와 기능 구조를 먼저 보여주고, 스크린샷은 정리 후 순차적으로 추가할 예정입니다.
+                미리보기 UI는 실제 서비스 구조를 요약한 시각적 예시이며,
+                현재는 Live Demo 링크와 핵심 기능 흐름을 먼저 보여주는 방식으로 구성했습니다.
               </p>
 
               <div class="cta-box">
                 <h4>직접 들어가서 확인할 수 있습니다</h4>
                 <p>
                   단순한 설명용 포트폴리오가 아니라, 실제 프로젝트 페이지에 접속해
-                  기능 흐름과 구현 방향을 직접 확인할 수 있도록 연결했습니다.
+                  에러 분석, 코드 리뷰, 출석·포인트, 상점, 플로팅 챗봇까지 이어지는 기능 흐름을 직접 확인할 수 있도록 연결했습니다.
                 </p>
 
                 <div class="project-links">
@@ -1160,7 +1165,7 @@
                 </div>
 
                 <p class="mini-note">
-                  스크린샷보다 먼저 “실행 가능한 상태”를 보여주는 데 초점을 맞췄습니다.
+                  스크린샷보다 먼저 “실행 가능한 상태”와 실제 배포된 기능 흐름을 보여주는 데 초점을 맞췄습니다.
                 </p>
               </div>
             </div>
@@ -1170,10 +1175,13 @@
                 <strong>구현 완료 기능</strong>
                 <ul class="project-details">
                   <li>코드 에러 입력 및 AI 분석</li>
+                  <li>코드 리뷰 및 개선 방향 제안</li>
                   <li>분석 결과 저장</li>
                   <li>오늘 배운 점 기록일기</li>
-                  <li>출석 체크</li>
+                  <li>출석 체크 및 포인트 지급</li>
+                  <li>상점 및 프로필 커스터마이징</li>
                   <li>성장 그래프 시각화</li>
+                  <li>플로팅 AI 챗봇 및 대화 기록 저장</li>
                 </ul>
               </div>
 
@@ -1187,16 +1195,17 @@
                   <span>JavaScript</span>
                   <span>SQLite</span>
                   <span>Chart.js</span>
-                  <span>Ollama</span>
+                  <span>Hugging Face</span>
+                  <span>JWT</span>
                   <span>Docker</span>
                   <span>AWS EC2</span>
+                  <span>DuckDNS</span>
                 </div>
                 <p>
-                  유료 API 대신 로컬 AI 환경(Ollama)을 연결해
-                  비용 없이 실제 AI 분석 흐름을 구현했고,
-                  결과 저장과 학습 시각화까지 이어지는 서비스 구조를 완성했습니다.
-                  또한 Docker 기반 실행 환경과 AWS EC2 서버 배포 경험을 통해
-                  백엔드 서비스를 직접 운영하는 흐름까지 학습했습니다.
+                  Hugging Face 기반 AI 응답 구조와 fallback 답변 로직을 연결해
+                  AI 응답 실패 상황에서도 서비스가 끊기지 않도록 구성했습니다.
+                  결과 저장, 학습 시각화, 플로팅 챗봇, 사용자별 대화 기록까지 이어지는 서비스 구조를 완성했으며,
+                  Docker 기반 실행 환경과 AWS EC2 서버 배포 경험을 통해 백엔드 서비스를 직접 운영하는 흐름까지 학습했습니다.
                 </p>
               </div>
 
@@ -1212,8 +1221,8 @@
                     <span>기록, 분석, 확인이 끊기지 않도록 UX 보완</span>
                   </div>
                   <div class="progress-item">
-                    <strong>확장 준비</strong>
-                    <span>학습 추천, 리포트, 실시간 질문 기능으로 확장 예정</span>
+                    <strong>챗봇 고도화</strong>
+                    <span>실시간 질문 기능을 기반으로 프로젝트 설명, 오류 해결, 학습 추천 응답 품질을 개선</span>
                   </div>
                 </div>
               </div>
@@ -1360,8 +1369,8 @@
               </div>
 
               <p class="image-caption">
-                AI 분석 파이프라인, 관리자 기능, 위험도 판단, 알림 시스템을 통합했으며,
-                현재 배포된 서비스 화면을 통해 실제 동작 흐름을 확인할 수 있습니다.
+                미리보기 UI는 AI 관제 시스템의 화면 구성을 요약한 시각적 예시입니다.
+                실제 동작 흐름은 Live Demo 링크에서 확인할 수 있습니다.
               </p>
 
               <div class="cta-box">
@@ -1496,7 +1505,7 @@
         </p>
 
         <ul class="project-details">
-          <li>AI 기반 개발 학습 지원 서비스 고도화</li>
+          <li>AI 기반 개발 학습 지원 서비스 및 플로팅 챗봇 응답 품질 고도화</li>
           <li>실시간 CCTV 스트리밍 분석 기능 확장</li>
           <li>행동 분석 + 위험물체 탐지 기반 위험도 판단 고도화</li>
           <li>관리자 대시보드, 알림, 대응 가이드를 포함한 관제 시스템 강화</li>
