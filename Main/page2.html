@@ -1230,45 +1230,208 @@
           </div>
         </article>
 
-        <article class="project" data-category="web">
+        <article class="project featured-ai" data-category="ai">
           <div class="project-top">
             <div>
-              <h3>AI Portfolio Website</h3>
+              <div class="live-status-badge">● Live Project · Agentic Pipeline</div>
+              <div class="headline-meta">
+                <span>Multi-Agent</span>
+                <span>Gemini 2.5 Flash</span>
+                <span>LLM-as-Judge</span>
+                <span>Docker + AWS</span>
+              </div>
+              <h3>Agentic Annotation Pipeline</h3>
               <p class="project-desc">
-                개인 홈페이지를 단순 소개용이 아니라,
-                AI 개발자 포트폴리오답게 보이도록 리디자인한 프로젝트입니다.
+                코드, 번역, 문서, AI 응답을 6단계 멀티 에이전트가 순서대로 검수, 교정, 검증, 설명, 자연어 다듬기, 품질 평가까지
+                자동으로 처리하는 LLM 파이프라인 프로젝트입니다.
+                유형별로 특화된 에이전트가 입력을 분석하고, LLM-as-Judge 방식으로 결과 품질을 점수화하여
+                기준 미달 시 재시도하는 구조로 신뢰도를 높였습니다.
+                FastAPI 백엔드와 Gemini 2.5 Flash를 연동하고, Docker 멀티스테이지 빌드와 AWS EC2, Nginx, HTTPS 환경으로 실제 배포까지 완료했습니다.
               </p>
             </div>
-            <span class="status completed">구성 완료</span>
+            <span class="status completed">배포 완료 · 개선 중</span>
+          </div>
+
+          <div class="summary-strip">
+            <div class="summary-item problem">
+              <small>Problem</small>
+              <strong>수작업 검수의 한계</strong>
+              <p>코드, 번역, 문서, AI 응답을 사람이 일일이 검수하고 교정하는 작업은 느리고 일관성을 유지하기 어렵습니다.</p>
+            </div>
+            <div class="summary-item solution">
+              <small>Solution</small>
+              <strong>6단계 멀티 에이전트 자동화</strong>
+              <p>검수, 교정, 검증, 설명, 자연어 다듬기, 품질 평가를 단계별 전담 에이전트로 나눠 자동 처리합니다.</p>
+            </div>
+            <div class="summary-item result">
+              <small>Result</small>
+              <strong>품질 게이트 + 실배포</strong>
+              <p>LLM-as-Judge 점수화와 재시도 로직으로 출력 신뢰도를 확보하고, AWS EC2에 HTTPS로 배포했습니다.</p>
+            </div>
           </div>
 
           <div class="project-grid">
             <div class="project-box">
               <strong>프로젝트 개요</strong>
               <ul class="project-details">
-                <li>문제: 기존 홈페이지가 개인 기록 중심이라 포트폴리오 메시지가 약했음</li>
-                <li>해결: 메인/프로젝트 페이지 역할을 분리하고 구조를 재설계</li>
-                <li>성과: AI 개발자 브랜딩, 기술 구조화, 대표 프로젝트 강조 방식 적용</li>
+                <li>문제: 코드, 번역, 문서, AI 응답을 사람이 직접 검수하면 속도와 일관성을 모두 잡기 어려움</li>
+                <li>해결: 검수, 교정, 검증, 설명, 자연어 다듬기, 품질 평가를 6단계 멀티 에이전트로 분리해 자동화</li>
+                <li>구성: 유형별 특화 에이전트(코드 / 번역 / 문서 / AI 응답)를 공통 베이스 인터페이스로 통합</li>
+                <li>품질: LLM-as-Judge가 정확성, 자연스러움, 일관성 3개 축으로 점수화하고 기준 미달 시 재시도</li>
+                <li>성과: FastAPI 백엔드, 실시간 진행 추적, 다크모드/반응형 UI 구현 및 Docker·AWS EC2·Nginx·HTTPS 기반 배포 완료</li>
               </ul>
 
-              <div class="project-links">
-                <a class="link-primary" href="index.html">메인 페이지 보기</a>
-                <a class="link-ghost" href="https://github.com/dahunee1111" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <div class="feature-mini-grid">
+                <div class="feature-mini-card">
+                  <strong>멀티 에이전트</strong>
+                  <span>6단계 에이전트가 검수부터 품질 평가까지 순서대로 처리</span>
+                </div>
+                <div class="feature-mini-card">
+                  <strong>유형별 특화</strong>
+                  <span>코드, 번역, 문서, AI 응답 각각에 맞는 에이전트로 분기</span>
+                </div>
+                <div class="feature-mini-card">
+                  <strong>품질 평가</strong>
+                  <span>LLM-as-Judge로 정확성·자연스러움·일관성을 점수화</span>
+                </div>
+                <div class="feature-mini-card">
+                  <strong>재시도 게이트</strong>
+                  <span>기준 점수 미달 시 자동 재시도로 출력 신뢰도 확보</span>
+                </div>
+              </div>
+
+              <div class="browser-mockup">
+                <div class="browser-top">
+                  <div class="browser-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="browser-address"></div>
+                </div>
+                <div class="browser-body">
+                  <div class="mock-hero">
+                    <div class="mock-line large"></div>
+                    <div class="mock-line mid"></div>
+                    <div class="mock-line small"></div>
+                  </div>
+
+                  <div class="mock-function-grid">
+                    <div class="mock-function-card"></div>
+                    <div class="mock-function-card"></div>
+                    <div class="mock-function-card"></div>
+                    <div class="mock-function-card"></div>
+                  </div>
+
+                  <div class="mock-chart"></div>
+                </div>
+              </div>
+
+              <p class="image-caption">
+                미리보기 UI는 파이프라인 진행 화면과 결과 구성을 요약한 시각적 예시입니다.
+                실제 동작 흐름은 Live Demo 링크에서 직접 확인할 수 있습니다.
+              </p>
+
+              <div class="cta-box">
+                <h4>직접 들어가서 파이프라인을 실행할 수 있습니다</h4>
+                <p>
+                  입력 → 검수 → 교정 → 검증 → 설명 → 자연어 다듬기 → 품질 평가까지 이어지는 6단계 흐름을
+                  실제 서비스 페이지에서 직접 실행하고, 교정 전후 비교(diff)와 품질 점수, 한국어 설명까지 확인할 수 있도록 연결했습니다.
+                </p>
+
+                <div class="project-links">
+                  <a
+                    class="link-primary"
+                    href="https://dahun-annotation.duckdns.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    🚀 Live Demo
+                  </a>
+                  <a
+                    class="link-ghost"
+                    href="https://github.com/dahunee1111/agentic-annotation-pipeline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    프로젝트 GitHub
+                  </a>
+                  <a class="link-ghost" href="index.html">메인 페이지 보기</a>
+                  <a
+                    class="link-ghost"
+                    href="https://github.com/dahunee1111"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub 전체 보기
+                  </a>
+                </div>
+
+                <p class="mini-note">
+                  포트폴리오에서는 단순 LLM 호출이 아니라 “에이전트 오케스트레이션과 품질 게이트를 실제 서비스로 연결하는 능력”을 강조했습니다.
+                </p>
               </div>
             </div>
 
             <aside class="project-side">
-              <strong>기술 스택</strong>
-              <div class="tech-tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>Responsive UI</span>
+              <div class="side-section">
+                <strong>핵심 기능</strong>
+                <ul class="project-details">
+                  <li>6단계 멀티 에이전트 교정 파이프라인</li>
+                  <li>코드 / 번역 / 문서 / AI 응답 유형별 특화 에이전트</li>
+                  <li>LLM-as-Judge 자동 품질 평가</li>
+                  <li>품질 기준 기반 검증 및 재시도 로직</li>
+                  <li>교정 전후 diff 비교 및 점수 시각화</li>
+                  <li>실패 원인별 한국어 안내 메시지</li>
+                  <li>실시간 파이프라인 진행 추적</li>
+                  <li>다크모드 및 반응형 UI</li>
+                  <li>JWT 기반 인증 시스템</li>
+                  <li>통계 및 차트 대시보드</li>
+                </ul>
               </div>
-              <p>
-                단순한 자기소개보다,
-                무엇을 만들고 어떤 문제를 해결하는 개발자인지 한눈에 보이도록 구성했습니다.
-              </p>
+
+              <div class="side-section">
+                <strong>기술 스택</strong>
+                <div class="tech-tags">
+                  <span>Python</span>
+                  <span>FastAPI</span>
+                  <span>SQLAlchemy</span>
+                  <span>SQLite</span>
+                  <span>Gemini 2.5 Flash</span>
+                  <span>JWT</span>
+                  <span>JavaScript</span>
+                  <span>Chart.js</span>
+                  <span>Docker</span>
+                  <span>AWS EC2</span>
+                  <span>Nginx</span>
+                  <span>DuckDNS</span>
+                </div>
+                <p>
+                  백엔드는 FastAPI와 SQLAlchemy 기반으로 구성하고, Gemini 2.5 Flash를 멀티 에이전트 오케스트레이션에 연동했습니다.
+                  LLM-as-Judge 품질 평가와 재시도 로직으로 출력 신뢰도를 높였으며,
+                  Docker 멀티스테이지 빌드와 AWS EC2, Nginx 리버스 프록시, Let's Encrypt HTTPS 환경으로 실제 서비스 형태로 배포했습니다.
+                </p>
+              </div>
+
+              <div class="side-section">
+                <strong>Pipeline</strong>
+                <div class="progress-list">
+                  <div class="progress-item">
+                    <strong>1. 검수 + 교정</strong>
+                    <span>Review 에이전트가 오류를 찾고 Correction 에이전트가 수정안을 생성</span>
+                  </div>
+                  <div class="progress-item">
+                    <strong>2. 검증</strong>
+                    <span>Verifier 에이전트가 교정 결과를 검증하고 기준 미달 시 재시도</span>
+                  </div>
+                  <div class="progress-item">
+                    <strong>3. 설명 + 자연어 다듬기</strong>
+                    <span>Explanation, Humanization 에이전트가 변경 이유를 자연스러운 문장으로 정리</span>
+                  </div>
+                  <div class="progress-item">
+                    <strong>4. 품질 평가</strong>
+                    <span>Quality 에이전트가 정확성·자연스러움·일관성을 점수화하고 DB에 저장</span>
+                  </div>
+                </div>
+              </div>
             </aside>
           </div>
         </article>
